@@ -1,0 +1,5 @@
+package com.myboard.etfboard.board.dao;
+
+public class BoardDAOImpl {
+
+}

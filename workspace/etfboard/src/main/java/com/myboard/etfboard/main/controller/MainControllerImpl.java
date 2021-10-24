@@ -28,11 +28,13 @@ public class MainControllerImpl implements MainController{
 		return "/member/join";
 	}
 	
-	@Override
-	@RequestMapping(value="/board", method=RequestMethod.GET)
-	public String viewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "/board";
-	}
+	/*
+	 * @Override
+	 * 
+	 * @RequestMapping(value="/board", method=RequestMethod.GET) public String
+	 * viewBoard(HttpServletRequest request, HttpServletResponse response) throws
+	 * Exception { return "/board"; }
+	 */
 
 	@Override
 	@RequestMapping(value="/etfkorea", method=RequestMethod.GET)

@@ -1,0 +1,5 @@
+package com.myboard.etfboard.board.service;
+
+public class BoardServiceImpl {
+
+}

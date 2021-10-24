@@ -1,0 +1,14 @@
+package com.myboard.etfboard.board.service;
+
+import java.util.List;
+
+import org.springframework.dao.DataAccessException;
+
+public class BoardServiceImpl implements BoardService{
+
+	@Override
+	public List listTexts() throws DataAccessException {
+		return null;
+	}
+	
+}

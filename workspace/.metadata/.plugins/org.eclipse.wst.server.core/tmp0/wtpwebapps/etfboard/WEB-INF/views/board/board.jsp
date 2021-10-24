@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
 <div class="container">
 <table class="table table-bordered">
   <thead>
@@ -7,20 +10,22 @@
       <th class="text-center" scope="col" style="width:7.5%">번호</th>
       <th class="text-center" scope="col" style="width:50%">글제목</th>
       <th class="text-center" scope="col" style="width:12.5%">닉네임</th>
-      <th class="text-center" scope="col" style="width:10%">작성일</th>
+      <th class="text-center" scope="col" style="width:15%">작성일</th>
       <th class="text-center" scope="col" style="width:7.5%">추천수</th>
-      <th class="text-center" scope="col" style="width:12.5%">조회수</th>
+      <th class="text-center" scope="col" style="width:7.5%">조회수</th>
     </tr>
   </thead>
   <tbody>
-    <tr>
-      <th class="text-center">1</th>
-      <td>테스트 전입니다</td>
-      <td class="text-center">watercase</td>
-      <td class="text-center">2</td>
-      <td class="text-center">3</td>
-      <td class="text-center">4</td>
-    </tr>
+	<c:forEach var="board" items="${boardList}">
+	    <tr>
+	      <td class="text-center">${board.boardIndex}</td>
+	      <td>${board.title}</td>
+	      <td class="text-center">${board.name}</td>
+	      <td class="text-center">${board.writtenDate}</td>
+	      <td class="text-center">${board.push}</td>
+	      <td class="text-center">${board.views}</td>
+	    </tr>
+	</c:forEach>
   </tbody>
 </table>
 
