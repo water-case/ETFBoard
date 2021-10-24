@@ -1,0 +1,5 @@
+package com.myboard.etfboard.main.controller;
+
+public class MainControllerImpl {
+
+}

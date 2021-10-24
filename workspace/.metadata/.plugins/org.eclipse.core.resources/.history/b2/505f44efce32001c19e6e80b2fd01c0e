@@ -1,0 +1,55 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<hr class="featurette-divider">
+<div class="container">
+	<div class="row featurette">
+		<div class="col-md-7">
+			<br><br>
+			<h2 class="featurette-heading">투자와 투기</h2>
+			<br>
+			<p class="lead">
+				투기<br>
+				전략없이 매매차익만을 노리는 방식<br>
+				리스크에 완전히 노출
+				<br><br>
+				투자<br>
+				전략을 가지고 장기적 이익을 노리는 방식<br>
+				리스크에 대응하며 방식에 따라 리스크가 자산증식의 촉매 역할을 한다
+				
+			</p>
+		</div>
+		<div class="col-md-5">
+			<svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+		</div>
+	</div>
+
+	<hr class="featurette-divider">
+
+	<div class="row featurette">
+		<div class="col-md-7 order-md-2">
+			<br><br>
+			<h2 class="featurette-heading">투자와 자산배분</h2>
+			<br>
+			<p class="lead">
+				전설적인 투자자들은 공통적으로 자산 배분 전략을 사용했다<br><br>
+				자산을 여러 투자 수단에 특정 비율대로 배분하고 주기적 &middot; 상황 맞춤형 리밸런싱을 하는 것이 자산 배분 투자전략이다
+			</p>
+		</div>
+		<div class="col-md-5 order-md-1">
+			<svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="700" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+		</div>
+	</div>
+
+	<hr class="featurette-divider">
+
+	<div class="row featurette">
+		<div class="col-md-7">
+			<h2 class="featurette-heading">자산배분과 ETF</h2>
+			<p class="lead">
+				Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.
+			</p>
+		</div>
+		<div class="col-md-5">
+			<svg class="bd-placeholder-img bd-placeholder-img-lg featurette-image img-fluid mx-auto" width="500" height="500" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: 500x500"><title>Placeholder</title><rect width="100%" height="100%" fill="#eee"/><text x="50%" y="50%" fill="#aaa" dy=".3em">500x500</text></svg>
+		</div>
+	</div>
+</div>

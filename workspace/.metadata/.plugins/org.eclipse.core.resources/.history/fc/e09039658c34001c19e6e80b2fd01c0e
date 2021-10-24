@@ -1,0 +1,5 @@
+package com.myboard.etfboard.board.controller;
+
+public interface BoardController {
+
+}

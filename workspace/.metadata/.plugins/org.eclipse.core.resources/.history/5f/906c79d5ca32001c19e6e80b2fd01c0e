@@ -1,0 +1,14 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+				<hr class="featurette-divider">
+				<footer class="container">
+					<p class="float-right"><a href="#">Back to top</a></p>
+					<p>&copy; 2017-2019 Company, Inc.</p>
+					<p>e-mail : wjd30142@naver.com</p>
+					<p>github : https://github.com/water-case</p>
+				</footer>
+				<footer class="footer mt-auto py-3 bg-light">
+					<div class="container">
+						<span class="text-muted">e-mail : wjd30142@naver.com</span><br>
+						<span class="text-muted">github : https://github.com/water-case</span><br>
+					</div>
+				</footer>

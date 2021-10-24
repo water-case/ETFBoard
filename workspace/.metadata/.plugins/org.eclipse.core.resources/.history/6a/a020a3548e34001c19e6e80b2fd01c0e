@@ -1,0 +1,8 @@
+package com.myboard.etfboard.board.vo;
+
+import org.springframework.stereotype.Component;
+
+@Component("BoardVO")
+public class BoardVO {
+
+}

@@ -1,0 +1,8 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+				<hr class="featurette-divider">
+				<footer class="container">
+					<p class="float-right"><a href="#">Back to top</a></p>
+					<p>e-mail : wjd30142@naver.com</p>
+					<p>github : https://github.com/water-case</p>
+					<p>&copy; 2017-2019 Company, Inc.</p>
+				</footer>

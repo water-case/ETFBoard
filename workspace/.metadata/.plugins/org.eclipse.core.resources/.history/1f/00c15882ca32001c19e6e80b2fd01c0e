@@ -1,0 +1,7 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+				<footer class="footer mt-auto py-3 bg-light">
+					<div class="container">
+						<span class="text-muted">e-mail : wjd30142@naver.com</span><br>
+						<span class="text-muted">github : https://github.com/water-case</span><br>
+					</div>
+				</footer>
