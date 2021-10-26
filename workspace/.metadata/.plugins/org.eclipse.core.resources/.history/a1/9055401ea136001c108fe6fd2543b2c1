@@ -34,18 +34,14 @@
 <!-- 페이징 -->
 <!-- 조건에 따라 페이징을 적합하게 변경 -->
 <!-- << 1 2 3 4 5 >> 현재페이지는 색이 다르게 표시 -->
-<script>
-	function writeButton() {
-	    if (${isLogOn == true && member != null}) {
-	    	location.href='${contextPath}/board/write'
-	    } else {
-	    	alert("로그인 후 이용가능합니다");
-	    }
-	}
-</script>
 	<div class="text-center row">	
       <div class="col-md-2">
-		<button type="button" onclick="writeButton()" class="btn btn-secondary disabled">글쓰기</button>
+        <c:choose>
+			<c:when test="${isLogOn == true && member != null}">
+				<button type="button" onclick="location.href='${contextPath}/board/write'" class="btn btn-secondary disabled">글쓰기</button>
+			</c:when>
+		</c:choose>
+        
       </div>
       <div class="col-md-8">
         <ul class="pagination justify-content-center">

@@ -1,23 +1,24 @@
 alter table etf_member modify joindate date default sysdate;
 
--- ÀÎµ¦½º ½ÃÄö½º
+-- ì¸ë±ìŠ¤ ì‹œí€€ìŠ¤
 create sequence board_index
 start with 1
 increment by 1
 nomaxvalue
 nominvalue;
--- ½ÃÄö½º cache ¿É¼ÇÀ» »ç¿ëÇÏÁö ¾Êµµ·Ï º¯°æ
+-- ì‹œí€€ìŠ¤ cache ì˜µì…˜ì„ ì‚¬ìš©í•˜ì§€ ì•Šë„ë¡ ë³€ê²½
 alter sequence board_index nocache;
--- ½ÃÄö½º »èÁ¦
+-- ì‹œí€€ìŠ¤ ì‚­ì œ
 drop sequence board_index ;
 
--- »ğÀÔ
+-- ì‚½ì…
 insert into etf_board (boardindex, title, text, name)
-values(board_index.nextval, 'Å×½ºÆ®', 'Å×½ºÆ®ÀÔ´Ï´Ù', 'dummy');
+values(board_index.nextval, 'í…ŒìŠ¤íŠ¸'||board_index.currval, 'í…ŒìŠ¤íŠ¸ì…ë‹ˆë‹¤'||board_index.currval, 'dummy'||board_index.currval);
 
 commit;
--- Á¶È¸Å×½ºÆ®
+-- ì¡°íšŒí…ŒìŠ¤íŠ¸
 select * from etf_board order by boardIndex desc;
 
 select sysdate from dual;
 
+select parameter, value from nls_database_parameters where parameter like '%char%'

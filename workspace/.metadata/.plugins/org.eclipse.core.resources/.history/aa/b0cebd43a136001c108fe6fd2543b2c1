@@ -39,13 +39,14 @@
 	    if (${isLogOn == true && member != null}) {
 	    	location.href='${contextPath}/board/write'
 	    } else {
-	    	alert("로그인 후 이용가능합니다");
+	    	alert("세션이 만료되었습니다. 다시 로그인 후 시도해 주세요");
+	    	location.href='${contextPath}/board'
 	    }
 	}
 </script>
 	<div class="text-center row">	
       <div class="col-md-2">
-		<button type="button" onclick="writeButton()" class="btn btn-secondary disabled">글쓰기</button>
+		<button type="button" onclick="location.href='${contextPath}/board/write'" class="btn btn-secondary disabled">글쓰기</button>
       </div>
       <div class="col-md-8">
         <ul class="pagination justify-content-center">

@@ -39,7 +39,8 @@
 	    if (${isLogOn == true && member != null}) {
 	    	location.href='${contextPath}/board/write'
 	    } else {
-	    	alert("로그인 후 이용가능합니다");
+	    	alert("세션이 만료되었습니다. 다시 로그인 후 시도해 주세요");
+	    	location.href='${contextPath}/board'
 	    }
 	}
 </script>
