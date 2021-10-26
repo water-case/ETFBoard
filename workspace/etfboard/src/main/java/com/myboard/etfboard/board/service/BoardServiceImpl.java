@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.myboard.etfboard.board.dao.BoardDAO;
+import com.myboard.etfboard.board.vo.BoardVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -28,6 +29,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public List PageList(int page) {
 		return boardDAO.getBoardPageList(page);
+	}
+
+	@Override
+	public int writeContents(BoardVO board) throws DataAccessException {
+		return boardDAO.insertContents(board);
 	}
 	
 }

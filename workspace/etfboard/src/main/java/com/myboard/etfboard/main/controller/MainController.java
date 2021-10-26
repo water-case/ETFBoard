@@ -9,7 +9,6 @@ public interface MainController {
 	public String viewMain(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String viewLogin(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String viewJoin(HttpServletRequest request, HttpServletResponse response) throws Exception;
-	//public String viewBoard(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String viewETFKOREA(HttpServletRequest request, HttpServletResponse response) throws Exception;
 	public String viewRebalancing(HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

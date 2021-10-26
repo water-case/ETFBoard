@@ -35,5 +35,11 @@ public class BoardDAOImpl implements BoardDAO{
 		boardList = sqlSession.selectList("mapper.board.selectBoardPageList", page);
 		return boardList;
 	}
+
+	@Override
+	public int insertContents(BoardVO board) throws DataAccessException {
+		int result = sqlSession.insert("mapper.board.insertContents", board);
+		return result;
+	}
 	
 }

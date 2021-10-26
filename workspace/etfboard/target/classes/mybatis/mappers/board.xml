@@ -42,4 +42,12 @@
 		where rownum <= 15
 		]]>
 	</select>
+	
+	<!-- 글쓰기 --> 
+	<insert id="insertContents"  parameterType="boardVO">
+		<![CDATA[
+		insert into etf_board (boardindex, title, text, name)
+		values(board_index.nextval, #{title}, #{text}, #{name})
+		]]>
+	</insert>
 </mapper>
