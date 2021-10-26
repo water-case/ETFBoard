@@ -19,7 +19,7 @@
       <div class="row">
         <div class="col-md-3 mb-3"></div>
         <div class="col-md-6 mb-3">
-          <textarea class="form-control" name="text" placeholder="내용을 입력해 주세요" style="margin-top: 10px; margin-bottom: 10px; height: 400px;" required maxlength='400'></textarea>
+          <textarea class="form-control" name="text" placeholder="내용을 입력해 주세요" style="margin-top: 10px; margin-bottom: 10px; height: 400px;" required maxlength='300'></textarea>
         </div>
       </div>
       <input type="hidden" name="name" value="${member.name}"/>
