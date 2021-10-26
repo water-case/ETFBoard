@@ -1,0 +1,5 @@
+package com.myboard.etfboard.board.vo;
+
+public class PageVO {
+
+}

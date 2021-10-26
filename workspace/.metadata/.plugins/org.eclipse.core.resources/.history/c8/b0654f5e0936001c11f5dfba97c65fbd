@@ -1,0 +1,26 @@
+package com.myboard.etfboard.board.vo;
+
+import org.springframework.stereotype.Component;
+
+@Component("pageVO")
+public class PageVO {
+	private int totalIndexCount;
+	private int NowPage;
+
+	public int getTotalIndexCount() {
+		return totalIndexCount;
+	}
+
+	public void setTotalIndexCount(int totalIndexCount) {
+		this.totalIndexCount = totalIndexCount;
+	}
+
+	public int getNowPage() {
+		return NowPage;
+	}
+
+	public void setNowPage(int nowPage) {
+		NowPage = nowPage;
+	}
+	
+}

@@ -6,5 +6,6 @@
 	<typeAliases>
 		<typeAlias type="com.myboard.etfboard.member.vo.MemberVO"  alias="memberVO" />
 		<typeAlias type="com.myboard.etfboard.board.vo.BoardVO"  alias="boardVO" />
+		<typeAlias type="com.myboard.etfboard.board.vo.PageVO"  alias="pageVO" />
 	</typeAliases>
 </configuration>

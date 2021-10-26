@@ -13,10 +13,33 @@
         <result property="views" column="views" />
 	</resultMap>
 	
-	<select id="selectAllBoardList" resultMap="boardResult">
+	<!-- 첫번째 페이지 조회 -->
+	<select id="selectBoardFirstList" resultMap="boardResult">
 		<![CDATA[
-		select * from etf_board order by boardIndex desc
+		select boardIndex, title, name, writtendate, push, views
+		from (select * from etf_board order by boardIndex desc)
+		where rownum <= 15
 		]]>
 	</select>
 	
+	<!-- 전체 글 갯수 조회 -->
+	<select id="getIndexCount" resultType="pageVO">
+		<![CDATA[
+		select count(*) as totalIndexCount from etf_board
+		]]>
+	</select>
+
+	<!-- 페이지별 조회 -->
+	<select id="selectBoardPageList" parameterType="int" resultMap="boardResult">
+		<![CDATA[
+		select boardIndex, title, name, writtendate, push, views
+		from (	select pre, boardIndex, title, name, writtendate, push, views
+				from (	select rownum as pre, boardIndex, title, name, writtendate, push, views
+						from (select * from etf_board order by boardindex desc )
+				)
+				where pre > 15*(#{page}-1) 
+		)
+		where rownum <= 15
+		]]>
+	</select>
 </mapper>

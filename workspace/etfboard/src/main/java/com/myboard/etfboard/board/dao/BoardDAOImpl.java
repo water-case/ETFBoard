@@ -8,6 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myboard.etfboard.board.vo.BoardVO;
+import com.myboard.etfboard.board.vo.PageVO;
 
 @Repository("boardDAO")
 public class BoardDAOImpl implements BoardDAO{
@@ -15,9 +16,23 @@ public class BoardDAOImpl implements BoardDAO{
 	private SqlSession sqlSession;
 	
 	@Override
-	public List selectAllBoardList() throws DataAccessException {
+	public List selectBoardFirstList() throws DataAccessException {
 		List<BoardVO> boardList = null;
-		boardList = sqlSession.selectList("mapper.board.selectAllBoardList");
+		boardList = sqlSession.selectList("mapper.board.selectBoardFirstList");
+		return boardList;
+	}
+
+	@Override
+	public int getIndexCount() throws DataAccessException {
+		List<PageVO> pageVO = null;
+		pageVO = sqlSession.selectList("mapper.board.getIndexCount");
+		return pageVO.get(0).getTotalIndexCount();
+	}
+
+	@Override
+	public List getBoardPageList(int page) throws DataAccessException {
+		List<BoardVO> boardList = null;
+		boardList = sqlSession.selectList("mapper.board.selectBoardPageList", page);
 		return boardList;
 	}
 	

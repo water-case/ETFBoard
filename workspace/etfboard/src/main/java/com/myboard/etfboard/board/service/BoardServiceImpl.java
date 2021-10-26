@@ -14,10 +14,20 @@ public class BoardServiceImpl implements BoardService{
 	private BoardDAO boardDAO;
 	
 	@Override
-	public List listTexts() throws DataAccessException {
+	public List FirstList() throws DataAccessException {
 		List boardList = null;
-		boardList = boardDAO.selectAllBoardList();
+		boardList = boardDAO.selectBoardFirstList();
 		return boardList;
+	}
+
+	@Override
+	public int GetIndexCount() throws DataAccessException{
+		return boardDAO.getIndexCount();
+	}
+
+	@Override
+	public List PageList(int page) {
+		return boardDAO.getBoardPageList(page);
 	}
 	
 }
