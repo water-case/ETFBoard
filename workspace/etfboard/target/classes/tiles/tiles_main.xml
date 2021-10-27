@@ -44,6 +44,11 @@
 	<definition name="/board/contents" extends="baseLayout">
 		<put-attribute name="body" value="/WEB-INF/views/board/contents.jsp" />
 	</definition>
+	<!-- 소통게시판 글수정 -->
+	<definition name="/board/update" extends="baseLayout">
+		<put-attribute name="title" value="글수정" />
+		<put-attribute name="body" value="/WEB-INF/views/board/update.jsp" />
+	</definition>
 	
 	<!-- 국내ETF 페이지 -->
 	<definition name="/etfkorea" extends="baseLayout">

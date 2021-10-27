@@ -16,4 +16,6 @@ public interface BoardService {
 	public int writeContents(BoardVO board) throws DataAccessException;
 
 	public BoardVO getContents(int boardIndex) throws DataAccessException;
+
+	public int updateContents(BoardVO board) throws DataAccessException;
 }

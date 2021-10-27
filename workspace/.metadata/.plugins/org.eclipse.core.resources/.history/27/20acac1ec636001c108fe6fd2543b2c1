@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+"-//Apache Software Foundation//DTD Tiles Configuration 2.0//EN"
+"http://tiles.apache.org/dtds/tiles-config_2_0.dtd">
+
+<tiles-definitions>
+	<definition name="baseLayout" template="/WEB-INF/views/common/layout.jsp">
+		<put-attribute name="title" value="" />
+		<put-attribute name="header" value="/WEB-INF/views/common/header.jsp" />
+		<!-- <put-attribute name="side" value="/WEB-INF/views/common/side.jsp" /> -->
+		<put-attribute name="body" value="" />
+		<put-attribute name="footer" value="/WEB-INF/views/common/footer.jsp" />		
+	</definition>
+	
+	<!-- 기본 메인 페이지 -->
+	<definition name="/main" extends="baseLayout">
+		<put-attribute name="title" value="자산 배분을 통한 투자" />
+		<put-attribute name="body" value="/WEB-INF/views/main.jsp" />
+	</definition>
+	
+	<!-- 로그인 페이지 -->
+	<definition name="/member/login" extends="baseLayout">
+		<put-attribute name="title" value="로그인" />
+		<put-attribute name="body" value="/WEB-INF/views/member/login/loginForm.jsp" />
+	</definition>
+	
+	<!-- 회원가입 페이지 -->
+	<definition name="/member/join" extends="baseLayout">
+		<put-attribute name="title" value="회원가입" />
+		<put-attribute name="body" value="/WEB-INF/views/member/join/joinForm.jsp" />
+	</definition>
+	
+	<!-- 소통게시판 페이지 -->
+	<definition name="/board" extends="baseLayout">
+		<put-attribute name="title" value="소통게시판" />
+		<put-attribute name="body" value="/WEB-INF/views/board/board.jsp" />
+	</definition>
+	<!-- 소통게시판 글쓰기 -->
+	<definition name="/board/write" extends="baseLayout">
+		<put-attribute name="title" value="글쓰기" />
+		<put-attribute name="body" value="/WEB-INF/views/board/write.jsp" />
+	</definition>
+	<!-- 소통게시판 글내용조회 -->
+	<definition name="/board/contents" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/board/contents.jsp" />
+	</definition>
+	<!-- 소통게시판 글수정 -->
+	<definition name="/board/contents" extends="baseLayout">
+		<put-attribute name="title" value="글수정" />
+		<put-attribute name="body" value="/WEB-INF/views/board/update.jsp" />
+	</definition>
+	
+	<!-- 국내ETF 페이지 -->
+	<definition name="/etfkorea" extends="baseLayout">
+		<put-attribute name="title" value="국내 ETF" />
+		<put-attribute name="body" value="/WEB-INF/views/investment/etfkorea.jsp" />
+	</definition>
+	
+	<!-- 해외ETF 페이지 -->
+	<definition name="/rebalancing" extends="baseLayout">
+		<put-attribute name="title" value="리밸런싱 계산기" />
+		<put-attribute name="body" value="/WEB-INF/views/investment/rebalancing.jsp" />
+	</definition>
+	
+</tiles-definitions>

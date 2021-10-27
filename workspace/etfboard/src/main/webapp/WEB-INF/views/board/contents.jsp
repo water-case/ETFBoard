@@ -13,9 +13,13 @@
         <div class="col-md-3"></div>
         <div class="col-md-6"></div>
         <div class="col-md-3">
-        	<button type="button" class="btn btn-secondary disabled">목록</button>
-        	<button type="button" class="btn btn-warning disabled">수정</button>
-        	<button type="button" class="btn btn-danger disabled">삭제</button>
+        	<c:choose>
+			  <c:when test="${isLogOn == true && member != null && boardContents.name == member.name}">
+		        <button type="button" class="btn btn-danger disabled float-right mr-1">삭제</button>
+		        <button type="button" class="btn btn-warning disabled float-right mr-1" onclick="location.href='${contextPath}/board/update?index=${boardContents.boardIndex}'">수정</button>
+			  </c:when>
+			</c:choose>
+        	<button type="button" class="btn btn-secondary disabled float-right mr-1" onclick="location.href='${contextPath}/board'">목록</button>
         </div>
     </div>
 	<hr class="featurette-divider">

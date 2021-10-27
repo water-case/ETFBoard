@@ -49,7 +49,7 @@
 		where
 		id=#{id}
 		]]>      
-	</update> 
+	</update>
      
 	<delete id="deleteMember"  parameterType="String">
 		<![CDATA[

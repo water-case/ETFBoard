@@ -81,7 +81,8 @@ public class BoardControllerImpl implements BoardController{
 		}
 		return mav;
 	}
-
+	
+	// 글 내용 조회
 	@Override
 	@RequestMapping(value="/board/contents*" ,method = RequestMethod.GET)
 	public ModelAndView ViewBoardContents(@RequestParam("index") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception {
@@ -96,6 +97,34 @@ public class BoardControllerImpl implements BoardController{
 			// 조회 실패 시 '삭제되었거나 잘못된 접근입니다' 노출 후 리다이렉트			
 		}
 		mav.setViewName("/board/contents");
+		return mav;
+	}
+	
+	// 글 내용 수정 폼
+	@Override
+	@RequestMapping(value="/board/update*" ,method = RequestMethod.GET)
+	public ModelAndView UpdateBoardContents(@RequestParam("index") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		BoardVO boardContents = boardService.getContents(boardIndex);
+		mav.addObject("boardContents",boardContents);
+		mav.setViewName("/board/update");
+		
+		return mav;
+	}
+	
+	// 글 내용 수정
+	@Override
+	@RequestMapping(value="/board/update.do" ,method = RequestMethod.POST)
+	public ModelAndView DoUpdateBoardContents(@ModelAttribute("board") BoardVO board, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		// DB에 수정한 글 내용 전송
+		int result = boardService.updateContents(board);
+		if(result == 1) {
+			rAttr.addAttribute("result","updateSuccess");
+		} else {
+			rAttr.addAttribute("result","updateFail");
+		}
+		mav.setViewName("redirect:/board/contents?index=" + board.getBoardIndex());
 		return mav;
 	}
 	

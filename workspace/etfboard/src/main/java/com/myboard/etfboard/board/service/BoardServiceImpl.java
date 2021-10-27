@@ -38,7 +38,13 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public BoardVO getContents(int boardIndex) throws DataAccessException {
+		boardDAO.increaseView(boardIndex);
 		return boardDAO.selectContents(boardIndex);
+	}
+
+	@Override
+	public int updateContents(BoardVO board) throws DataAccessException {
+		return boardDAO.updateContents(board);
 	}
 	
 }

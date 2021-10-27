@@ -22,7 +22,11 @@ public interface BoardController {
 	
 	// 글내용 조회
 	public ModelAndView ViewBoardContents(@RequestParam("index") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	// 글수정 폼
+	public ModelAndView UpdateBoardContents(@RequestParam("index") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	// 글수정
+	public ModelAndView DoUpdateBoardContents(@ModelAttribute("board") BoardVO board, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	
 	// 글삭제
 	
 	// 댓글조회, 쓰기

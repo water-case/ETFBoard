@@ -47,5 +47,16 @@ public class BoardDAOImpl implements BoardDAO{
 		BoardVO boardVO = sqlSession.selectOne("mapper.board.selectContents", boardIndex);
 		return boardVO;
 	}
+
+	@Override
+	public void increaseView(int boardIndex) throws DataAccessException {
+		sqlSession.update("mapper.board.increaseView", boardIndex);
+	}
+
+	@Override
+	public int updateContents(BoardVO board) throws DataAccessException {
+		int result = sqlSession.update("mapper.board.updateContents", board);
+		return result;
+	}
 	
 }

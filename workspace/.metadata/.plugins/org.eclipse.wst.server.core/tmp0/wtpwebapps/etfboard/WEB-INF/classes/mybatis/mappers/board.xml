@@ -58,4 +58,25 @@
 		select * from etf_board where boardindex = #{boardindex}
 		]]>
 	</select>
+	
+	<!-- 조회수 증가 --> 
+	<update id="increaseView"  parameterType="int">
+		<![CDATA[
+		update etf_board
+		set views=views+1
+		where
+		boardindex=#{boardindex}
+		]]>      
+	</update>
+	
+	<!-- 글 내용 수정 -->
+	<update id="updateContents"  parameterType="boardVO">
+		<![CDATA[
+		update etf_board
+		set title=#{title}, text=#{text}
+		where
+		boardIndex=#{boardIndex}
+		]]>      
+	</update>
+	
 </mapper>

@@ -16,4 +16,8 @@ public interface BoardDAO {
 	public int insertContents(BoardVO board) throws DataAccessException;
 
 	public BoardVO selectContents(int boardIndex) throws DataAccessException;
+
+	public void increaseView(int boardIndex) throws DataAccessException;
+
+	public int updateContents(BoardVO board) throws DataAccessException;
 }
