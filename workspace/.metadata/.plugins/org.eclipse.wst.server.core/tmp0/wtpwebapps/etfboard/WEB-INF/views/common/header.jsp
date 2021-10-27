@@ -15,7 +15,7 @@
 						<div class="d-flex justify-content-between">
 							<a href="${contextPath}" class="nav-link px-3 text-white">자산배분</a>
 							
-							<ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+							<ul class="nav col-4 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 					          <li><a href="${contextPath}" class="nav-link px-2 text-secondary">홈</a></li>
 					          <li><a href="${contextPath}/board" class="nav-link px-2 text-white">소통게시판</a></li>
 					          <li><a href="${contextPath}/etfkorea" class="nav-link px-2 text-white">국내ETF</a></li>
@@ -25,7 +25,7 @@
 							<c:choose>
 								<c:when test="${isLogOn == true && member != null}">
 									<div class="d-flex justify-content-between">
-										<a href="#" class="nav-link px-4 text-white">${member.name} 님</a>
+										<a href="#" class="nav-link py-3 text-white">${member.name} 님</a>
 										<button id="logout" type="button" onclick="logout()" class="btn btn-warning">로그아웃</button>
 									</div>
 								</c:when>

@@ -5,6 +5,12 @@
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="startPage" value="${startPageIndex*5}" />
 
+<style>
+#boardTitle:link { color: black; text-decoration: none;}
+#boardTitle:visited { color: orange; text-decoration: none;}
+#boardTitle:hover { color: blue; text-decoration: none;}
+</style>
+
 <div class="container">
 <table class="table table-sm">
   <thead>
@@ -21,7 +27,7 @@
 	<c:forEach var="board" items="${boardList}">
 	  <tr>
 	    <td class="text-center">${board.boardIndex}</td>
-	    <td class="px-4">${board.title}</td>
+	    <td class="px-4"><a id="boardTitle" href="${contextPath}/board/contents?index=${board.boardIndex}">${board.title}</a></td>
 	    <td class="text-center">${board.name}</td>
 	    <td class="text-center">${board.writtenDate}</td>
 	    <td class="text-center">${board.push}</td>
@@ -30,7 +36,7 @@
 	</c:forEach>
   </tbody>
 </table>
-
+<hr class="mb-4">
 <!-- 페이징 -->
 <!-- 조건에 따라 페이징을 적합하게 변경 -->
 <!-- << 1 2 3 4 5 >> 현재페이지는 색이 다르게 표시 -->

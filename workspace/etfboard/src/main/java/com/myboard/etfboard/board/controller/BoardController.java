@@ -20,7 +20,8 @@ public interface BoardController {
 	// 글쓰기
 	public ModelAndView DoBoardWrite(@ModelAttribute("board") BoardVO board, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	// 글내용
+	// 글내용 조회
+	public ModelAndView ViewBoardContents(@RequestParam("index") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	// 글수정
 	// 글삭제
 	

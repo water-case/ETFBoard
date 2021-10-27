@@ -21,11 +21,7 @@
 		<input type="text" name="id" id="inputId" class="form-control" placeholder="Id" required maxlength='10'>
 		<div class="mb-3"></div>
 		<input type="password" name="pwd" id="inputPassword" class="form-control" placeholder="Password" required maxlength='12'>
-		<!-- <div class="checkbox mb-3">
-			<label>
-				<input type="checkbox" value="remember-me"> Remember me
-			</label>
-		</div> -->
+		<hr class="mb-4 mt-4">
 		<div class="text-center">
 			<button class="btn btn-lg btn-dark" type="submit">로그인</button>
 		</div>

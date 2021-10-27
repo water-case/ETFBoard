@@ -35,5 +35,10 @@ public class BoardServiceImpl implements BoardService{
 	public int writeContents(BoardVO board) throws DataAccessException {
 		return boardDAO.insertContents(board);
 	}
+
+	@Override
+	public BoardVO getContents(int boardIndex) throws DataAccessException {
+		return boardDAO.selectContents(boardIndex);
+	}
 	
 }

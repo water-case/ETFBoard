@@ -56,6 +56,7 @@ public class BoardControllerImpl implements BoardController{
 	}
 	
 	// 글쓰기 폼
+	@Override
 	@RequestMapping(value="/board/write" ,method = RequestMethod.GET)
 	public ModelAndView BoardWrite(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -64,6 +65,7 @@ public class BoardControllerImpl implements BoardController{
 	}
 	
 	// 글쓰기
+	@Override
 	@RequestMapping(value="/board/write.do" ,method = RequestMethod.POST)
 	public ModelAndView DoBoardWrite(@ModelAttribute("board") BoardVO board, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -77,6 +79,23 @@ public class BoardControllerImpl implements BoardController{
 			rAttr.addAttribute("result","writeFail");
 			mav.setViewName("redirect:/board");
 		}
+		return mav;
+	}
+
+	@Override
+	@RequestMapping(value="/board/contents*" ,method = RequestMethod.GET)
+	public ModelAndView ViewBoardContents(@RequestParam("index") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		// DB에 인덱스를 보내서 글 내용 조회
+		BoardVO boardContents = boardService.getContents(boardIndex);
+		
+		if(boardContents != null) {
+			// 조회 성공 시 mav에 바인딩
+			mav.addObject("boardContents", boardContents);
+		} else {
+			// 조회 실패 시 '삭제되었거나 잘못된 접근입니다' 노출 후 리다이렉트			
+		}
+		mav.setViewName("/board/contents");
 		return mav;
 	}
 	

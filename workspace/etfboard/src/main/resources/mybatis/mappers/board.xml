@@ -50,4 +50,12 @@
 		values(board_index.nextval, #{title}, #{text}, #{name})
 		]]>
 	</insert>
+	
+	
+	<!-- 글 내용 조회 --> 
+	<select id="selectContents"  parameterType="int" resultType="boardVO">
+		<![CDATA[
+		select * from etf_board where boardindex = #{boardindex}
+		]]>
+	</select>
 </mapper>

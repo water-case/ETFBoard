@@ -41,6 +41,9 @@
 		<put-attribute name="body" value="/WEB-INF/views/board/write.jsp" />
 	</definition>
 	<!-- 소통게시판 글내용조회 -->
+	<definition name="/board/contents" extends="baseLayout">
+		<put-attribute name="body" value="/WEB-INF/views/board/contents.jsp" />
+	</definition>
 	
 	<!-- 국내ETF 페이지 -->
 	<definition name="/etfkorea" extends="baseLayout">

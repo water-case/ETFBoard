@@ -14,4 +14,6 @@ public interface BoardService {
 	public List PageList(int page) throws DataAccessException;
 
 	public int writeContents(BoardVO board) throws DataAccessException;
+
+	public BoardVO getContents(int boardIndex) throws DataAccessException;
 }

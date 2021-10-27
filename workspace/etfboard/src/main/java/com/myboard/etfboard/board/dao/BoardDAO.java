@@ -14,4 +14,6 @@ public interface BoardDAO {
 	public List getBoardPageList(int page) throws DataAccessException;
 
 	public int insertContents(BoardVO board) throws DataAccessException;
+
+	public BoardVO selectContents(int boardIndex) throws DataAccessException;
 }

@@ -1,4 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
+<!-- 스크롤 없애기 -->
+<style>
+	::-webkit-scrollbar { 
+	display: none !important; // 윈도우 크롬 등
+	}
+</style>
+
 				<div class="container">
 					<div class="row featurette">
 						<div class="col-md-7">
@@ -16,9 +23,9 @@
 								
 							</p>
 						</div>
-						<div class="col-md-5">
+						<div class="col-md-5 mt-5">
 							<br>
-							<img src="https://investpension.miraeasset.com/file/imgView.do?fileNm=1558943447675_1.png" width="500" height="300">
+							<img src="https://investpension.miraeasset.com/file/imgView.do?fileNm=1558943447675_1.png" width="370" height="250">
 						</div>
 					</div>
 				
@@ -36,7 +43,7 @@
 						</div>
 						<div class="col-md-5 order-md-1">
 							<br>
-							<img src="http://photo.sentv.co.kr/uploads/editor/news/2021/05/739489797ceba627adf976504464b221.png" width="350" height="300">
+							<img src="http://photo.sentv.co.kr/uploads/editor/news/2021/05/739489797ceba627adf976504464b221.png" width="300" height="250">
 						</div>
 					</div>
 				
@@ -53,7 +60,7 @@
 							</p>
 						</div>
 						<div class="col-md-5">
-							<img src="https://image.fmkorea.com/files/attach/new2/20210925/192159903/3452318700/3940936078/0927ed3816e412cd268ed51c32ad1e12.png" width="500" height="270">
+							<img src="https://image.fmkorea.com/files/attach/new2/20210925/192159903/3452318700/3940936078/0927ed3816e412cd268ed51c32ad1e12.png" width="370" height="200">
 						</div>
 					</div>
 				</div>
