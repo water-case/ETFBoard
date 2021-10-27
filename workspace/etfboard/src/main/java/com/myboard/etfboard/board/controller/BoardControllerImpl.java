@@ -127,5 +127,21 @@ public class BoardControllerImpl implements BoardController{
 		mav.setViewName("redirect:/board/contents?index=" + board.getBoardIndex());
 		return mav;
 	}
+
+	@Override
+	@RequestMapping(value="/board/delete*" ,method = RequestMethod.GET)
+	public ModelAndView DeleteBoardContents(@RequestParam("index") int boardIndex, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		int result = boardService.DeleteContents(boardIndex);
+		if(result == 1) {
+			rAttr.addAttribute("result","deleteSuccess");
+		} else {
+			rAttr.addAttribute("result","deleteFail");
+		}
+		mav.setViewName("redirect:/board");
+		return mav;
+	}
+	
+	// 글 삭제
 	
 }

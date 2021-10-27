@@ -46,5 +46,10 @@ public class BoardServiceImpl implements BoardService{
 	public int updateContents(BoardVO board) throws DataAccessException {
 		return boardDAO.updateContents(board);
 	}
+
+	@Override
+	public int DeleteContents(int boardIndex) throws DataAccessException {
+		return boardDAO.deleteContentes(boardIndex);
+	}
 	
 }

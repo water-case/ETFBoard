@@ -18,4 +18,6 @@ public interface BoardService {
 	public BoardVO getContents(int boardIndex) throws DataAccessException;
 
 	public int updateContents(BoardVO board) throws DataAccessException;
+
+	public int DeleteContents(int boardIndex) throws DataAccessException;
 }

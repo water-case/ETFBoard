@@ -16,6 +16,8 @@
 		<title>
 			<tiles:insertAttribute name="title" />
 		</title>
+		
+		
 	</head>
 	<body>
 		<div id="container">

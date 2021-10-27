@@ -15,7 +15,7 @@
         <div class="col-md-3">
         	<c:choose>
 			  <c:when test="${isLogOn == true && member != null && boardContents.name == member.name}">
-		        <button type="button" class="btn btn-danger disabled float-right mr-1">삭제</button>
+		        <button type="button" class="btn btn-danger disabled float-right mr-1" onclick="location.href='${contextPath}/board/delete?index=${boardContents.boardIndex}'">삭제</button>
 		        <button type="button" class="btn btn-warning disabled float-right mr-1" onclick="location.href='${contextPath}/board/update?index=${boardContents.boardIndex}'">수정</button>
 			  </c:when>
 			</c:choose>
@@ -47,7 +47,7 @@
     <hr class="featurette-divider">
     
     <!-- 글내용 -->
-    ${boardContents.text}
+    <textarea readonly class="form-control" name="text" style="margin-top: 10px; margin-bottom: 10px; height: 400px; textarea.autosize; resize:none;" required maxlength='400'>${boardContents.text}</textarea>
     <hr class="featurette-divider">
     <!-- 추천버튼 -->
     <div class="row">

@@ -79,4 +79,13 @@
 		]]>      
 	</update>
 	
+	<!-- 글 삭제 -->
+	<delete id="deleteContents"  parameterType="int">
+		<![CDATA[
+		delete from etf_board
+		where
+		boardIndex=#{boardIndex}
+		]]>      
+	</delete>
+	
 </mapper>

@@ -20,4 +20,6 @@ public interface BoardDAO {
 	public void increaseView(int boardIndex) throws DataAccessException;
 
 	public int updateContents(BoardVO board) throws DataAccessException;
+
+	public int deleteContentes(int boardIndex) throws DataAccessException;
 }
