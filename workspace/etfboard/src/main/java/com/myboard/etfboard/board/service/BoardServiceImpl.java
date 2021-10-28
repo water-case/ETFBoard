@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import com.myboard.etfboard.board.dao.BoardDAO;
 import com.myboard.etfboard.board.vo.BoardVO;
+import com.myboard.etfboard.board.vo.ReplyVO;
 
 @Service("boardService")
 public class BoardServiceImpl implements BoardService{
@@ -56,6 +57,15 @@ public class BoardServiceImpl implements BoardService{
 	public int AddAndGetPushCount(int boardIndex) throws DataAccessException {
 		boardDAO.updateContents(boardIndex);
 		return boardDAO.getPushCount(boardIndex);
+	}
+
+	@Override
+	public int InsertBoardReply(ReplyVO replyVO) throws DataAccessException {
+		// 댓글추가
+		boardDAO.InsertReply(replyVO);
+		
+		// 댓글수증가시키기
+		return boardDAO.AddCommentsCount(replyVO.getBoardIndex());
 	}
 	
 }

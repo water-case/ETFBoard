@@ -11,19 +11,20 @@
         <result property="writtenDate" column="writtenDate" />
         <result property="push" column="push" />
         <result property="views" column="views" />
+        <result property="comments" column="comments" />
 	</resultMap>
 	
 	<!-- 첫번째 페이지 조회 -->
 	<select id="selectBoardFirstList" resultMap="boardResult">
 		<![CDATA[
-		select boardIndex, title, name, writtendate, push, views
+		select boardIndex, title, name, writtendate, push, views, comments
 		from (select * from etf_board order by boardIndex desc)
 		where rownum <= 15
 		]]>
 	</select>
 	
 	<!-- 전체 글 갯수 조회 -->
-	<select id="getIndexCount" resultType="pageVO">
+	<select id="getIndexCount" resultType="int">
 		<![CDATA[
 		select count(*) as totalIndexCount from etf_board
 		]]>
@@ -32,9 +33,9 @@
 	<!-- 페이지별 조회 -->
 	<select id="selectBoardPageList" parameterType="int" resultMap="boardResult">
 		<![CDATA[
-		select boardIndex, title, name, writtendate, push, views
-		from (	select pre, boardIndex, title, name, writtendate, push, views
-				from (	select rownum as pre, boardIndex, title, name, writtendate, push, views
+		select boardIndex, title, name, writtendate, push, views, comments
+		from (	select pre, boardIndex, title, name, writtendate, push, views, comments
+				from (	select rownum as pre, boardIndex, title, name, writtendate, push, views, comments
 						from (select * from etf_board order by boardindex desc )
 				)
 				where pre > 15*(#{page}-1) 
@@ -64,8 +65,7 @@
 		<![CDATA[
 		update etf_board
 		set views=views+1
-		where
-		boardindex=#{boardindex}
+		where boardindex=#{boardindex}
 		]]>      
 	</update>
 	
@@ -74,17 +74,14 @@
 		<![CDATA[
 		update etf_board
 		set title=#{title}, text=#{text}
-		where
-		boardIndex=#{boardIndex}
+		where boardIndex=#{boardIndex}
 		]]>      
 	</update>
 	
 	<!-- 글 삭제 -->
 	<delete id="deleteContents"  parameterType="int">
 		<![CDATA[
-		delete from etf_board
-		where
-		boardIndex=#{boardIndex}
+		delete from etf_board where boardIndex=#{boardIndex}
 		]]>      
 	</delete>
 	
@@ -93,8 +90,7 @@
 		<![CDATA[
 		update etf_board
 		set push=push+1
-		where
-		boardIndex=#{boardIndex}
+		where boardIndex=#{boardIndex}
 		]]>      
 	</update>
 	
@@ -104,5 +100,23 @@
 		select push from etf_board where boardindex = #{boardindex}
 		]]>
 	</select>
+	
+	<!-- 댓글 추가 -->
+	<insert id="insertReply"  parameterType="replyVO">
+		<![CDATA[
+		insert into etf_boardreply (boardindex, replyindex, groupindex, grade, name, text)
+		values(#{boardIndex}, boardreply_index.nextval, boardreplygroup_index.nextval, #{grade}, #{name}, #{text})
+		]]>
+	</insert>
+	
+	<!-- 댓글수 증가 -->
+	<update id="increaseComments" parameterType="int">
+		<![CDATA[
+		update etf_board
+		set comments=comments+1
+		where boardindex=#{boardIndex}
+		]]>
+	</update>
+	
 	
 </mapper>

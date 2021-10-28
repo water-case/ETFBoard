@@ -60,7 +60,8 @@ public class MemberControllerImpl implements MemberController {
 		memberVO = memberService.login(member);
 		if(memberVO != null) {
 			HttpSession session = request.getSession();
-			session.setAttribute("member", memberVO);
+			session.setAttribute("memberId", memberVO.getId());
+			session.setAttribute("memberName", memberVO.getName());
 			session.setAttribute("isLogOn", true);
 			session.setMaxInactiveInterval(24*60*60); // 세션 유지시간 하루
 			mav.setViewName("redirect:/member/loginSuccess");
@@ -81,8 +82,10 @@ public class MemberControllerImpl implements MemberController {
 	@RequestMapping(value = "/member/logout.do", method =  RequestMethod.GET)
 	public ModelAndView memberLogout(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		HttpSession session = request.getSession();
-		session.removeAttribute("member");
+		session.removeAttribute("memberId");
+		session.removeAttribute("memberName");
 		session.removeAttribute("isLogOn");
+		
 		ModelAndView mav = new ModelAndView();
 		
 		// 로그아웃하면 메인이 아니라 현재페이지로 가도록 만들기

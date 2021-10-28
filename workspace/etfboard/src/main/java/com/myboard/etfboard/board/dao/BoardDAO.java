@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.dao.DataAccessException;
 
 import com.myboard.etfboard.board.vo.BoardVO;
+import com.myboard.etfboard.board.vo.ReplyVO;
 
 public interface BoardDAO {
 	public List selectBoardFirstList() throws DataAccessException;
@@ -26,5 +27,9 @@ public interface BoardDAO {
 	public void updateContents(int boardIndex) throws DataAccessException;
 	
 	public int getPushCount(int boardIndex) throws DataAccessException;
+
+	public void InsertReply(ReplyVO replyVO) throws DataAccessException;
+
+	public int AddCommentsCount(int boardIndex) throws DataAccessException;
 	
 }

@@ -6,7 +6,6 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -20,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myboard.etfboard.board.service.BoardService;
 import com.myboard.etfboard.board.vo.BoardVO;
+import com.myboard.etfboard.board.vo.ReplyVO;
 
 @Controller("boardController")
 public class BoardControllerImpl implements BoardController{
@@ -76,12 +76,12 @@ public class BoardControllerImpl implements BoardController{
 		// DB에 글 내용 전송
 		int result = boardService.writeContents(board);
 		if(result == 1) {
-			rAttr.addAttribute("result","writeSuccess");
-			mav.setViewName("redirect:/board");
+			rAttr.addFlashAttribute("result",true);
+			mav.setViewName("redirect:/board/page?page=1");
 		}
 		else {
-			rAttr.addAttribute("result","writeFail");
-			mav.setViewName("redirect:/board");
+			rAttr.addFlashAttribute("result",false);
+			mav.setViewName("redirect:/board/page?page=1");
 		}
 		return mav;
 	}
@@ -150,7 +150,7 @@ public class BoardControllerImpl implements BoardController{
 	// 추천수 증가
 	@RequestMapping(value = "/board/push", method = RequestMethod.POST) 
 	@ResponseBody 
-	public Map<String, String> ContentsPush(@RequestParam("index") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map<String, String> ContentsPush(@RequestParam("boardIndex") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
 		// 추천수 증가시키기
 		int pushCount = boardService.AddAndGetPushCount(boardIndex);
@@ -159,5 +159,19 @@ public class BoardControllerImpl implements BoardController{
 		map.put("first", "true"); 
 		return map;
 	}
+	
+	// 댓글 쓰기
+	@RequestMapping(value = "/board/insertReply", method = RequestMethod.POST) 
+	@ResponseBody 
+	public Map<String, String> InsertReply(@RequestParam("boardIndex") int boardIndex, @RequestParam("name") String name, @RequestParam("text") String text, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		ReplyVO replyVO = new ReplyVO(boardIndex, 0, name, text);
+		int result = boardService.InsertBoardReply(replyVO);
+		map.put("success", "true"); 
+		return map;
+	}
+	
+	// 댓글 조회
+	
 
 }

@@ -5,7 +5,87 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-10-27T19:00:00Z</updated>
+  <updated>2021-10-28T15:46:00Z</updated>
+  <entry>
+    <title>Spring GraphQL 1.0.0-M3 Released</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/10/28/spring-graphql-1-0-0-m3-released" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Brian Clozel</name>
+    </author>
+    <id>tag:spring.io,2021-10-28:4588</id>
+    <updated>2021-10-28T15:46:00Z</updated>
+    <content type="html">&lt;p&gt;The Spring GraphQL team is pleased to announce a 3rd milestone towards a 1.0.0 release, driven with great help from the community .&lt;/p&gt;&lt;h2&gt;&lt;a href="#batch-mapping" class="anchor" name="batch-mapping"&gt;&lt;/a&gt;Batch Mapping&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://spring.io/blog/2021/09/01/spring-graphql-1-0-0-m2-available-now"&gt;2nd milestone&lt;/a&gt; introduced an annotation programming model for GraphQL data controllers with &lt;code&gt;@SchemaMapping&lt;/code&gt; methods. The 3rd milestone adds a new &lt;code&gt;@BatchMapping&lt;/code&gt; method.&lt;/p&gt;
+&lt;p&gt;If you&amp;rsquo;re familiar with GraphQL, you know that navigating an object graph can cause the &amp;ldquo;N+1 queries problem&amp;rdquo; if we&amp;rsquo;re not mapping carefully object relations. We could already leverage the &lt;a href="https://www.graphql-java.com/documentation/v16/batching/"&gt;Batching feature&lt;/a&gt; from GraphQL Java to solve that problem, but this release introduces &lt;a href="https://docs.spring.io/spring-graphql/docs/1.0.0-M3/reference/html/#execution-batching"&gt;dedicated support&lt;/a&gt; as well as an &lt;a href="https://docs.spring.io/spring-graphql/docs/1.0.0-M3/reference/html/#controllers-batch-mapping"&gt;&lt;code&gt;@BatchMapping&lt;/code&gt; annotation&lt;/a&gt; for a smoother experience:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@Controller&#xD;
+public class BookController {&#xD;
+&#xD;
+    @BatchMapping&#xD;
+    public Mono&amp;lt;Map&amp;lt;Book, Author&amp;gt;&amp;gt; author(List&amp;lt;Book&amp;gt; books) {&#xD;
+        // ...&#xD;
+    }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;With that example, we&amp;rsquo;re using a GraphQL engine mechanism to efficiently load many &lt;code&gt;Book-&amp;gt;Author&lt;/code&gt; relations with a single call.&lt;/p&gt;&lt;h2&gt;&lt;a href="#improved-querydsl-support" class="anchor" name="improved-querydsl-support"&gt;&lt;/a&gt;Improved Querydsl Support&lt;/h2&gt;
+&lt;p&gt;The &lt;a href="https://docs.spring.io/spring-graphql/docs/1.0.0-M3/reference/html/#data-querydsl"&gt;QuerydslDataFetcher support&lt;/a&gt; now checks the selected fields for a query and fetches only the corresponding properties of the underlying domain entity.&lt;/p&gt;&lt;h2&gt;&lt;a href="#typeresolver-rsquo-s" class="anchor" name="typeresolver-rsquo-s"&gt;&lt;/a&gt;TypeResolver&amp;rsquo;s&lt;/h2&gt;
+&lt;p&gt;There is now &lt;a href="https://docs.spring.io/spring-graphql/docs/1.0.0-M3/reference/html/#execution-graphqlsource-default-type-resolver"&gt;built-in support&lt;/a&gt; for TypeResolver&amp;rsquo;s for GraphQL Unions and Interfaces. By default, it tries to match the simple name of a Java class to a GraphQL Object type, and it tries the same for super types in the hierarchy of the class. &lt;/p&gt;
+&lt;p&gt;There are further options to customize this behavior to provide sufficient hints to match concrete Java classes to GraphQL Object types. Please, try this and let us know how well it works or if you need further flexibility around this feature.&lt;/p&gt;&lt;h2&gt;&lt;a href="#databinder-for-input-arguments" class="anchor" name="databinder-for-input-arguments"&gt;&lt;/a&gt;DataBinder for Input Arguments&lt;/h2&gt;
+&lt;p&gt;GraphQL Java parses input arguments to generic Maps of data. Spring GraphQL now uses the Spring Framework &lt;code&gt;DataBinder&lt;/code&gt; mechanism to turn those Maps into the typed objects declared on an &lt;code&gt;@Argument&lt;/code&gt; controller method parameter. You can hook in the &lt;code&gt;ConversionService&lt;/code&gt; to use in the &lt;code&gt;DataBinder&lt;/code&gt; to convert individual input fields when needed.&lt;/p&gt;&lt;h2&gt;&lt;a href="#websocketinterceptor" class="anchor" name="websocketinterceptor"&gt;&lt;/a&gt;WebSocketInterceptor&lt;/h2&gt;
+&lt;p&gt;There is now a &lt;code&gt;WebSocketInterceptor&lt;/code&gt; sub-type of &lt;code&gt;WebInterceptor&lt;/code&gt; which can also handle the &lt;code&gt;CONNECTION_INIT&lt;/code&gt; and the &lt;code&gt;COMPLETE&lt;/code&gt; messages on a WebSocket connection, including access to the &lt;code&gt;CONNECTION_INIT&lt;/code&gt; payload along with the ability to reject the connection. Please, give this feature a try and let us know if there is anything further needed.&lt;/p&gt;&lt;h2&gt;&lt;a href="#cors-configuration" class="anchor" name="cors-configuration"&gt;&lt;/a&gt;CORS Configuration&lt;/h2&gt;
+&lt;p&gt;The Spring GraphQL Boot starter provides &lt;code&gt;spring.graphql.cors.*&lt;/code&gt; properties to configure CORS for the exposed GraphQL endpoints.&lt;/p&gt;&lt;h2&gt;&lt;a href="#query-files-for-graphqltester" class="anchor" name="query-files-for-graphqltester"&gt;&lt;/a&gt;Query Files for GraphQlTester&lt;/h2&gt;
+&lt;p&gt;This release builds on the &lt;code&gt;GraphQlTester&lt;/code&gt; API and the testing auto-configuration to help you test your Spring GraphQL application.&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;GraphQlTester&lt;/code&gt; now supports use of &lt;code&gt;*.graphql&lt;/code&gt; &lt;a href="https://docs.spring.io/spring-graphql/docs/1.0.0-M3/reference/html/#testing-queries"&gt;query files&lt;/a&gt; in tests as an alternative to writing queries, inline in the Java test classes. Given a &lt;code&gt;projectReleases.graphql&lt;/code&gt; file in your test resources:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint graphql"&gt;query projectReleases($slug: ID!) {&#xD;
+    project(slug: $slug) {&#xD;
+        releases {&#xD;
+            version&#xD;
+        }&#xD;
+    }&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;You can now refer to this query file in your test:&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;graphQlTester.queryName(&amp;quot;projectReleases&amp;quot;) &#xD;
+        .variable(&amp;quot;slug&amp;quot;, &amp;quot;spring-framework&amp;quot;) &#xD;
+        .execute()&#xD;
+        .path(&amp;quot;project.releases[*].version&amp;quot;)&#xD;
+        .entityList(String.class)&#xD;
+        .hasSizeGreaterThan(1);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The &amp;ldquo;JS GraphQL&amp;rdquo; plugin for IntelliJ supports GraphQL query files with code completion.&lt;/p&gt;&lt;h2&gt;&lt;a href="#ldquo-sliced-tests-rdquo-support-with-graphqltest" class="anchor" name="ldquo-sliced-tests-rdquo-support-with-graphqltest"&gt;&lt;/a&gt;&amp;ldquo;Sliced tests&amp;rdquo; support with @GraphQlTest&lt;/h2&gt;
+&lt;p&gt;Last but not least, we&amp;rsquo;re now providing a new &lt;code&gt;@GraphQlTest&lt;/code&gt; testing facility, quite similar to the &lt;code&gt;@WebMvcTest&lt;/code&gt; and &lt;code&gt;@JsonTest&lt;/code&gt; Spring Boot annotations.&lt;br/&gt;With this, you can write integration tests that &lt;a href="https://docs.spring.io/spring-boot/docs/current/reference/html/features.html#features.testing.spring-boot-applications.autoconfigured-tests"&gt;rely on particular slice of your application&lt;/a&gt;.&lt;br/&gt;No need to load the entire application context, only the relevant parts are considered, which makes it easy to mock and test without involving too much infrastructure.&lt;/p&gt;
+&lt;p&gt;In this example, we&amp;rsquo;re testing our &lt;code&gt;BookController&lt;/code&gt; to make sure that it&amp;rsquo;s properly implemented - no need to set up complex data fixtures as we can mock the repository.&lt;/p&gt;
+&lt;pre&gt;&lt;code class="prettyprint java"&gt;@GraphQlTest(controllers = BookController.class)&#xD;
+public class BookControllerTests {&#xD;
+&#xD;
+    @Autowired&#xD;
+    private GraphQlTester graphQlTester;&#xD;
+&#xD;
+    @MockBean&#xD;
+    private BookRepository bookRepository;&#xD;
+&#xD;
+    @Test&#xD;
+    void bookdByIdShouldReturnSpringBook() {&#xD;
+        given(this.bookRepository.findById(42L)).willReturn(new Book(42L, &amp;quot;Spring GraphQL&amp;quot;));&#xD;
+        String query = &amp;quot;&amp;quot;&amp;quot;&#xD;
+			{&#xD;
+			  bookById(id: &amp;quot;42&amp;quot;){&#xD;
+			    id&#xD;
+			    name&#xD;
+			  }&#xD;
+			}&#xD;
+			&amp;quot;&amp;quot;&amp;quot;;&#xD;
+        this.graphQlTester.query(query).execute()&#xD;
+                .path(&amp;quot;data.bookById.name&amp;quot;).entity(String.class).isEqualTo(&amp;quot;Spring GraphQL&amp;quot;);&#xD;
+    }&#xD;
+&#xD;
+}
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;More &lt;a href="https://github.com/spring-projects/spring-graphql/milestone/4?closed=1"&gt;improvements and fixes made their way into their release&lt;/a&gt; and they&amp;rsquo;re available right now in the new Spring GraphQL 1.0.0-M3 from the Spring Milestone repository.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;re interested in helping out, you can &lt;a href="https://docs.spring.io/spring-graphql/docs/1.0.0-M3/reference/html/#boot-graphql"&gt;get started with Spring GraphQL&lt;/a&gt; and &lt;a href="https://github.com/spring-projects/spring-graphql/issues"&gt;raise issues on our GitHub project&lt;/a&gt;.&lt;br/&gt;If you have general questions, please ask on &lt;a href="https://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="https://stackoverflow.com/tags/spring-graphql"&gt;&lt;code&gt;spring-graphql&lt;/code&gt; tag&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://spring.io/projects/spring-graphql/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-graphql"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-graphql/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-graphql/docs/1.0.0-M3/reference/html/"&gt;Documentation&lt;/a&gt; | &lt;a href="https://stackoverflow.com/questions/tagged/spring-graphql"&gt;Stack Overflow&lt;/a&gt;&lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Tools 4.12.1 released</title>
     <link rel="alternate" href="https://spring.io/blog/2021/10/27/spring-tools-4-12-1-released" />
@@ -1010,56 +1090,6 @@ Let me know if you would like me to cover specific topics.&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Data 2021.0.6 and 2020.0.14 released</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/10/18/spring-data-2021-0-6-and-2020-0-14-released" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Mark Paluch</name>
-    </author>
-    <id>tag:spring.io,2021-10-18:4569</id>
-    <updated>2021-10-18T09:33:47Z</updated>
-    <content type="html">&lt;p&gt;On behalf of the team, I¡¯m pleased to announce the availability of the Spring Data &lt;code&gt;2021.0.6&lt;/code&gt; and &lt;code&gt;2020.0.14&lt;/code&gt; service releases.&lt;/p&gt;
-&lt;p&gt;Both releases are built on top of Spring Framework &lt;code&gt;5.3.11&lt;/code&gt;. For your convenience, you can consume Spring Data &lt;code&gt;2021.0.6&lt;/code&gt; and &lt;code&gt;2020.0.14&lt;/code&gt; through the upcoming Spring Boot releases &lt;code&gt;2.5.6&lt;/code&gt; and &lt;code&gt;2.4.12&lt;/code&gt;, respectively. &lt;/p&gt;
-&lt;p&gt;Both service releases ship with mostly bug fixes and dependency upgrades.&lt;/p&gt;
-&lt;p&gt;To round things off, here are the links to the artifacts, changelogs, and documentation:&lt;/p&gt;&lt;h2&gt;&lt;a href="#2021-0-6" class="anchor" name="2021-0-6"&gt;&lt;/a&gt;2021.0.6&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring Data Commons 2.5.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-commons/2.5.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/commons/docs/2.5.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/commons/docs/2.5.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-commons/releases/tag/2.5.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data JDBC 2.2.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-jdbc/2.2.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/jdbc/docs/2.2.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/jdbc/docs/2.2.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-jdbc/releases/tag/2.2.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data JPA 2.5.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-jpa/2.5.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/jpa/docs/2.5.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/jpa/docs/2.5.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-jpa/releases/tag/2.5.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data for Apache Geode 2.5.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-geode/2.5.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/geode/docs/2.5.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/geode/docs/2.5.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-geode/releases/tag/2.5.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Neo4j 6.1.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-neo4j/6.1.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/neo4j/docs/6.1.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/neo4j/docs/6.1.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-neo4j/releases/tag/6.1.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data for Apache Cassandra 3.2.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-cassandra/3.2.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/cassandra/docs/3.2.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/cassandra/docs/3.2.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-cassandra/releases/tag/3.2.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data MongoDB 3.2.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-mongodb/3.2.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/mongodb/docs/3.2.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/mongodb/docs/3.2.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-mongodb/releases/tag/3.2.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data KeyValue 2.5.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-keyvalue/2.5.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/keyvalue/docs/2.5.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/keyvalue/docs/2.5.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-keyvalue/releases/tag/2.5.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data R2DBC 1.3.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-r2dbc/1.3.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/r2dbc/docs/1.3.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/r2dbc/docs/1.3.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-r2dbc/releases/tag/1.3.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data LDAP 2.5.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-ldap/2.5.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/ldap/docs/2.5.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/ldap/docs/2.5.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-ldap/releases/tag/2.5.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Envers 2.5.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-envers/2.5.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/envers/docs/2.5.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/envers/docs/2.5.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-envers/releases/tag/2.5.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data REST 3.5.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-rest-webmvc/3.5.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/rest/docs/3.5.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/rest/docs/3.5.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-rest/releases/tag/3.5.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Redis 2.5.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-redis/2.5.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/redis/docs/2.5.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/redis/docs/2.5.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-redis/releases/tag/2.5.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Elasticsearch 4.2.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-elasticsearch/4.2.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/elasticsearch/docs/4.2.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/elasticsearch/docs/4.2.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-elasticsearch/releases/tag/4.2.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Couchbase 4.2.6 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-couchbase/4.2.6"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/couchbase/docs/4.2.6/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/couchbase/docs/4.2.6/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-couchbase/releases/tag/4.2.6"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;&lt;h2&gt;&lt;a href="#2020-0-14" class="anchor" name="2020-0-14"&gt;&lt;/a&gt;2020.0.14&lt;/h2&gt;
-&lt;ul&gt;
-  &lt;li&gt;Spring Data Commons 2.4.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-commons/2.4.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/commons/docs/2.4.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/commons/docs/2.4.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-commons/releases/tag/2.4.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data JDBC 2.1.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-jdbc/2.1.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/jdbc/docs/2.1.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/jdbc/docs/2.1.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-jdbc/releases/tag/2.1.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data JPA 2.4.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-jpa/2.4.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/jpa/docs/2.4.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/jpa/docs/2.4.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-jpa/releases/tag/2.4.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data for Apache Geode 2.4.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-geode/2.4.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/geode/docs/2.4.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/geode/docs/2.4.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-geode/releases/tag/2.4.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Neo4j 6.0.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-neo4j/6.0.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/neo4j/docs/6.0.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/neo4j/docs/6.0.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-neo4j/releases/tag/6.0.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data for Apache Cassandra 3.1.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-cassandra/3.1.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/cassandra/docs/3.1.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/cassandra/docs/3.1.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-cassandra/releases/tag/3.1.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data MongoDB 3.1.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-mongodb/3.1.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/mongodb/docs/3.1.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/mongodb/docs/3.1.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-mongodb/releases/tag/3.1.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data KeyValue 2.4.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-keyvalue/2.4.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/keyvalue/docs/2.4.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/keyvalue/docs/2.4.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-keyvalue/releases/tag/2.4.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data R2DBC 1.2.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-r2dbc/1.2.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/r2dbc/docs/1.2.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/r2dbc/docs/1.2.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-r2dbc/releases/tag/1.2.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data LDAP 2.4.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-ldap/2.4.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/ldap/docs/2.4.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/ldap/docs/2.4.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-ldap/releases/tag/2.4.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Envers 2.4.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-envers/2.4.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/envers/docs/2.4.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/envers/docs/2.4.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-envers/releases/tag/2.4.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data REST 3.4.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-rest-webmvc/3.4.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/rest/docs/3.4.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/rest/docs/3.4.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-rest/releases/tag/3.4.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Redis 2.4.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-redis/2.4.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/redis/docs/2.4.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/redis/docs/2.4.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-redis/releases/tag/2.4.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Elasticsearch 4.1.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-elasticsearch/4.1.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/elasticsearch/docs/4.1.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/elasticsearch/docs/4.1.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-elasticsearch/releases/tag/4.1.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data Couchbase 4.1.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-couchbase/4.1.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/couchbase/docs/4.1.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/couchbase/docs/4.1.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-couchbase/releases/tag/4.1.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Spring Data for Apache Solr 4.3.14 - &lt;a href="https://repo.spring.io/libs-release/org/springframework/data/spring-data-solr/4.3.14"&gt;Artifacts&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/solr/docs/4.3.14/api"&gt;Javadoc&lt;/a&gt; - &lt;a href="https://docs.spring.io/spring-data/solr/docs/4.3.14/reference/html"&gt;Documentation&lt;/a&gt; - &lt;a href="https://github.com/spring-projects/spring-data-solr/releases/tag/4.3.14"&gt;Changelog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>

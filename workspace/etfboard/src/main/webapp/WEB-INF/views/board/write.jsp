@@ -22,7 +22,7 @@
           <textarea class="form-control" name="text" placeholder="내용을 입력해 주세요" style="margin-top: 10px; margin-bottom: 10px; height: 400px;" required maxlength='400'></textarea>
         </div>
       </div>
-      <input type="hidden" name="name" value="${member.name}"/>
+      <input type="hidden" name="name" value="${memberName}"/>
       <hr class="mb-4">
       <button class="btn btn-dark btn-lg " type="submit">글쓰기</button>
     </form>

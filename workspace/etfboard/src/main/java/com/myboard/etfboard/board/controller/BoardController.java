@@ -1,5 +1,7 @@
 package com.myboard.etfboard.board.controller;
 
+import java.util.Map;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,6 +11,7 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myboard.etfboard.board.vo.BoardVO;
+import com.myboard.etfboard.board.vo.ReplyVO;
 
 public interface BoardController {
 	// 조회
@@ -29,12 +32,15 @@ public interface BoardController {
 	// 글삭제
 	public ModelAndView DeleteBoardContents(@RequestParam("index") int boardIndex, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	// 추천
+	public Map<String, String> ContentsPush(@RequestParam("index") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	// 댓글조회, 쓰기
+	// 댓글쓰기
+	public Map<String, String> InsertReply(@RequestParam("boardIndex") int boardIndex, @RequestParam("name") String name, @RequestParam("text") String text, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	// 댓글조회
+	
 	// 댓글수정
 	// 댓글삭제
 	
-	// 대댓글조회
 	// 대댓글쓰기
 	// 대댓글수정
 	// 대댓글삭제

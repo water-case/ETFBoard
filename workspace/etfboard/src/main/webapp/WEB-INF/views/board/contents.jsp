@@ -12,26 +12,52 @@
     	$.ajax({
     		type: "post",
     		url: "./push",
-    		data: {index:${boardContents.boardIndex}},
+    		data: {'boardIndex':'${boardContents.boardIndex}'},
     		success: function(data) {
     			if(data.first=="true"){
-    				document.getElementById('push_btn').innerText = '추천 '+data.push;    				
+    				document.getElementById('push_btn').innerText = '추천 '+data.push; 
     			} else{
 			    	alert("추천은 1회만 가능합니다");    				
     			}
     		}
     	});
 	}
-    
-    function comment_insert(){
-    	if(${isLogOn == true && member != null}){
-    		// 등록하기
-    	} else {
-    		alert("로그인후 가능합니다");
-    	}
-    }
-    
 </script>
+<c:choose>
+  <c:when test="${isLogOn == true && memberName != null}">
+	<script type="text/javascript">
+		// 댓글함수
+		function comment_insert(){
+			$.ajax({
+	    		type: "post",
+	    		url: "./insertReply",
+	    		data: {'boardIndex':'${boardContents.boardIndex}',
+	    				'name':'${memberName}',
+	    				'text':$('#reply_text').val()
+	    		},
+	    		success: function(data) {
+	    			if(data.success=="true"){
+	    				alert("댓글 생성 성공"); 
+	    			} else{
+				    	alert("댓글이 작성되지 않았습니다");
+	    			}
+	    		}
+	    	});
+	    }
+	</script>
+  </c:when>
+  <c:otherwise>
+  	<script>
+	    // 대댓글함수
+	    function comment2_insert(){
+	    	alert("구현예정입니다");
+	    }
+	  	function comment_insert(){
+	    	alert("로그인 후 가능합니다");
+	    }
+  	</script>
+  </c:otherwise>
+</c:choose>
 
 <div class="container">
 	<!-- 목록, 수정, 삭제버튼 -->
@@ -40,7 +66,7 @@
         <div class="col-md-6"></div>
         <div class="col-md-3">
         	<c:choose>
-			  <c:when test="${isLogOn == true && member != null && boardContents.name == member.name}">
+			  <c:when test="${isLogOn == true && boardContents.name == memberName}">
 		        <button type="button" class="btn btn-danger disabled float-right mr-1" onclick="location.href='${contextPath}/board/delete?index=${boardContents.boardIndex}'">삭제</button>
 		        <button type="button" class="btn btn-warning disabled float-right mr-1" onclick="location.href='${contextPath}/board/update?index=${boardContents.boardIndex}'">수정</button>
 			  </c:when>
@@ -66,7 +92,7 @@
           ${boardContents.name} / ${boardContents.writtenDate}
         </div>
         <div class="col-md-6"></div>
-        <div class="col-md-3">
+        <div class="col-md-3 text-right">
           조회 ${boardContents.views} 추천 ${boardContents.push} 댓글 #
         </div>
     </div>
@@ -94,7 +120,7 @@
         </div>
         <div class="col-md-2">
         	<c:choose>
-			  <c:when test="${isLogOn == true && member != null}">
+			  <c:when test="${isLogOn == true && memberName == boardContents.name}">
 				<button type="button" class="btn btn-warning disabled">수정</button>
 	        	<button type="button" class="btn btn-danger disabled">삭제</button>
 			  </c:when>
@@ -105,13 +131,13 @@
     <hr class="featurette-divider">
     <div class="row">
 	  <div class="col-md-2">
-		<input class="form-control" type="text" placeholder="${member.name}" readonly="">
+		<input class="form-control" type="text" value="${memberName}" readonly="">
 	  </div>
-      <div class="col-md-8">
-		<textarea class="form-control" rows="2" placeholder="욕설, 비방등 남에게 피해를 줄 수 있는 댓글은 자제해 주세요"></textarea>
-      </div>
-      <div class="col-md-2">
+	  <div class="col-md-8">
+		<textarea class="form-control" id="reply_text" rows="2" placeholder="욕설, 비방등 타인에게 피해를 줄 수 있는 댓글은 자제해 주세요"></textarea>
+	  </div>
+	  <div class="col-md-2">
 	    <button type="button" class="btn btn-info disabled" onclick="comment_insert()">등록</button>
-      </div>
+	  </div>
     </div>
 </div>

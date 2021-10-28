@@ -13,15 +13,7 @@ public class BoardVO {
 	private Date writtenDate;
 	private int push;
 	private int views;
-	
-	public BoardVO() {
-	}
-
-	public BoardVO(String title, String text, String name) {
-		this.title = title;
-		this.text = text;
-		this.name = name;
-	}
+	private int comments;
 
 	public int getBoardIndex() {
 		return boardIndex;
@@ -77,6 +69,14 @@ public class BoardVO {
 
 	public void setViews(int views) {
 		this.views = views;
+	}
+
+	public int getComments() {
+		return comments;
+	}
+
+	public void setComments(int comments) {
+		this.comments = comments;
 	}
 	
 	

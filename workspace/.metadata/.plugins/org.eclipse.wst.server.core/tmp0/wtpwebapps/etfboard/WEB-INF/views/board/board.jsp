@@ -11,6 +11,14 @@
 #boardTitle:hover { color: blue; text-decoration: none;}
 </style>
 
+<c:choose>
+	<c:when test="${result == false}">
+		<script>
+			alert("글쓰기에 실패했습니다");
+		</script>
+	</c:when>
+</c:choose>
+
 <div class="container">
 <table class="table table-sm">
   <thead>
@@ -27,7 +35,14 @@
 	<c:forEach var="board" items="${boardList}">
 	  <tr>
 	    <td class="text-center">${board.boardIndex}</td>
-	    <td class="px-4"><a id="boardTitle" href="${contextPath}/board/contents?index=${board.boardIndex}">${board.title}</a></td>
+	    <td class="px-4"><a id="boardTitle" href="${contextPath}/board/contents?index=${board.boardIndex}">
+	      ${board.title}&nbsp;&nbsp;
+	      <c:choose>
+			<c:when test="${board.comments != 0}">
+			  [${board.comments}]
+			</c:when>
+		  </c:choose>
+	    </a></td>
 	    <td class="text-center">${board.name}</td>
 	    <td class="text-center">${board.writtenDate}</td>
 	    <td class="text-center">${board.push}</td>
@@ -42,7 +57,7 @@
 <!-- << 1 2 3 4 5 >> 현재페이지는 색이 다르게 표시 -->
 <script>
 	function writeButton() {
-	    if (${isLogOn == true && member != null}) {
+	    if (${isLogOn == true}) {
 	    	location.href='${contextPath}/board/write'
 	    } else {
 	    	alert("로그인 후 이용가능합니다");

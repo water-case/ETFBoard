@@ -8,7 +8,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Repository;
 
 import com.myboard.etfboard.board.vo.BoardVO;
-import com.myboard.etfboard.board.vo.PageVO;
+import com.myboard.etfboard.board.vo.ReplyVO;
 
 @Repository("boardDAO")
 public class BoardDAOImpl implements BoardDAO{
@@ -24,9 +24,7 @@ public class BoardDAOImpl implements BoardDAO{
 
 	@Override
 	public int getIndexCount() throws DataAccessException {
-		List<PageVO> pageVO = null;
-		pageVO = sqlSession.selectList("mapper.board.getIndexCount");
-		return pageVO.get(0).getTotalIndexCount();
+		return sqlSession.selectOne("mapper.board.getIndexCount");
 	}
 
 	@Override
@@ -72,6 +70,16 @@ public class BoardDAOImpl implements BoardDAO{
 	@Override
 	public int getPushCount(int boardIndex) throws DataAccessException {
 		return sqlSession.selectOne("mapper.board.selectPushCount", boardIndex);
+	}
+
+	@Override
+	public void InsertReply(ReplyVO replyVO) throws DataAccessException {
+		sqlSession.insert("mapper.board.insertReply", replyVO);
+	}
+
+	@Override
+	public int AddCommentsCount(int boardIndex) throws DataAccessException {
+		return sqlSession.update("mapper.board.increaseComments", boardIndex);
 	}
 	
 }

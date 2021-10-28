@@ -9,7 +9,7 @@
         }
     }
     function rebalancing() {
-	    if (${isLogOn == true && member != null}) {
+	    if (${isLogOn == true}) {
 	    	location.href='${contextPath}/rebalancing'
 	    } else {
 	    	alert("로그인 후 이용가능합니다");
@@ -24,15 +24,15 @@
 							
 							<ul class="nav col-5 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
 					          <%-- <li><a href="${contextPath}" class="nav-link px-2 text-secondary">홈</a></li> --%>
-					          <li><a href="${contextPath}/board" class="nav-link px-2 text-white">소통게시판</a></li>
+					          <li><a href="${contextPath}/board/page?page=1" class="nav-link px-2 text-white">소통게시판</a></li>
 					          <li><a href="${contextPath}/etfkorea" class="nav-link px-2 text-white">국내ETF</a></li>
 					          <li><a onclick="rebalancing()" href="#" class="nav-link px-2 text-white">리밸런싱계산기</a></li>
 					        </ul>
 							
 							<c:choose>
-								<c:when test="${isLogOn == true && member != null}">
+								<c:when test="${isLogOn == true}">
 									<div class="d-flex justify-content-between">
-										<a href="#" class="nav-link py-2 text-white">${member.name} 님</a>
+										<a href="#" class="nav-link py-2 text-white">${memberName} 님</a>
 										<button id="logout" type="button" onclick="logout()" class="btn btn-warning">로그아웃</button>
 									</div>
 								</c:when>
