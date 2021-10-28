@@ -63,5 +63,15 @@ public class BoardDAOImpl implements BoardDAO{
 	public int deleteContentes(int boardIndex) throws DataAccessException {
 		return sqlSession.delete("mapper.board.deleteContents", boardIndex);
 	}
+
+	@Override
+	public void updateContents(int boardIndex) throws DataAccessException {
+		sqlSession.update("mapper.board.increasePush", boardIndex);
+	}
+
+	@Override
+	public int getPushCount(int boardIndex) throws DataAccessException {
+		return sqlSession.selectOne("mapper.board.selectPushCount", boardIndex);
+	}
 	
 }

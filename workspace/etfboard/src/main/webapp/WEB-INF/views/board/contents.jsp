@@ -3,8 +3,34 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<script>
+
+<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
+<script type="text/javascript">
     document.title = "${boardContents.title}" ; <!-- 글 제목으로 title 변경 -->
+    
+    function push() {
+    	$.ajax({
+    		type: "post",
+    		url: "./push",
+    		data: {index:${boardContents.boardIndex}},
+    		success: function(data) {
+    			if(data.first=="true"){
+    				document.getElementById('push_btn').innerText = '추천 '+data.push;    				
+    			} else{
+			    	alert("추천은 1회만 가능합니다");    				
+    			}
+    		}
+    	});
+	}
+    
+    function comment_insert(){
+    	if(${isLogOn == true && member != null}){
+    		// 등록하기
+    	} else {
+    		alert("로그인후 가능합니다");
+    	}
+    }
+    
 </script>
 
 <div class="container">
@@ -53,7 +79,7 @@
     <div class="row">
         <div class="col-md-5"></div>
         <div class="col-md-3">
-    		<button type="button" class="btn btn-primary disabled">추천 ${boardContents.push}</button>
+    		<button type="button" id="push_btn" class="btn btn-primary disabled" onclick="push()">추천 ${boardContents.push}</button>
         </div>
         <div class="col-md-3"></div>
     </div>
@@ -67,21 +93,25 @@
 			<input class="form-control" type="text" placeholder="${boardContents.title}" readonly="">
         </div>
         <div class="col-md-2">
-			<button type="button" class="btn btn-warning disabled">수정</button>
-        	<button type="button" class="btn btn-danger disabled">삭제</button>
+        	<c:choose>
+			  <c:when test="${isLogOn == true && member != null}">
+				<button type="button" class="btn btn-warning disabled">수정</button>
+	        	<button type="button" class="btn btn-danger disabled">삭제</button>
+			  </c:when>
+			</c:choose>
         </div>
     </div>
-    <hr class="featurette-divider">
     <!-- 댓글 작성창과 등록버튼 -->
+    <hr class="featurette-divider">
     <div class="row">
-    	<div class="col-md-2">
-			<input class="form-control" type="text" placeholder="${member.name}" readonly="">
-    	</div>
-        <div class="col-md-8">
-			<textarea class="form-control" rows="2" placeholder="욕설, 비방등 남에게 피해를 줄 수 있는 댓글은 자제해 주세요"></textarea>
-        </div>
-        <div class="col-md-2">
-			<button type="button" class="btn btn-info disabled">등록</button>
-        </div>
+	  <div class="col-md-2">
+		<input class="form-control" type="text" placeholder="${member.name}" readonly="">
+	  </div>
+      <div class="col-md-8">
+		<textarea class="form-control" rows="2" placeholder="욕설, 비방등 남에게 피해를 줄 수 있는 댓글은 자제해 주세요"></textarea>
+      </div>
+      <div class="col-md-2">
+	    <button type="button" class="btn btn-info disabled" onclick="comment_insert()">등록</button>
+      </div>
     </div>
 </div>

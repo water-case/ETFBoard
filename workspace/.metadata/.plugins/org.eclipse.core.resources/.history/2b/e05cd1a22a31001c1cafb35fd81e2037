@@ -1,7 +1,0 @@
-package com.myboard.etfboard.main.controller;
-
-import org.springframework.web.servlet.ModelAndView;
-
-public interface MainController {
-	public ModelAndView 
-}

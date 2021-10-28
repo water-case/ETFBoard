@@ -88,4 +88,21 @@
 		]]>      
 	</delete>
 	
+	<!-- 추천수 증가 -->
+	<update id="increasePush"  parameterType="int">
+		<![CDATA[
+		update etf_board
+		set push=push+1
+		where
+		boardIndex=#{boardIndex}
+		]]>      
+	</update>
+	
+	<!-- 추천수 조회 -->
+	<select id="selectPushCount"  parameterType="int" resultType="int">
+		<![CDATA[
+		select push from etf_board where boardindex = #{boardindex}
+		]]>
+	</select>
+	
 </mapper>

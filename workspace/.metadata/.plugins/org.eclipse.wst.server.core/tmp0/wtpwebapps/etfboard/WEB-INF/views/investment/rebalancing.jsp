@@ -2,14 +2,14 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-<c:choose>
+<%-- <c:choose>
 	<c:when test="${isLogOn != true}">
 		<script>
 			alert("로그인 후 이용가능합니다");
 			location.href='${contextPath}/'
 		</script>
 	</c:when>
-</c:choose>
+</c:choose> --%>
 
 <!DOCTYPE html>
 <html>

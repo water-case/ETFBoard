@@ -22,4 +22,9 @@ public interface BoardDAO {
 	public int updateContents(BoardVO board) throws DataAccessException;
 
 	public int deleteContentes(int boardIndex) throws DataAccessException;
+
+	public void updateContents(int boardIndex) throws DataAccessException;
+	
+	public int getPushCount(int boardIndex) throws DataAccessException;
+	
 }
