@@ -8,6 +8,7 @@
 <script type="text/javascript">
     document.title = "${boardContents.title}" ; <!-- 글 제목으로 title 변경 -->
     
+    
     function push() {
     	$.ajax({
     		type: "post",
@@ -26,7 +27,7 @@
 <c:choose>
   <c:when test="${isLogOn == true && memberName != null}">
 	<script type="text/javascript">
-		// 댓글함수
+		// 댓글 작성
 		function comment_insert(){
 			$.ajax({
 	    		type: "post",
@@ -36,11 +37,10 @@
 	    				'text':$('#reply_text').val()
 	    		},
 	    		success: function(data) {
-	    			if(data.success=="true"){
-	    				alert("댓글 생성 성공"); 
-	    			} else{
-				    	alert("댓글이 작성되지 않았습니다");
-	    			}
+	    			window.location.reload(true);
+	    		},
+	    		error: function(){
+	    			alert("댓글이 작성되지 않았습니다");
 	    		}
 	    	});
 	    }
@@ -93,7 +93,7 @@
         </div>
         <div class="col-md-6"></div>
         <div class="col-md-3 text-right">
-          조회 ${boardContents.views} 추천 ${boardContents.push} 댓글 #
+          조회 ${boardContents.views} 추천 ${boardContents.push} 댓글 ${boardContents.comments}
         </div>
     </div>
     <hr class="featurette-divider">
@@ -107,25 +107,30 @@
         <div class="col-md-3">
     		<button type="button" id="push_btn" class="btn btn-primary disabled" onclick="push()">추천 ${boardContents.push}</button>
         </div>
-        <div class="col-md-3"></div>
+        <div class="col-md-4">
+    		<button type="button" class="btn btn-primary disabled float-right" onclick="replyRefresh()">새로고침</button>
+        </div>
     </div>
     <hr class="featurette-divider">
-    <!-- 댓글,대댓글 -->
-    <div class="row">
-    	<div class="col-md-2">
-			<input class="form-control" type="text" placeholder="${boardContents.name}" readonly="">
+    <!-- 댓글,대댓글 조회 -->
+    <div class="row" id="reply_div">
+      <c:forEach var="replyList" items="${replyList}">
+      	<input type="hidden" value="${replyList.replyIndex}">
+    	<div class="col-md-2 mb-1">
+			<input class="form-control" type="text" placeholder="${replyList.name}" readonly="">
     	</div>
         <div class="col-md-8">
-			<input class="form-control" type="text" placeholder="${boardContents.title}" readonly="">
+			<input class="form-control" type="text" placeholder="${replyList.text}" readonly="">
         </div>
         <div class="col-md-2">
         	<c:choose>
-			  <c:when test="${isLogOn == true && memberName == boardContents.name}">
-				<button type="button" class="btn btn-warning disabled">수정</button>
-	        	<button type="button" class="btn btn-danger disabled">삭제</button>
+			  <c:when test="${isLogOn == true && memberName == replyList.name}">
+	        	<button type="button" class="btn btn-danger disabled float-right mr-1">삭제</button>
+				<button type="button" class="btn btn-warning disabled float-right mr-1">수정</button>
 			  </c:when>
 			</c:choose>
         </div>
+      </c:forEach>
     </div>
     <!-- 댓글 작성창과 등록버튼 -->
     <hr class="featurette-divider">

@@ -67,5 +67,10 @@ public class BoardServiceImpl implements BoardService{
 		// 댓글수증가시키기
 		return boardDAO.AddCommentsCount(replyVO.getBoardIndex());
 	}
+
+	@Override
+	public List getReplyList(int boardIndex) throws DataAccessException {
+		return boardDAO.getReplyList(boardIndex);
+	}
 	
 }

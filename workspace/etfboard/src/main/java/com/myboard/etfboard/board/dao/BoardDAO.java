@@ -31,5 +31,7 @@ public interface BoardDAO {
 	public void InsertReply(ReplyVO replyVO) throws DataAccessException;
 
 	public int AddCommentsCount(int boardIndex) throws DataAccessException;
+
+	public List getReplyList(int boardIndex) throws DataAccessException;
 	
 }

@@ -14,6 +14,16 @@
         <result property="comments" column="comments" />
 	</resultMap>
 	
+	<resultMap id="replyResult" type="replyVO">
+		<result property="boardIndex" column="boardIndex" />
+        <result property="replyIndex" column="replyIndex" />
+        <result property="groupIndex" column="groupIndex" />
+        <result property="grade" column="grade" />
+        <result property="name" column="name" />
+        <result property="text" column="text" />
+        <result property="writtenDate" column="writtenDate" />
+	</resultMap>
+	
 	<!-- 첫번째 페이지 조회 -->
 	<select id="selectBoardFirstList" resultMap="boardResult">
 		<![CDATA[
@@ -118,5 +128,11 @@
 		]]>
 	</update>
 	
+	<!-- 댓글 조회 -->
+	<select id="selectReplyList"  parameterType="int" resultMap="replyResult">
+		<![CDATA[
+		select * from etf_boardreply where boardindex = #{boardindex} order by replyindex asc
+		]]>
+	</select>
 	
 </mapper>
