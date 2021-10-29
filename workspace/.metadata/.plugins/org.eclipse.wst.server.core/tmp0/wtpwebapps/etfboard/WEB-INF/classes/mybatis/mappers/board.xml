@@ -135,4 +135,13 @@
 		]]>
 	</select>
 	
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="replyVO">
+		<![CDATA[
+		update etf_boardreply
+		set text=#{text}
+		where replyindex=#{replyIndex}
+		]]>
+	</update>
+	
 </mapper>

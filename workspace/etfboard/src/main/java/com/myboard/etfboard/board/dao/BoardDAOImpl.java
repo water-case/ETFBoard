@@ -86,5 +86,10 @@ public class BoardDAOImpl implements BoardDAO{
 	public List getReplyList(int boardIndex) throws DataAccessException {
 		return sqlSession.selectList("mapper.board.selectReplyList", boardIndex);
 	}
+
+	@Override
+	public int UpdateReply(ReplyVO replyVO) throws DataAccessException {
+		return sqlSession.update("mapper.board.updateReply", replyVO);
+	}
 	
 }

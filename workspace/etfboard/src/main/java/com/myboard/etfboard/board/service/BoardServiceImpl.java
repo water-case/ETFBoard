@@ -72,5 +72,10 @@ public class BoardServiceImpl implements BoardService{
 	public List getReplyList(int boardIndex) throws DataAccessException {
 		return boardDAO.getReplyList(boardIndex);
 	}
+
+	@Override
+	public int UpdateBoardReply(ReplyVO replyVO) throws DataAccessException {
+		return boardDAO.UpdateReply(replyVO);
+	}
 	
 }

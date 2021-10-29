@@ -27,4 +27,6 @@ public interface BoardService {
 	public int InsertBoardReply(ReplyVO replyVO) throws DataAccessException;
 
 	public List getReplyList(int boardIndex) throws DataAccessException;
+
+	public int UpdateBoardReply(ReplyVO replyVO) throws DataAccessException;
 }

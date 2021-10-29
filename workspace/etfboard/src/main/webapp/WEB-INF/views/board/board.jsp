@@ -36,7 +36,7 @@
 	  <tr>
 	    <td class="text-center">${board.boardIndex}</td>
 	    <td class="px-4"><a id="boardTitle" href="${contextPath}/board/contents?index=${board.boardIndex}">
-	      ${board.title}&nbsp;&nbsp;
+	      ${board.title}&nbsp;
 	      <c:choose>
 			<c:when test="${board.comments != 0}">
 			  [${board.comments}]

@@ -16,13 +16,19 @@ public class ReplyVO {
 	
 	public ReplyVO() {
 	}
-	
+	// 댓글 작성용 생성자
 	public ReplyVO(int boardIndex, int grade, String name, String text) {
 		this.boardIndex = boardIndex;
 		this.grade = grade;
 		this.name = name;
 		this.text = text;
 	}
+	// 댓글 수정용 생성자
+	public ReplyVO(int replyIndex, String text) {
+		this.replyIndex = replyIndex;
+		this.text = text;
+	}
+	
 	public int getBoardIndex() {
 		return boardIndex;
 	}

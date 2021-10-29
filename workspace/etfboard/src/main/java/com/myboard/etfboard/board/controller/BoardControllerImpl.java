@@ -174,7 +174,20 @@ public class BoardControllerImpl implements BoardController{
 		return map;
 	}
 	
-	// 댓글 조회
+	// 댓글 수정
+	@RequestMapping(value = "/board/updateReply", method = RequestMethod.POST) 
+	@ResponseBody 
+	public Map<String, String> UpdateReply(@RequestParam("replyIndex") int replyIndex, @RequestParam("text") String text, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		ReplyVO replyVO = new ReplyVO(replyIndex, text);
+		int result = boardService.UpdateBoardReply(replyVO);
+		if(result == 1) {
+			map.put("success", "true"); 			
+		} else {
+			map.put("success", "false"); 			
+		}
+		return map;
+	}
 	
 
 }

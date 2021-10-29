@@ -34,7 +34,7 @@
 	    		url: "./insertReply",
 	    		data: {'boardIndex':'${boardContents.boardIndex}',
 	    				'name':'${memberName}',
-	    				'text':$('#reply_text').val()
+	    				'text':$('#reply_textarea').val()
 	    		},
 	    		success: function(data) {
 	    			window.location.reload(true);
@@ -44,6 +44,46 @@
 	    		}
 	    	});
 	    }
+		
+		// 댓글 수정
+		var editOn = false;
+		function reply_edit(replyIndex,text){
+			if(editOn == false){
+				editOn = true;
+				$('#reply_text'+replyIndex).attr("readonly", false);
+				$('#replyEdit_btn'+replyIndex).text("완료");
+			} else {
+				editOn = false;
+				if($('#reply_text'+replyIndex).val() == text){
+					$('#reply_text'+replyIndex).attr("readonly", true);	
+					$('#replyEdit_btn'+replyIndex).text("수정");
+				} else {
+					// 서버로 데이터 전송
+					$.ajax({
+			    		type: "post",
+			    		url: "./updateReply",
+			    		data: {'replyIndex':replyIndex,
+			    				'text':$('#reply_text'+replyIndex).val()
+			    		},
+			    		success: function(data) {
+			    			if(data.success){
+				    			alert("수정되었습니다");
+			    			} else {
+			    				alert("특정문제로 수정되지 않았습니다");
+			    				window.location.reload(true);
+			    			}
+			    		},
+			    		error: function(){
+			    			alert("수정되지 않았습니다");
+			    			$('#reply_text'+replyIndex).val(text);
+			    		}
+			    	});
+					// 버튼과 text원상태로
+					$('#reply_text'+replyIndex).attr("readonly", true);
+					$('#replyEdit_btn'+replyIndex).text("수정");
+				}
+			}
+		}
 	</script>
   </c:when>
   <c:otherwise>
@@ -115,18 +155,17 @@
     <!-- 댓글,대댓글 조회 -->
     <div class="row" id="reply_div">
       <c:forEach var="replyList" items="${replyList}">
-      	<input type="hidden" value="${replyList.replyIndex}">
     	<div class="col-md-2 mb-1">
 			<input class="form-control" type="text" placeholder="${replyList.name}" readonly="">
     	</div>
         <div class="col-md-8">
-			<input class="form-control" type="text" placeholder="${replyList.text}" readonly="">
+			<input class="form-control" type="text" id="reply_text${replyList.replyIndex}" value="${replyList.text}" readonly="">
         </div>
         <div class="col-md-2">
         	<c:choose>
 			  <c:when test="${isLogOn == true && memberName == replyList.name}">
 	        	<button type="button" class="btn btn-danger disabled float-right mr-1">삭제</button>
-				<button type="button" class="btn btn-warning disabled float-right mr-1">수정</button>
+				<button type="button" id="replyEdit_btn${replyList.replyIndex}" onclick="reply_edit(${replyList.replyIndex},'${replyList.text}')" class="btn btn-warning disabled float-right mr-1">수정</button>
 			  </c:when>
 			</c:choose>
         </div>
@@ -139,7 +178,7 @@
 		<input class="form-control" type="text" value="${memberName}" readonly="">
 	  </div>
 	  <div class="col-md-8">
-		<textarea class="form-control" id="reply_text" rows="2" placeholder="욕설, 비방등 타인에게 피해를 줄 수 있는 댓글은 자제해 주세요"></textarea>
+		<textarea class="form-control" id="reply_textarea" rows="2" placeholder="욕설, 비방등 타인에게 피해를 줄 수 있는 댓글은 자제해 주세요"></textarea>
 	  </div>
 	  <div class="col-md-2">
 	    <button type="button" class="btn btn-info disabled" onclick="comment_insert()">등록</button>
