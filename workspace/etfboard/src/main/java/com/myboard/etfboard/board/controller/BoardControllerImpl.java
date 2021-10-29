@@ -163,12 +163,17 @@ public class BoardControllerImpl implements BoardController{
 		return map;
 	}
 	
-	// 댓글 쓰기
+	// 댓글, 대댓글 쓰기
 	@RequestMapping(value = "/board/insertReply", method = RequestMethod.POST) 
 	@ResponseBody 
-	public Map<String, String> InsertReply(@RequestParam("boardIndex") int boardIndex, @RequestParam("name") String name, @RequestParam("text") String text, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map<String, String> InsertReply(@RequestParam("boardIndex") int boardIndex, @RequestParam("groupIndex") int groupIndex, @RequestParam("grade") int grade, @RequestParam("name") String name, @RequestParam("text") String text, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
-		ReplyVO replyVO = new ReplyVO(boardIndex, 0, name, text);
+		ReplyVO replyVO = null;
+		if(grade == 0) {
+			replyVO = new ReplyVO(boardIndex, grade, name, text);
+		} else {
+			replyVO = new ReplyVO(boardIndex, groupIndex, grade, name, text);
+		}
 		int result = boardService.InsertBoardReply(replyVO);
 		map.put("success", "true"); 
 		return map;

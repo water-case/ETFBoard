@@ -62,7 +62,11 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public int InsertBoardReply(ReplyVO replyVO) throws DataAccessException {
 		// 댓글추가
-		boardDAO.InsertReply(replyVO);
+		if(replyVO.getGrade() == 0)
+			boardDAO.InsertReply(replyVO);
+		// 대댓글 추가
+		else
+			boardDAO.InsertReReply(replyVO);
 		
 		// 댓글수증가시키기
 		return boardDAO.AddCommentsCount(replyVO.getBoardIndex());

@@ -101,5 +101,10 @@ public class BoardDAOImpl implements BoardDAO{
 	public int SubCommentsCount(int boardIndex) throws DataAccessException {
 		return sqlSession.update("mapper.board.subComments", boardIndex);
 	}
+
+	@Override
+	public void InsertReReply(ReplyVO replyVO) throws DataAccessException {
+		sqlSession.insert("mapper.board.insertReReply", replyVO);
+	}
 	
 }

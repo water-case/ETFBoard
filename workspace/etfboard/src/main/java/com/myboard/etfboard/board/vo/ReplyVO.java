@@ -23,6 +23,14 @@ public class ReplyVO {
 		this.name = name;
 		this.text = text;
 	}
+	// 대댓글 작성용 생성자
+	public ReplyVO(int boardIndex, int groupIndex, int grade, String name, String text) {
+		this.boardIndex = boardIndex;
+		this.groupIndex = groupIndex;
+		this.grade = grade;
+		this.name = name;
+		this.text = text;
+	}
 	// 댓글 수정용 생성자
 	public ReplyVO(int replyIndex, String text) {
 		this.replyIndex = replyIndex;

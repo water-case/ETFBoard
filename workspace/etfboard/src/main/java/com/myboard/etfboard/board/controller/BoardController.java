@@ -34,8 +34,8 @@ public interface BoardController {
 	// 추천
 	public Map<String, String> ContentsPush(@RequestParam("index") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	
-	// 댓글쓰기
-	public Map<String, String> InsertReply(@RequestParam("boardIndex") int boardIndex, @RequestParam("name") String name, @RequestParam("text") String text, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	// 댓글 대댓글 쓰기
+	public Map<String, String> InsertReply(@RequestParam("boardIndex") int boardIndex, @RequestParam("replyIndex") int replyIndex, @RequestParam("grade") int grade, @RequestParam("name") String name, @RequestParam("text") String text, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	// 댓글조회
 	
 	// 댓글수정

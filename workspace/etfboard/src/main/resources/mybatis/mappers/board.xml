@@ -115,7 +115,7 @@
 	<insert id="insertReply"  parameterType="replyVO">
 		<![CDATA[
 		insert into etf_boardreply (boardindex, replyindex, groupindex, grade, name, text)
-		values(#{boardIndex}, boardreply_index.nextval, boardreplygroup_index.nextval, #{grade}, #{name}, #{text})
+		values(#{boardIndex}, boardreply_index.nextval, boardreply_index.currval, #{grade}, #{name}, #{text})
 		]]>
 	</insert>
 	
@@ -131,7 +131,7 @@
 	<!-- 댓글 조회 -->
 	<select id="selectReplyList"  parameterType="int" resultMap="replyResult">
 		<![CDATA[
-		select * from etf_boardreply where boardindex = #{boardindex} order by replyindex asc
+		select * from etf_boardreply where boardindex=#{boardIndex} order by groupindex asc, replyindex asc
 		]]>
 	</select>
 	
@@ -159,5 +159,13 @@
 		where boardindex=#{boardIndex}
 		]]>
 	</update>
+	
+	<!-- 대댓글 작성 -->
+	<insert id="insertReReply"  parameterType="replyVO">
+		<![CDATA[
+		insert into etf_boardreply (boardindex, replyindex, groupindex, grade, name, text)
+		values(#{boardIndex}, boardreply_index.nextval, #{groupIndex}, #{grade}, #{name}, #{text})
+		]]>
+	</insert>
 	
 </mapper>

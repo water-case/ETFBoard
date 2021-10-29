@@ -39,5 +39,7 @@ public interface BoardDAO {
 	public int DeleteReply(int replyIndex) throws DataAccessException;
 
 	public int SubCommentsCount(int boardIndex) throws DataAccessException;
+
+	public void InsertReReply(ReplyVO replyVO) throws DataAccessException;
 	
 }
