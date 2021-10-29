@@ -4,6 +4,7 @@
 	+ front-end
 		+ bootstrap
 		+ tiles
+		+ ajax
 
 
 	+ back-end
@@ -15,5 +16,4 @@
 
 
 ## 추가할것
-	+ ajax
 	+ RESTful API
