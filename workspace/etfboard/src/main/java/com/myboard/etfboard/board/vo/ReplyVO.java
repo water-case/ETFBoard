@@ -29,6 +29,9 @@ public class ReplyVO {
 		this.text = text;
 	}
 	
+	public ReplyVO(int replyIndex) {
+		this.replyIndex = replyIndex;
+	}
 	public int getBoardIndex() {
 		return boardIndex;
 	}

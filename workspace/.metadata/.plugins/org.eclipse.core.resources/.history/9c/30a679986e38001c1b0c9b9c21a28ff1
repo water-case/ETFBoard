@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.board">
+	<resultMap id="boardResult" type="boardVO">
+		<result property="boardIndex" column="boardIndex" />
+        <result property="title" column="title" />
+        <result property="name" column="name" />
+        <result property="writtenDate" column="writtenDate" />
+        <result property="push" column="push" />
+        <result property="views" column="views" />
+        <result property="comments" column="comments" />
+	</resultMap>
+	
+	<resultMap id="replyResult" type="replyVO">
+		<result property="boardIndex" column="boardIndex" />
+        <result property="replyIndex" column="replyIndex" />
+        <result property="groupIndex" column="groupIndex" />
+        <result property="grade" column="grade" />
+        <result property="name" column="name" />
+        <result property="text" column="text" />
+        <result property="writtenDate" column="writtenDate" />
+	</resultMap>
+	
+	<!-- 첫번째 페이지 조회 -->
+	<select id="selectBoardFirstList" resultMap="boardResult">
+		<![CDATA[
+		select boardIndex, title, name, writtendate, push, views, comments
+		from (select * from etf_board order by boardIndex desc)
+		where rownum <= 15
+		]]>
+	</select>
+	
+	<!-- 전체 글 갯수 조회 -->
+	<select id="getIndexCount" resultType="int">
+		<![CDATA[
+		select count(*) as totalIndexCount from etf_board
+		]]>
+	</select>
+
+	<!-- 페이지별 조회 -->
+	<select id="selectBoardPageList" parameterType="int" resultMap="boardResult">
+		<![CDATA[
+		select boardIndex, title, name, writtendate, push, views, comments
+		from (	select pre, boardIndex, title, name, writtendate, push, views, comments
+				from (	select rownum as pre, boardIndex, title, name, writtendate, push, views, comments
+						from (select * from etf_board order by boardindex desc )
+				)
+				where pre > 15*(#{page}-1) 
+		)
+		where rownum <= 15
+		]]>
+	</select>
+	
+	<!-- 글쓰기 --> 
+	<insert id="insertContents"  parameterType="boardVO">
+		<![CDATA[
+		insert into etf_board (boardindex, title, text, name)
+		values(board_index.nextval, #{title}, #{text}, #{name})
+		]]>
+	</insert>
+	
+	
+	<!-- 글 내용 조회 --> 
+	<select id="selectContents"  parameterType="int" resultType="boardVO">
+		<![CDATA[
+		select * from etf_board where boardindex = #{boardindex}
+		]]>
+	</select>
+	
+	<!-- 조회수 증가 --> 
+	<update id="increaseView"  parameterType="int">
+		<![CDATA[
+		update etf_board
+		set views=views+1
+		where boardindex=#{boardindex}
+		]]>      
+	</update>
+	
+	<!-- 글 내용 수정 -->
+	<update id="updateContents"  parameterType="boardVO">
+		<![CDATA[
+		update etf_board
+		set title=#{title}, text=#{text}
+		where boardIndex=#{boardIndex}
+		]]>      
+	</update>
+	
+	<!-- 글 삭제 -->
+	<delete id="deleteContents"  parameterType="int">
+		<![CDATA[
+		delete from etf_board where boardIndex=#{boardIndex}
+		]]>      
+	</delete>
+	
+	<!-- 추천수 증가 -->
+	<update id="increasePush"  parameterType="int">
+		<![CDATA[
+		update etf_board
+		set push=push+1
+		where boardIndex=#{boardIndex}
+		]]>      
+	</update>
+	
+	<!-- 추천수 조회 -->
+	<select id="selectPushCount"  parameterType="int" resultType="int">
+		<![CDATA[
+		select push from etf_board where boardindex = #{boardindex}
+		]]>
+	</select>
+	
+	<!-- 댓글 추가 -->
+	<insert id="insertReply"  parameterType="replyVO">
+		<![CDATA[
+		insert into etf_boardreply (boardindex, replyindex, groupindex, grade, name, text)
+		values(#{boardIndex}, boardreply_index.nextval, boardreplygroup_index.nextval, #{grade}, #{name}, #{text})
+		]]>
+	</insert>
+	
+	<!-- 댓글수 증가 -->
+	<update id="increaseComments" parameterType="int">
+		<![CDATA[
+		update etf_board
+		set comments=comments+1
+		where boardindex=#{boardIndex}
+		]]>
+	</update>
+	
+	<!-- 댓글 조회 -->
+	<select id="selectReplyList"  parameterType="int" resultMap="replyResult">
+		<![CDATA[
+		select * from etf_boardreply where boardindex = #{boardindex} order by replyindex asc
+		]]>
+	</select>
+	
+	<!-- 댓글 수정 -->
+	<update id="updateReply" parameterType="replyVO">
+		<![CDATA[
+		update etf_boardreply
+		set text=#{text}
+		where replyindex=#{replyIndex}
+		]]>
+	</update>
+	
+</mapper>

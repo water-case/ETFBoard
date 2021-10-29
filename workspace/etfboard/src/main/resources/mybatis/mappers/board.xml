@@ -144,4 +144,20 @@
 		]]>
 	</update>
 	
+	<!-- 댓글 삭제  -->
+	<delete id="deleteReply"  parameterType="int">
+		<![CDATA[
+		delete from etf_boardreply where replyindex=#{replyIndex}
+		]]>      
+	</delete>
+	
+	<!-- 댓글 수 감소 -->
+	<update id="subComments" parameterType="int">
+		<![CDATA[
+		update etf_board
+		set comments=comments-1
+		where boardindex=#{boardIndex}
+		]]>
+	</update>
+	
 </mapper>

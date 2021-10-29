@@ -77,5 +77,13 @@ public class BoardServiceImpl implements BoardService{
 	public int UpdateBoardReply(ReplyVO replyVO) throws DataAccessException {
 		return boardDAO.UpdateReply(replyVO);
 	}
-	
+
+	@Override
+	public int DeleteBoardReply(int boardIndex, int replyIndex) throws DataAccessException {
+		if(boardDAO.DeleteReply(replyIndex) == 1){
+			return boardDAO.SubCommentsCount(boardIndex);
+		}
+		return 0;
+	}
 }
+

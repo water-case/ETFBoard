@@ -91,5 +91,15 @@ public class BoardDAOImpl implements BoardDAO{
 	public int UpdateReply(ReplyVO replyVO) throws DataAccessException {
 		return sqlSession.update("mapper.board.updateReply", replyVO);
 	}
+
+	@Override
+	public int DeleteReply(int replyIndex) throws DataAccessException {
+		return sqlSession.delete("mapper.board.deleteReply", replyIndex);
+	}
+
+	@Override
+	public int SubCommentsCount(int boardIndex) throws DataAccessException {
+		return sqlSession.update("mapper.board.subComments", boardIndex);
+	}
 	
 }

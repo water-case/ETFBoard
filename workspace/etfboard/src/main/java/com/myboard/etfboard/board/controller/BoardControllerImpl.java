@@ -189,5 +189,18 @@ public class BoardControllerImpl implements BoardController{
 		return map;
 	}
 	
+	// 댓글 삭제
+	@RequestMapping(value = "/board/deleteReply", method = RequestMethod.POST) 
+	@ResponseBody 
+	public Map<String, String> DeleteReply(@RequestParam("boardIndex") int boardIndex, @RequestParam("replyIndex") int replyIndex, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		int result = boardService.DeleteBoardReply(boardIndex, replyIndex);
+		if(result == 1) {
+			map.put("success", "true"); 			
+		} else {
+			map.put("success", "false"); 			
+		}
+		return map;
+	}
 
 }

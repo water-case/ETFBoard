@@ -84,6 +84,26 @@
 				}
 			}
 		}
+		
+		// 댓글 삭제
+		function reply_delete(replyIndex){
+			$.ajax({
+	    		type: "post",
+	    		url: "./deleteReply",
+	    		data: {'replyIndex':replyIndex, 'boardIndex':'${boardContents.boardIndex}'},
+	    		success: function(data) {
+	    			if(data.success){
+		    			alert("삭제되었습니다");
+		    			window.location.reload(true);
+	    			} else {
+	    				alert("특정문제로 삭제되지 않았습니다");
+	    			}
+	    		},
+	    		error: function(){
+	    			alert("삭제되지 않았습니다");
+	    		}
+	    	});
+		}
 	</script>
   </c:when>
   <c:otherwise>
@@ -159,12 +179,12 @@
 			<input class="form-control" type="text" placeholder="${replyList.name}" readonly="">
     	</div>
         <div class="col-md-8">
-			<input class="form-control" type="text" id="reply_text${replyList.replyIndex}" value="${replyList.text}" readonly="">
+			<input class="form-control" type="text" id="reply_text${replyList.replyIndex}" value="${replyList.text}" readonly="" minlength='2' maxlength='30'>
         </div>
         <div class="col-md-2">
         	<c:choose>
 			  <c:when test="${isLogOn == true && memberName == replyList.name}">
-	        	<button type="button" class="btn btn-danger disabled float-right mr-1">삭제</button>
+	        	<button type="button" class="btn btn-danger disabled float-right mr-1" onclick="reply_delete(${replyList.replyIndex})">삭제</button>
 				<button type="button" id="replyEdit_btn${replyList.replyIndex}" onclick="reply_edit(${replyList.replyIndex},'${replyList.text}')" class="btn btn-warning disabled float-right mr-1">수정</button>
 			  </c:when>
 			</c:choose>
@@ -178,7 +198,7 @@
 		<input class="form-control" type="text" value="${memberName}" readonly="">
 	  </div>
 	  <div class="col-md-8">
-		<textarea class="form-control" id="reply_textarea" rows="2" placeholder="욕설, 비방등 타인에게 피해를 줄 수 있는 댓글은 자제해 주세요"></textarea>
+		<textarea class="form-control" id="reply_textarea" rows="2" placeholder="욕설, 비방등 타인에게 피해를 줄 수 있는 댓글은 자제해 주세요" maxlength='30'></textarea>
 	  </div>
 	  <div class="col-md-2">
 	    <button type="button" class="btn btn-info disabled" onclick="comment_insert()">등록</button>
