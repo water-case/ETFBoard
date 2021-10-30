@@ -29,15 +29,9 @@ public class MainControllerImpl implements MainController{
 	}
 
 	@Override
-	@RequestMapping(value="/etfkorea", method=RequestMethod.GET)
-	public String viewETFKOREA(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "/etfkorea";
-	}
-
-	@Override
-	@RequestMapping(value="/rebalancing", method=RequestMethod.GET)
+	@RequestMapping(value="/etfsimulator", method=RequestMethod.GET)
 	public String viewRebalancing(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "/rebalancing";
+		return "/etfsimulator";
 	}
 	
 }

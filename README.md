@@ -13,7 +13,7 @@
 		+ spring framework
 		+ oracle
 		+ mybatis
-
+		+ jsoup ( HTML 파싱 라이브러리 )
 
 ## 추가할것
 	+ RESTful API

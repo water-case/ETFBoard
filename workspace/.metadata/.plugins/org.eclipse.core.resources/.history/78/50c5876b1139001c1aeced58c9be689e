@@ -1,0 +1,8 @@
+package com.myboard.etfboard.etfkorea.vo;
+
+import org.springframework.stereotype.Component;
+
+@Component("etfVO")
+public class etfVO {
+	
+}

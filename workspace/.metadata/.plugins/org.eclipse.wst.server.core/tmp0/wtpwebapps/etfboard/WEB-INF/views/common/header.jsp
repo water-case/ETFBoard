@@ -8,9 +8,9 @@
         	location.href='${contextPath}/member/logout.do'
         }
     }
-    function rebalancing() {
+    function etfSimulator() {
 	    if (${isLogOn == true}) {
-	    	location.href='${contextPath}/rebalancing'
+	    	location.href='${contextPath}/etfsimulator'
 	    } else {
 	    	alert("로그인 후 이용가능합니다");
 	    }
@@ -26,7 +26,7 @@
 					          <%-- <li><a href="${contextPath}" class="nav-link px-2 text-secondary">홈</a></li> --%>
 					          <li><a href="${contextPath}/board/page?page=1" class="nav-link px-2 text-white">소통게시판</a></li>
 					          <li><a href="${contextPath}/etfkorea" class="nav-link px-2 text-white">국내ETF</a></li>
-					          <li><a onclick="rebalancing()" href="#" class="nav-link px-2 text-white">리밸런싱계산기</a></li>
+					          <li><a onclick="etfSimulator()" href="#" class="nav-link px-2 text-white">투자시뮬레이터</a></li>
 					        </ul>
 							
 							<c:choose>

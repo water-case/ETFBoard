@@ -59,8 +59,8 @@
 								ETF는 자산을 배분하는 것을 아주 쉽게 만들어주는 수단이다
 							</p>
 						</div>
-						<div class="col-md-5">
-							<img src="https://image.fmkorea.com/files/attach/new2/20210925/192159903/3452318700/3940936078/0927ed3816e412cd268ed51c32ad1e12.png" width="370" height="200">
+						<div class="col-md-5 mt-4">
+							<img src="https://jaetechlab.com/wp-content/uploads/2020/07/image-4.png" width="370" height="210">
 						</div>
 					</div>
 				</div>

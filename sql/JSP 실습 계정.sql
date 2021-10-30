@@ -12,3 +12,7 @@ select parameter, value from nls_database_parameters where parameter like '%char
 
 -- board & member 외래키
 alter table etf_board add foreign key(name) references etf_member(name) on delete cascade;
+
+-- reply 댓글 대댓글 정렬
+
+select * from etf_boardreply order by groupindex asc, replyindex asc;

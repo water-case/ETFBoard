@@ -237,6 +237,11 @@
     <hr class="featurette-divider">
     <!-- 댓글,대댓글 조회 -->
     <c:forEach var="replyList" items="${replyList}">
+      <c:choose>
+	    <c:when test="${replyList.groupIndex==0}">
+	  	  <hr class="featurette-divider">
+	    </c:when>
+	  </c:choose>
 	  <div class="row" id="reply_divNull">
 	    <c:choose>
 	      <c:when test="${replyList.groupIndex==0}">
@@ -244,7 +249,7 @@
 			  <input class="form-control" type="text" placeholder="" readonly="">
 		    </div>
 		    <div class="col-md-8">
-			  <input class="form-control" type="text" id="reply_text${replyList.replyIndex}" value="삭제된 댓글입니다" readonly="" minlength='2' maxlength='30'>
+			  <input class="form-control text-danger" type="text" id="reply_text${replyList.replyIndex}_delete" value="삭제된 댓글입니다" readonly="" minlength='2' maxlength='30'>
 		    </div>
 		    <div class="col-md-2"></div>
 	      </c:when>

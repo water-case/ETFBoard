@@ -1,0 +1,82 @@
+package com.myboard.etfboard.etfkorea.vo;
+
+import org.springframework.stereotype.Component;
+
+@Component("etfVO")
+public class EtfVO {
+	
+	private String itemcode;
+	private String itemname;
+	private String nowVal;
+	private String changeVal;
+	private String changeRate;
+	private String nav;
+	private String quant;
+	private String marketSum;
+	
+	public EtfVO() {
+	}
+	
+	public EtfVO(String itemcode, String itemname, String nowVal, String changeVal, String changeRate, String nav,
+			String guant, String marketSum) {
+		this.itemcode = itemcode;
+		this.itemname = itemname;
+		this.nowVal = nowVal;
+		this.changeVal = changeVal;
+		this.changeRate = changeRate;
+		this.nav = nav;
+		this.quant = quant;
+		this.marketSum = marketSum;
+	}
+	
+	public String getItemcode() {
+		return itemcode;
+	}
+	public void setItemcode(String itemcode) {
+		this.itemcode = itemcode;
+	}
+	public String getItemname() {
+		return itemname;
+	}
+	public void setItemname(String itemname) {
+		this.itemname = itemname;
+	}
+	public String getNowVal() {
+		return nowVal;
+	}
+	public void setNowVal(String nowVal) {
+		this.nowVal = nowVal;
+	}
+	public String getChangeVal() {
+		return changeVal;
+	}
+	public void setChangeVal(String changeVal) {
+		this.changeVal = changeVal;
+	}
+	public String getChangeRate() {
+		return changeRate;
+	}
+	public void setChangeRate(String changeRate) {
+		this.changeRate = changeRate;
+	}
+	public String getNav() {
+		return nav;
+	}
+	public void setNav(String nav) {
+		this.nav = nav;
+	}
+	public String getQuant() {
+		return quant;
+	}
+	public void setQuant(String quant) {
+		this.quant = quant;
+	}
+	public String getMarketSum() {
+		return marketSum;
+	}
+	public void setMarketSum(String marketSum) {
+		this.marketSum = marketSum;
+	}
+	
+	
+}

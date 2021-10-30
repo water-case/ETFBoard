@@ -1,0 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+    
+<div class="container">
+	<div class="row">
+	  <div class="col-md-3 text-center">종목명</div>
+	  <div class="col-md-2">현재가 [전일비]</div>
+	  <div class="col-md-1">등락%</div>
+	  <div class="col-md-2">4</div>
+	  <div class="col-md-2">5</div>
+	  <div class="col-md-2">6</div>
+	</div>
+</div>

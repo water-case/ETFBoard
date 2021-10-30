@@ -1,0 +1,37 @@
+package com.myboard.etfboard.etfkorea.controller;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.jsoup.Jsoup;
+import org.jsoup.nodes.Document;
+import org.jsoup.nodes.Element;
+import org.jsoup.select.Elements;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.servlet.ModelAndView;
+
+@Controller("etfkoreaController")
+public class EtfkoreaControllerImpl implements EtfkoreaController{
+
+	// etf 조회
+	@Override
+	@RequestMapping(value="/etfkorea", method=RequestMethod.GET)
+	public ModelAndView viewETFKOREA(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		String address = "https://finance.naver.com/api/sise/etfItemList.nhn?etfType=0&targetColumn=market_sum&sortOrder=desc&_callback=window.__jindo2_callback._4777";
+		Document doc = Jsoup.connect(address).get();
+//		Elements elem = doc.select("caption");
+//		String a = elem.select("caption").text();
+//		String[] str = doc.text().split(":");
+		System.out.println(doc);
+//		System.out.println(elem.text());
+		
+		
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/etfkorea");
+		
+		return mav;
+	}
+	
+}
