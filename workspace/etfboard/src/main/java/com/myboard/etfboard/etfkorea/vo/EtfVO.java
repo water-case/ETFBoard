@@ -8,7 +8,7 @@ public class EtfVO implements Comparable<EtfVO>{
 	private int itemcode;
 	private String itemname;
 	private int nowVal;
-	private double changeVal;
+	private int changeVal;
 	private double changeRate;
 	private int nav;
 	private int quant;
@@ -16,7 +16,7 @@ public class EtfVO implements Comparable<EtfVO>{
 	
 	public EtfVO() {
 	}
-	public EtfVO(int itemcode, String itemname, int nowVal, double changeVal, double changeRate, int nav, int quant,
+	public EtfVO(int itemcode, String itemname, int nowVal, int changeVal, double changeRate, int nav, int quant,
 		int marketSum) {
 		this.itemcode = itemcode;
 		this.itemname = itemname;
@@ -52,11 +52,11 @@ public class EtfVO implements Comparable<EtfVO>{
 		this.nowVal = nowVal;
 	}
 
-	public double getChangeVal() {
+	public int getChangeVal() {
 		return changeVal;
 	}
 
-	public void setChangeVal(double changeVal) {
+	public void setChangeVal(int changeVal) {
 		this.changeVal = changeVal;
 	}
 

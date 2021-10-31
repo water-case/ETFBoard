@@ -1,0 +1,28 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" isELIgnored="false"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
+
+<div class="container">
+  <table class="table">
+    <tr>
+      <td class="text-left"><strong>남은 금액 : </strong></td>
+      <td class="text-left"><strong>자산 총계 : </strong></td>
+    </tr>
+  </table>
+  <table class="table table-sm">
+	<thead>
+	  <tr class="table-sm">
+	    <th class="text-center" scope="col" style="width:5%">삭제</th>
+	    <th class="text-center" scope="col" style="width:38%">종목명</th>
+	    <th class="text-right" scope="col" style="width:9%">현재가</th>
+	    <th class="text-right" scope="col" style="width:9%">보유량</th>
+	    <th class="text-right" scope="col" style="width:9%">보유비중</th>
+	    <th class="text-right" scope="col" style="width:9%">평단</th>
+	    <th class="text-right" scope="col" style="width:12%">수익률</th>
+	    <th class="text-right" scope="col" style="width:4%">매수</th>
+	    <th class="text-right" scope="col" style="width:5%">매도</th>
+	  </tr>
+	</thead>
+  </table>
+</div>
