@@ -1,0 +1,12 @@
+package com.myboard.etfboard.etfkorea.dao;
+
+import java.util.List;
+
+public class EtfDAOImpl implements EtfDAO{
+
+	@Override
+	public List getCheckList(String name) {
+		return null;
+	}
+	
+}

@@ -1,0 +1,8 @@
+package com.myboard.etfboard.etfkorea.service;
+
+import org.springframework.stereotype.Service;
+
+@Service("etfService")
+public class EtfServiceImpl implements EtfService{
+	
+}

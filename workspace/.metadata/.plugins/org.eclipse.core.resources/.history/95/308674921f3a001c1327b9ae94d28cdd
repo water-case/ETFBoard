@@ -1,0 +1,5 @@
+package com.myboard.etfboard.etfkorea.service;
+
+public class EtfServiceImpl implements EtfService{
+	
+}

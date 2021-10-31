@@ -19,20 +19,8 @@ public class MemberServiceImpl implements MemberService {
 	private MemberDAO memberDAO;
 
 	@Override
-	public List listMembers() throws DataAccessException {
-		List membersList = null;
-		membersList = memberDAO.selectAllMemberList();
-		return membersList;
-	}
-
-	@Override
 	public int addMember(MemberVO member) throws DataAccessException {
 		return memberDAO.insertMember(member);
-	}
-
-	@Override
-	public int removeMember(String id) throws DataAccessException {
-		return memberDAO.deleteMember(id);
 	}
 	
 	@Override

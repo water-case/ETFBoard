@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 @Component("etfVO")
 public class EtfVO implements Comparable<EtfVO>{
 	
-	private int itemcode;
+	private String itemcode;
 	private String itemname;
 	private int nowVal;
 	private int changeVal;
@@ -16,7 +16,7 @@ public class EtfVO implements Comparable<EtfVO>{
 	
 	public EtfVO() {
 	}
-	public EtfVO(int itemcode, String itemname, int nowVal, int changeVal, double changeRate, int nav, int quant,
+	public EtfVO(String itemcode, String itemname, int nowVal, int changeVal, double changeRate, int nav, int quant,
 		int marketSum) {
 		this.itemcode = itemcode;
 		this.itemname = itemname;
@@ -28,11 +28,11 @@ public class EtfVO implements Comparable<EtfVO>{
 		this.marketSum = marketSum;
 	}
 
-	public int getItemcode() {
+	public String getItemcode() {
 		return itemcode;
 	}
 
-	public void setItemcode(int itemcode) {
+	public void setItemcode(String itemcode) {
 		this.itemcode = itemcode;
 	}
 

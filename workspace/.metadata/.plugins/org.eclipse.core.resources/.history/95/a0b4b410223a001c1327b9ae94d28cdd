@@ -1,0 +1,7 @@
+package com.myboard.etfboard.etfkorea.service;
+
+public interface EtfService {
+
+	int getMoney(int id);
+	
+}

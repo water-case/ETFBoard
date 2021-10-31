@@ -34,29 +34,12 @@
 		]]>
 	</select>
 	
-	
-	<select id="selectAllMemberList" resultMap="memResult">
+	<select id="getEtfMoney" resultType="Integer" parameterType="String">
 		<![CDATA[
-		select * from t_member	order by joinDate desc
+		select money from etf_member 
+		where name=#{name}
 		]]>
 	</select>
-    
 	
-	<update id="updateMember"  parameterType="memberVO">
-		<![CDATA[
-		update t_member
-		set pwd=#{pwd}, name=#{name}, email=#{email}
-		where
-		id=#{id}
-		]]>      
-	</update>
-     
-	<delete id="deleteMember"  parameterType="String">
-		<![CDATA[
-		delete from  t_member
-		where
-		id=#{id}
-		]]>      
-	</delete>
 	
 </mapper>

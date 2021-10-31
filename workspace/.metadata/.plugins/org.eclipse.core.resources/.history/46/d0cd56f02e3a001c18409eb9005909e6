@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+      PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mapper.mock">
+	<resultMap id="mockResult" type="mockVO">
+		<result property="id" column="id" />
+        <result property="itemcode" column="itemcode" />
+        <result property="havenum" column="havenum" />
+        <result property="buymoney" column="buymoney" />
+	</resultMap>
+	
+	<!--
+	<select id="selectBoardFirstList" resultMap="boardResult">
+		<![CDATA[
+		select boardIndex, title, name, writtendate, push, views, comments
+		from (select * from etf_board order by boardIndex desc)
+		where rownum <= 15
+		]]>
+	</select>
+	
+	<insert id="insertContents"  parameterType="boardVO">
+		<![CDATA[
+		insert into etf_board (boardindex, title, text, name)
+		values(board_index.nextval, #{title}, #{text}, #{name})
+		]]>
+	</insert>
+	
+	<update id="increaseView"  parameterType="int">
+		<![CDATA[
+		update etf_board
+		set views=views+1
+		where boardindex=#{boardindex}
+		]]>      
+	</update>
+	
+	<update id="updateContents"  parameterType="boardVO">
+		<![CDATA[
+		update etf_board
+		set title=#{title}, text=#{text}
+		where boardIndex=#{boardIndex}
+		]]>      
+	</update>
+	
+	<delete id="deleteContents"  parameterType="int">
+		<![CDATA[
+		delete from etf_board where boardIndex=#{boardIndex}
+		]]>      
+	</delete>-->
+	
+</mapper>
