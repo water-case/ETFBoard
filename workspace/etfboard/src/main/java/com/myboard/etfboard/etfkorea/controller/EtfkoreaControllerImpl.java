@@ -31,16 +31,14 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 	@RequestMapping(value="/etfkorea", method=RequestMethod.GET)
 	public ModelAndView viewETFKOREA(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		// 크롤링
-		String address = "https://finance.naver.com/api/sise/etfItemList.nhn?etfType=0&targetColumn=market_sum&sortOrder=desc&_callback=window.__jindo2_callback._4777";
+		String address = "https://finance.naver.com/api/sise/etfItemList.nhn?etfType=0&targetColumn=market_sum&sortOrder=desc";
 		Document doc = Jsoup.connect(address).get();
-		// json 데이터로 파싱
-		String str = doc.text();
-		String cut = str.substring(0, str.length()-2).substring(64);
 		
 		// json 데이터를 분해하기
 		JSONParser jsonParse = new JSONParser();
-		JSONObject jsonObj = (JSONObject) jsonParse.parse(cut);
-		JSONArray etfArray = (JSONArray) jsonObj.get("etfItemList");
+		JSONObject jsonObj = (JSONObject) jsonParse.parse(doc.text());
+		JSONObject jsonObj2 = (JSONObject) jsonObj.get("result");
+		JSONArray etfArray = (JSONArray) jsonObj2.get("etfItemList");
 		
 		List<EtfVO> etfList = new ArrayList<EtfVO>();
 		for(int i=0; i<etfArray.size(); i++) {
@@ -85,7 +83,23 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 		List CheckList = etfService.getCheckList(name);
 		mav.addObject("checkList", CheckList);
 		
+		// 종목명, 현재가 크롤링
+		String address = "https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:069500";
+		Document doc = Jsoup.connect(address).get();
 		
+		// json 데이터를 분해하기
+		JSONParser jsonParse = new JSONParser();
+		JSONObject jsonObj = (JSONObject) jsonParse.parse(doc.text());
+		JSONObject _result = (JSONObject) jsonObj.get("result");
+		JSONArray _areasArray = (JSONArray) _result.get("areas");
+		JSONObject _areas = (JSONObject) _areasArray.get(0);
+		JSONArray _datasArray = (JSONArray) _areas.get("datas");
+		JSONObject _datas = (JSONObject) _datasArray.get(0);
+		
+		String itemName = String.valueOf(_datas.get("nm"));
+		String nowPrice = String.valueOf(_datas.get("sv"));
+		mav.addObject("itemName", itemName);
+		mav.addObject("nowPrice", nowPrice);
 		mav.setViewName("/etfsimulator");
 		return mav;
 	}

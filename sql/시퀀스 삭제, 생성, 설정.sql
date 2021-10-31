@@ -32,3 +32,5 @@ drop sequence boardreplygroup_index;
 alter sequence board_index nocache;
 alter sequence boardreply_index nocache;
 alter sequence boardreplygroup_index nocache;
+
+select id from etf_member where name='꼭꼭씹어먹어';
