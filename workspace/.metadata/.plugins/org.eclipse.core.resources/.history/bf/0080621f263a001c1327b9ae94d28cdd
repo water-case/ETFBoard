@@ -1,0 +1,22 @@
+package com.myboard.etfboard.etfkorea.service;
+
+import java.util.List;
+
+import org.springframework.stereotype.Service;
+
+@Service("etfService")
+public class EtfServiceImpl implements EtfService{
+
+	@Override
+	public int getMoney(String id) {
+		// TODO Auto-generated method stub
+		return 0;
+	}
+
+	@Override
+	public List getCheckList(String id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+}

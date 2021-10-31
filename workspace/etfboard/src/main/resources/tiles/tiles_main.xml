@@ -58,7 +58,7 @@
 	
 	<!-- 투자시뮬레이터 페이지 -->
 	<definition name="/etfsimulator" extends="baseLayout">
-		<put-attribute name="title" value="리밸런싱 계산기" />
+		<put-attribute name="title" value="모의투자" />
 		<put-attribute name="body" value="/WEB-INF/views/investment/etfsimulator.jsp" />
 	</definition>
 	

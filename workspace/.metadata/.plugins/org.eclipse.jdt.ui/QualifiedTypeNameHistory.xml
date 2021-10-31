@@ -11,7 +11,6 @@
     <fullyQualifiedTypeName name="com.myboard.etfboard.board.dao.BoardDAO"/>
     <fullyQualifiedTypeName name="org.springframework.stereotype.Repository"/>
     <fullyQualifiedTypeName name="org.apache.ibatis.session.SqlSession"/>
-    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.myboard.etfboard.board.vo.PageVO"/>
     <fullyQualifiedTypeName name="org.springframework.web.bind.annotation.RequestParam"/>
     <fullyQualifiedTypeName name="com.myboard.etfboard.board.vo.BoardVO"/>
@@ -30,4 +29,8 @@
     <fullyQualifiedTypeName name="java.lang.Comparable"/>
     <fullyQualifiedTypeName name="com.myboard.etfboard.etfkorea.vo.EtfVO"/>
     <fullyQualifiedTypeName name="java.lang.System"/>
+    <fullyQualifiedTypeName name="com.myboard.etfboard.etfkorea.service.EtfService"/>
+    <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+    <fullyQualifiedTypeName name="com.myboard.etfboard.etfkorea.dao.EtfDAO"/>
+    <fullyQualifiedTypeName name="com.myboard.etfboard.member.dao.MemberDAO"/>
 </qualifiedTypeNameHistroy>

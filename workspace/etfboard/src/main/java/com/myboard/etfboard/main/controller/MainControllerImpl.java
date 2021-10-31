@@ -27,11 +27,4 @@ public class MainControllerImpl implements MainController{
 	public String viewJoin(HttpServletRequest request, HttpServletResponse response) throws Exception {
 		return "/member/join";
 	}
-
-	@Override
-	@RequestMapping(value="/etfsimulator", method=RequestMethod.GET)
-	public String viewRebalancing(HttpServletRequest request, HttpServletResponse response) throws Exception {
-		return "/etfsimulator";
-	}
-	
 }

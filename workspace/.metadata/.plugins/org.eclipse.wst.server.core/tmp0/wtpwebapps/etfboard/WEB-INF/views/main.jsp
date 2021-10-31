@@ -9,15 +9,15 @@
 				<div class="container">
 					<div class="row featurette">
 						<div class="col-md-7">
-							<br><br>
+							<br>
 							<h2 class="featurette-heading">투기와 투자</h2>
 							<br>
 							<p class="lead">
-								투기<br>
+								<strong>투기</strong><br>
 								전략없이 매매차익만을 노리는 방식이다<br>
 								리스크에 완전히 노출된다
 								<br><br>
-								투자<br>
+								<strong>투자</strong><br>
 								전략을 가지고 장기적 이익을 노리는 방식이다<br>
 								리스크에 대응하며 방식에 따라 리스크가 자산증식의 촉매 역할을 한다
 								
@@ -33,7 +33,7 @@
 				
 					<div class="row featurette">
 						<div class="col-md-7 order-md-2">
-							<br><br>
+							<br>
 							<h2 class="featurette-heading">투자와 자산 배분</h2>
 							<br>
 							<p class="lead">
@@ -51,15 +51,16 @@
 				
 					<div class="row featurette">
 						<div class="col-md-7">
-							<br><br>
+							<br>
 							<h2 class="featurette-heading">자산 배분과 ETF</h2>
 							<br>
 							<p class="lead">
-								자산을 배분하기 위해 좋은 회사와 좋은 채권을 고르는 일은 쉽지 않다<br>
+								자산을 배분하기 위해 좋은 회사와 좋은 채권을 고르는 일은 쉽지 않다<br><br>
+								또한 소규모의 자본을 비율에 맞춰 여러가지 회사와 채권에 배분하는 것은 상당히 곤혹스럽다<br><br>
 								ETF는 자산을 배분하는 것을 아주 쉽게 만들어주는 수단이다
 							</p>
 						</div>
-						<div class="col-md-5 mt-4">
+						<div class="col-md-5 mt-5">
 							<img src="https://jaetechlab.com/wp-content/uploads/2020/07/image-4.png" width="370" height="210">
 						</div>
 					</div>

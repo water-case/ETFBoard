@@ -1,6 +1,0 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
-				<footer class="container">
-					<p class="float-right"><a href="#">맨 위로</a></p>
-					<a>e-mail : <a href="https://github.com/water-case">wjd30142@naver.com</a></p>
-					<p>github : https://github.com/water-case</p>
-				</footer>

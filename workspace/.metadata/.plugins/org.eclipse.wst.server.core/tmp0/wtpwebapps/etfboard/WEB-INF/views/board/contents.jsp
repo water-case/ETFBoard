@@ -266,7 +266,7 @@
 	        </div>
           </c:when>
           <c:otherwise>
-            <div class="col-md-1"></div>
+            <div class="col-md-1 pr-0 text-right align-self-center">⇒</div>
             <div class="col-md-2 mb-1">
 				<input class="form-control" type="text" placeholder="${replyList.name}" readonly="">
 	    	</div>

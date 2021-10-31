@@ -1,16 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 <div class="container">
   <table class="table mb-0">
     <tr>
       <td class="text-left text-primary" style="width:50%">
-        <strong>잔고 : 10,000,000 원</strong>
+        <strong>잔고 : <fmt:formatNumber value="${money}" /> 원</strong>
       </td>
       <td class="text-left text-primary" style="width:50%">
-        <strong>자산 총계 : 10,000,000 원</strong>
+        <strong>자산 총계 : <fmt:formatNumber value="${money}" /> 원</strong>
         </td>
     </tr>
   </table>
@@ -47,15 +48,16 @@
 	  </tr>
 	</thead>
 	<tbody>
+	  <c:forEach var="checkList" items="${checkList}">
 		<tr>
 	      <td class="text-center align-middle">
 	        <button type="button" class="btn btn-warning btn-sm">-</button>
 	      </td>
-	      <td class="text-left align-middle">kodex200</td>
+	      <td class="text-left align-middle">${checkList.itemcode}</td>
 	      <td class="text-right align-middle">13000</td>
-	      <td class="text-right align-middle">3</td>
+	      <td class="text-right align-middle">${checkList.havenum}</td>
 	      <td class="text-right align-middle">20%</td>
-	      <td class="text-right align-middle">13000</td>
+	      <td class="text-right align-middle">${checkList.buymoney/checkList.havenum}</td>
 	      <td class="text-right align-middle">0%</td>
 	      <td class="text-center align-middle">
 	        <button type="button" class="btn btn-primary btn-sm">매수</button>
@@ -68,6 +70,7 @@
 	      </td>
 	      <td class="text-right align-middle">13</td>
 	    </tr>
+	  </c:forEach>
 	</tbody>
   </table>
 </div>
