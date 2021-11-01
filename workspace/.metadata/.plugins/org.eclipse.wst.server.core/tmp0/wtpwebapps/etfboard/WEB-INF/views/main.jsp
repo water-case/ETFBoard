@@ -23,7 +23,7 @@
 								
 							</p>
 						</div>
-						<div class="col-md-5 mt-5">
+						<div class="col-md-5 mt-3">
 							<br>
 							<img src="https://investpension.miraeasset.com/file/imgView.do?fileNm=1558943447675_1.png" width="370" height="250">
 						</div>
@@ -56,7 +56,7 @@
 							<br>
 							<p class="lead">
 								자산을 배분하기 위해 좋은 회사와 좋은 채권을 고르는 일은 쉽지 않다<br><br>
-								또한 소규모의 자본을 비율에 맞춰 여러가지 회사와 채권에 배분하는 것은 상당히 곤혹스럽다<br><br>
+								또한 소규모의 자본을 비율에 맞춰 여러가지 회사와 채권에 배분하는 일은 상당히 곤혹스럽다<br><br>
 								ETF는 자산을 배분하는 것을 아주 쉽게 만들어주는 수단이다
 							</p>
 						</div>

@@ -11,6 +11,10 @@
 </style>
 
 <div class="container">
+  <div class="row">
+  	<div class="col-md-8"></div>
+  	<div class="col-md-4 mb-1 text-right">*시가총액 500억이상만 노출됩니다</div>
+  </div>
   <table class="table table-sm">
 	<thead>
 	  <tr class="table-sm table-active">
@@ -28,15 +32,15 @@
 	    <tr>
 	      <td class="text-left"><a id="ltemlink" href="https://finance.naver.com/item/main.naver?code=${etf.itemcode}" target="_blank">${etf.itemname}</a></td>
     		<c:choose>
-	  		  <c:when test="${0 eq etf.changeVal}">
-		        <td class="text-right"><fmt:formatNumber value="${etf.nowVal}" /></td>
-		        <td class="text-right">${etf.changeVal}</td>
-		        <td class="text-right">${etf.changeRate}%</td>
-			  </c:when>
 			  <c:when test="${0 lt etf.changeVal }">
 			    <td class="text-right text-danger"><fmt:formatNumber value="${etf.nowVal}" /></td>
 			    <td class="text-right text-danger">▲ ${etf.changeVal}</td>
 			    <td class="text-right text-danger">+${etf.changeRate}%</td>
+			  </c:when>
+	  		  <c:when test="${0 eq etf.changeVal}">
+		        <td class="text-right"><fmt:formatNumber value="${etf.nowVal}" /></td>
+		        <td class="text-right">${etf.changeVal}</td>
+		        <td class="text-right">${etf.changeRate}%</td>
 			  </c:when>
 			  <c:when test="${0 gt etf.changeVal }">
 				<td class="text-right text-primary"><fmt:formatNumber value="${etf.nowVal}" /></td>

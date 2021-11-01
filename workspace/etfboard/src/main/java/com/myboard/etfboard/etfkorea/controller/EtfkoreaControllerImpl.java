@@ -17,9 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.myboard.etfboard.etfkorea.service.EtfService;
 import com.myboard.etfboard.etfkorea.vo.EtfVO;
+import com.myboard.etfboard.etfkorea.vo.MockVO;
 
 @Controller("etfkoreaController")
 public class EtfkoreaControllerImpl implements EtfkoreaController{
@@ -72,7 +74,7 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 	
 	// 모의투자조회
 	@Override
-	@RequestMapping(value="/etfsimulator*", method=RequestMethod.GET)
+	@RequestMapping(value="/etfsimulator", method=RequestMethod.GET)
 	public ModelAndView viewMock(@RequestParam("name") String name, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
 
@@ -80,28 +82,59 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 		int money = etfService.getMoney(name);
 		mav.addObject("money", money);
 		// 매수한 etf 조회
-		List CheckList = etfService.getCheckList(name);
-		mav.addObject("checkList", CheckList);
+		List<MockVO> checkList = etfService.getCheckList(name);
 		
 		// 종목명, 현재가 크롤링
-		String address = "https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:069500";
-		Document doc = Jsoup.connect(address).get();
+		for(int i=0; i<checkList.size();i++) {
+			String address = "https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:"+checkList.get(i).getItemcode();
+			Document doc = Jsoup.connect(address).get();
+			
+			// json 데이터를 분해하기
+			JSONParser jsonParse = new JSONParser();
+			JSONObject jsonObj = (JSONObject) jsonParse.parse(doc.text());
+			JSONObject _result = (JSONObject) jsonObj.get("result");
+			JSONArray _areasArray = (JSONArray) _result.get("areas");
+			JSONObject _areas = (JSONObject) _areasArray.get(0);
+			JSONArray _datasArray = (JSONArray) _areas.get("datas");
+			JSONObject _datas = (JSONObject) _datasArray.get(0);
+			
+			checkList.get(i).setItemName(String.valueOf(_datas.get("nm")));
+			checkList.get(i).setNowPrice(String.valueOf(_datas.get("nv")));
+			checkList.get(i).setSavePrice(String.valueOf(_datas.get("sv")));
+		}
 		
-		// json 데이터를 분해하기
-		JSONParser jsonParse = new JSONParser();
-		JSONObject jsonObj = (JSONObject) jsonParse.parse(doc.text());
-		JSONObject _result = (JSONObject) jsonObj.get("result");
-		JSONArray _areasArray = (JSONArray) _result.get("areas");
-		JSONObject _areas = (JSONObject) _areasArray.get(0);
-		JSONArray _datasArray = (JSONArray) _areas.get("datas");
-		JSONObject _datas = (JSONObject) _datasArray.get(0);
-		
-		String itemName = String.valueOf(_datas.get("nm"));
-		String nowPrice = String.valueOf(_datas.get("sv"));
-		mav.addObject("itemName", itemName);
-		mav.addObject("nowPrice", nowPrice);
+		mav.addObject("checkList", checkList);
 		mav.setViewName("/etfsimulator");
 		return mav;
 	}
+	
+	// 종목 추가
+	@Override
+	@RequestMapping(value="/etfsimulator/add", method=RequestMethod.GET)
+	public ModelAndView MockAddItem(@RequestParam("name") String name, @RequestParam("itemcode") String itemcode, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		MockVO mockVO = new MockVO(name, itemcode);
+		
+		// 존재하는 종목이면 add
+		int result = etfService.addItem(mockVO);
+		rAttr.addAttribute("name",name);
+		mav.setViewName("redirect:/etfsimulator");
+		return mav;
+	}
+	
+	// 종목 삭제
+	@RequestMapping(value="/etfsimulator/sub", method=RequestMethod.GET)
+	public ModelAndView MockSubItem(@RequestParam("name") String name, @RequestParam("itemcode") String itemcode, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		MockVO mockVO = new MockVO(name, itemcode);
+		
+		// 존재하는 종목이면 add
+		int result = etfService.subItem(mockVO);
+		rAttr.addAttribute("name",name);
+		mav.setViewName("redirect:/etfsimulator");
+		return mav;
+	}
+	
+	// 매수, 매도
 	
 }

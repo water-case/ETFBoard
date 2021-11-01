@@ -33,4 +33,11 @@ alter sequence board_index nocache;
 alter sequence boardreply_index nocache;
 alter sequence boardreplygroup_index nocache;
 
-select id from etf_member where name='꼭꼭씹어먹어';
+insert into etf_mock (name, itemcode)
+		values('꼭꼭씹어먹어', '278530');
+select * from etf_mock
+		where name='꼭꼭씹어먹어';
+
+delete from (select name, itemcode from etf_mock where name='꼭꼭씹어먹어') where itemcode=157490;
+
+

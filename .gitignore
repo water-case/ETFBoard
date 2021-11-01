@@ -1,2 +1,2 @@
 # 메타데이터 제외
-workspace/.metadata/
+/workspace/.metadata

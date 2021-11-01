@@ -8,10 +8,35 @@ public class MockVO {
 	private String itemcode;
 	private int havenum;
 	private int buymoney;
+	private String itemName;
+	private String nowPrice;
+	private String savePrice;
 	
 	public MockVO() {
 	}
-
+	public MockVO(String name, String itemcode) {
+		this.name = name;
+		this.itemcode = itemcode;
+	}
+	
+	public String getItemName() {
+		return itemName;
+	}
+	public void setItemName(String itemName) {
+		this.itemName = itemName;
+	}
+	public String getNowPrice() {
+		return nowPrice;
+	}
+	public void setNowPrice(String nowPrice) {
+		this.nowPrice = nowPrice;
+	}
+	public String getSavePrice() {
+		return savePrice;
+	}
+	public void setSavePrice(String savePrice) {
+		this.savePrice = savePrice;
+	}
 	public String getName() {
 		return name;
 	}

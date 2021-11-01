@@ -9,14 +9,33 @@
         <result property="itemcode" column="itemcode" />
         <result property="havenum" column="havenum" />
         <result property="buymoney" column="buymoney" />
+        <result property="itemName" column="itemName" />
+        <result property="nowPrice" column="nowPrice" />
+        <result property="savePrice" column="savePrice" />
 	</resultMap>
 	
-	
+	<!-- 개인 종목 조회 -->
 	<select id="getCheckList"  resultType="mockVO"   parameterType="String" >
 		<![CDATA[
 		select * from etf_mock
 		where name=#{name}
 		]]>
 	</select>
+	
+	<!-- 종목 추가 -->
+	<insert id="addItem"  parameterType="mockVO">
+		<![CDATA[
+		insert into etf_mock (name, itemcode)
+		values(#{name}, #{itemcode})
+		]]>
+	</insert>
+	
+	<!-- 종목 삭제 -->
+	<delete id="subItem"  parameterType="mockVO">
+		<![CDATA[
+		delete from (select name, itemcode from etf_mock where name=#{name}) where itemcode=#{itemcode}
+		]]>      
+	</delete>
+	
 	
 </mapper>

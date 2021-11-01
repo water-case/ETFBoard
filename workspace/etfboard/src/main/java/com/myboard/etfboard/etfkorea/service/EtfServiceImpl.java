@@ -7,6 +7,7 @@ import org.springframework.dao.DataAccessException;
 import org.springframework.stereotype.Service;
 
 import com.myboard.etfboard.etfkorea.dao.EtfDAO;
+import com.myboard.etfboard.etfkorea.vo.MockVO;
 import com.myboard.etfboard.member.dao.MemberDAO;
 
 @Service("etfService")
@@ -22,8 +23,18 @@ public class EtfServiceImpl implements EtfService{
 	}
 
 	@Override
-	public List getCheckList(String name) throws DataAccessException {
+	public List<MockVO> getCheckList(String name) throws DataAccessException {
 		return etfDAO.getCheckList(name);
+	}
+
+	@Override
+	public int addItem(MockVO mockVO) throws DataAccessException {
+		return etfDAO.addItem(mockVO);
+	}
+
+	@Override
+	public int subItem(MockVO mockVO) throws DataAccessException {
+		return etfDAO.subItem(mockVO);
 	}
 	
 }
