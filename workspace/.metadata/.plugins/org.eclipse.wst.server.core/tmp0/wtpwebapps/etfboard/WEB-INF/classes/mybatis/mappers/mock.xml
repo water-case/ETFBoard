@@ -37,5 +37,22 @@
 		]]>      
 	</delete>
 	
+	<!-- 종목 매수 -->
+	<update id="buyItem"  parameterType="mockVO">
+		<![CDATA[
+		update etf_mock
+		set havenum=havenum+#{buyNum}, buymoney=buymoney+#{buyTotalPrice}
+		where itemcode = #{itemcode} and name=#{name}
+		]]>      
+	</update>
+	<!-- 종목 매도 -->
+	<update id="sellItem"  parameterType="mockVO">
+		<![CDATA[
+		update etf_mock
+		set havenum=havenum-#{buyNum}, buymoney=buymoney-#{buyTotalPrice}
+		where itemcode = #{itemcode} and name=#{name}
+		]]>      
+	</update>
+	
 	
 </mapper>

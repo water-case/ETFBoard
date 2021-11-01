@@ -36,5 +36,15 @@ public class EtfServiceImpl implements EtfService{
 	public int subItem(MockVO mockVO) throws DataAccessException {
 		return etfDAO.subItem(mockVO);
 	}
+
+	@Override
+	public int buyItem(MockVO mockVO) throws DataAccessException {
+		return etfDAO.buyItem(mockVO);
+	}
+
+	@Override
+	public int sellItem(MockVO mockVO) throws DataAccessException {
+		return etfDAO.sellItem(mockVO);
+	}
 	
 }

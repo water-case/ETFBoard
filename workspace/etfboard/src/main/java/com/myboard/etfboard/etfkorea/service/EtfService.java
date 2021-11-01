@@ -15,5 +15,9 @@ public interface EtfService {
 	int addItem(MockVO mockVO) throws DataAccessException;
 
 	int subItem(MockVO mockVO) throws DataAccessException;
+
+	int buyItem(MockVO mockVO) throws DataAccessException;
+
+	int sellItem(MockVO mockVO) throws DataAccessException;
 	
 }

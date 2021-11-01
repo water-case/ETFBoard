@@ -83,6 +83,7 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 		mav.addObject("money", money);
 		// 매수한 etf 조회
 		List<MockVO> checkList = etfService.getCheckList(name);
+		int totalBuyMoney = 0;
 		
 		// 종목명, 현재가 크롤링
 		for(int i=0; i<checkList.size();i++) {
@@ -101,8 +102,11 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 			checkList.get(i).setItemName(String.valueOf(_datas.get("nm")));
 			checkList.get(i).setNowPrice(String.valueOf(_datas.get("nv")));
 			checkList.get(i).setSavePrice(String.valueOf(_datas.get("sv")));
+			
+			// 투자 자산 계산
+			totalBuyMoney += checkList.get(i).getBuymoney();
 		}
-		
+		mav.addObject("totalBuyMoney", totalBuyMoney);
 		mav.addObject("checkList", checkList);
 		mav.setViewName("/etfsimulator");
 		return mav;
@@ -123,6 +127,7 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 	}
 	
 	// 종목 삭제
+	@Override
 	@RequestMapping(value="/etfsimulator/sub", method=RequestMethod.GET)
 	public ModelAndView MockSubItem(@RequestParam("name") String name, @RequestParam("itemcode") String itemcode, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		ModelAndView mav = new ModelAndView();
@@ -135,6 +140,55 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 		return mav;
 	}
 	
-	// 매수, 매도
+	// 매수
+	@RequestMapping(value="/etfsimulator/buy", method=RequestMethod.GET)
+	public ModelAndView MockBuy(@RequestParam("name") String name, @RequestParam("itemcode") String itemcode, @RequestParam("buyNum") String buyNum, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 현재가 크롤링
+		String address = "https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:"+itemcode;
+		Document doc = Jsoup.connect(address).get();
+		
+		JSONParser jsonParse = new JSONParser();
+		JSONObject jsonObj = (JSONObject) jsonParse.parse(doc.text());
+		JSONObject _result = (JSONObject) jsonObj.get("result");
+		JSONArray _areasArray = (JSONArray) _result.get("areas");
+		JSONObject _areas = (JSONObject) _areasArray.get(0);
+		JSONArray _datasArray = (JSONArray) _areas.get("datas");
+		JSONObject _datas = (JSONObject) _datasArray.get(0);
+		
+		String nowPrice = String.valueOf(_datas.get("nv"));
+		
+		ModelAndView mav = new ModelAndView();
+		MockVO mockVO = new MockVO(name, itemcode, nowPrice, buyNum);
+		int result = etfService.buyItem(mockVO);
+		
+		rAttr.addAttribute("name",name);
+		mav.setViewName("redirect:/etfsimulator");
+		return mav;
+	}
 	
+	// 매도
+	@RequestMapping(value="/etfsimulator/sell", method=RequestMethod.GET)
+	public ModelAndView MockSell(@RequestParam("name") String name, @RequestParam("itemcode") String itemcode, @RequestParam("sellNum") String sellNum, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		// 현재가 크롤링
+		String address = "https://polling.finance.naver.com/api/realtime?query=SERVICE_ITEM:"+itemcode;
+		Document doc = Jsoup.connect(address).get();
+		
+		JSONParser jsonParse = new JSONParser();
+		JSONObject jsonObj = (JSONObject) jsonParse.parse(doc.text());
+		JSONObject _result = (JSONObject) jsonObj.get("result");
+		JSONArray _areasArray = (JSONArray) _result.get("areas");
+		JSONObject _areas = (JSONObject) _areasArray.get(0);
+		JSONArray _datasArray = (JSONArray) _areas.get("datas");
+		JSONObject _datas = (JSONObject) _datasArray.get(0);
+		
+		String nowPrice = String.valueOf(_datas.get("nv"));
+		
+		ModelAndView mav = new ModelAndView();
+		MockVO mockVO = new MockVO(name, itemcode, nowPrice, sellNum);
+		int result = etfService.sellItem(mockVO);
+		
+		rAttr.addAttribute("name",name);
+		mav.setViewName("redirect:/etfsimulator");
+		return mav;
+	}
 }

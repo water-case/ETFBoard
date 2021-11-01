@@ -28,5 +28,17 @@ public class EtfDAOImpl implements EtfDAO{
 	public int subItem(MockVO mockVO) throws DataAccessException {
 		return sqlSession.delete("mapper.mock.subItem", mockVO);
 	}
+
+	@Override
+	public int buyItem(MockVO mockVO) throws DataAccessException {
+		sqlSession.update("mapper.member.buyItem", mockVO);
+		return sqlSession.update("mapper.mock.buyItem", mockVO);
+	}
+
+	@Override
+	public int sellItem(MockVO mockVO) throws DataAccessException {
+		sqlSession.update("mapper.member.sellItem", mockVO);
+		return sqlSession.update("mapper.mock.sellItem", mockVO);
+	}
 	
 }

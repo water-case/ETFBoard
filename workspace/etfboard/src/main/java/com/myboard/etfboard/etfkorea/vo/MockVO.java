@@ -11,6 +11,8 @@ public class MockVO {
 	private String itemName;
 	private String nowPrice;
 	private String savePrice;
+	private String buyNum;
+	private int buyTotalPrice;
 	
 	public MockVO() {
 	}
@@ -18,7 +20,26 @@ public class MockVO {
 		this.name = name;
 		this.itemcode = itemcode;
 	}
+	public MockVO(String name, String itemcode, String nowPrice, String buyNum) {
+		this.name = name;
+		this.itemcode = itemcode;
+		this.nowPrice = nowPrice;
+		this.buyNum = buyNum;
+		this.buyTotalPrice = Integer.parseInt(nowPrice) * Integer.parseInt(buyNum);
+	}
 	
+	public int getBuyTotalPrice() {
+		return buyTotalPrice;
+	}
+	public void setBuyTotalPrice(int buyTotalPrice) {
+		this.buyTotalPrice = buyTotalPrice;
+	}
+	public String getBuyNum() {
+		return buyNum;
+	}
+	public void setBuyNum(String buyNum) {
+		this.buyNum = buyNum;
+	}
 	public String getItemName() {
 		return itemName;
 	}

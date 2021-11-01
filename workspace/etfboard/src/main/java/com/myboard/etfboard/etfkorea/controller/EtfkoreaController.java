@@ -14,5 +14,7 @@ public interface EtfkoreaController {
 	// 모의투자 조회
 	public ModelAndView viewMock(@RequestParam("name") String name, HttpServletRequest request, HttpServletResponse response) throws Exception;
 	// 모의투자 종목 추가
-	public ModelAndView MockAddItem(@RequestParam("name") String name, @RequestParam("itemcode") String itemcode, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception
+	public ModelAndView MockAddItem(@RequestParam("name") String name, @RequestParam("itemcode") String itemcode, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
+	// 모의투자 종목 삭제
+	public ModelAndView MockSubItem(@RequestParam("name") String name, @RequestParam("itemcode") String itemcode, RedirectAttributes rAttr, HttpServletRequest request, HttpServletResponse response) throws Exception;
 }

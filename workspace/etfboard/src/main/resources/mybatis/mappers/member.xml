@@ -41,5 +41,22 @@
 		]]>
 	</select>
 	
+	<!-- 모의투자 종목 매수 -->
+	<update id="buyItem"  parameterType="mockVO">
+		<![CDATA[
+		update etf_member
+		set money=money-#{buyTotalPrice}
+		where name=#{name}
+		]]>      
+	</update>
+	<!-- 모의투자 종목 매도 -->
+	<update id="sellItem"  parameterType="mockVO">
+		<![CDATA[
+		update etf_member
+		set money=money+#{buyTotalPrice}
+		where name=#{name}
+		]]>      
+	</update>
+	
 	
 </mapper>
