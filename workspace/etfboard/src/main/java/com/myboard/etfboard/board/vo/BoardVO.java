@@ -1,7 +1,5 @@
 package com.myboard.etfboard.board.vo;
 
-import java.sql.Date;
-
 import org.springframework.stereotype.Component;
 
 @Component("boardVO")
@@ -10,7 +8,7 @@ public class BoardVO {
 	private String title;
 	private String text;
 	private String name;
-	private Date writtenDate;
+	private String writtenDate;
 	private int push;
 	private int views;
 	private int comments;
@@ -62,11 +60,11 @@ public class BoardVO {
 		this.name = name;
 	}
 
-	public Date getWrittenDate() {
+	public String getWrittenDate() {
 		return writtenDate;
 	}
 
-	public void setWrittenDate(Date writtenDate) {
+	public void setWrittenDate(String writtenDate) {
 		this.writtenDate = writtenDate;
 	}
 

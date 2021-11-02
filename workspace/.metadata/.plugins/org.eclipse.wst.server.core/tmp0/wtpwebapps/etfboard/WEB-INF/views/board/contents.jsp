@@ -223,10 +223,10 @@
     
     <!-- 닉네임과 작성시간 조회수 추천수 댓글수-->
 	<div class="row">
-        <div class="col-md-3">
+        <div class="col-md-4">
           ${boardContents.name} / ${boardContents.writtenDate}
         </div>
-        <div class="col-md-6"></div>
+        <div class="col-md-5"></div>
         <div class="col-md-3 text-right">
           조회 ${boardContents.views} 추천 ${boardContents.push} 댓글 ${boardContents.comments}
         </div>

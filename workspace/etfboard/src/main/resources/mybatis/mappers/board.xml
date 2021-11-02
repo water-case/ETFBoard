@@ -28,7 +28,7 @@
 	<!-- 첫번째 페이지 조회 -->
 	<select id="selectBoardFirstList" resultMap="boardResult">
 		<![CDATA[
-		select boardIndex, title, name, writtendate, push, views, comments
+		select boardIndex, title, name, to_char(writtendate, 'yyyy-mm-dd'), push, views, comments
 		from (select * from etf_board order by boardIndex desc)
 		where rownum <= 15
 		]]>
@@ -44,7 +44,7 @@
 	<!-- 페이지별 조회 -->
 	<select id="selectBoardPageList" parameterType="int" resultMap="boardResult">
 		<![CDATA[
-		select boardIndex, title, name, writtendate, push, views, comments
+		select boardIndex, title, name, to_char(writtendate, 'YYYY-MM-DD hh24:mi:ss') as writtendate, push, views, comments
 		from (	select pre, boardIndex, title, name, writtendate, push, views, comments
 				from (	select rownum as pre, boardIndex, title, name, writtendate, push, views, comments
 						from (select * from etf_board order by boardindex desc )
@@ -67,7 +67,7 @@
 	<!-- 글 내용 조회 --> 
 	<select id="selectContents"  parameterType="int" resultType="boardVO">
 		<![CDATA[
-		select * from etf_board where boardindex = #{boardindex}
+		select boardindex, title, text, name, to_char(writtendate, 'YYYY-MM-DD hh24:mi:ss') as writtendate, push, views, comments from etf_board where boardindex = #{boardindex}
 		]]>
 	</select>
 	

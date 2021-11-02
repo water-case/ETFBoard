@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"  %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 <c:set var="startPage" value="${startPageIndex*5}" />
 
@@ -44,7 +45,35 @@
 		  </c:choose>
 	    </a></td>
 	    <td class="text-center">${board.name}</td>
-	    <td class="text-center">${board.writtenDate}</td>
+	    <!-- 오늘 쓴글이면 시간 노출, 아니면 월일 노출, 올해가 아니면 연월일 노출 -->
+	    <c:set var="now" value="<%=new java.util.Date()%>" />
+		<c:set var="n_year"><fmt:formatDate value="${now}" pattern="yyyy" /></c:set>
+		<c:set var="n_month"><fmt:formatDate value="${now}" pattern="mm" /></c:set>
+		<c:set var="n_date"><fmt:formatDate value="${now}" pattern="dd" /></c:set>
+		
+		<fmt:parseDate var="written" pattern="yyyy-MM-dd HH:mm:ss" value="${board.writtenDate}" />
+		<c:set var="year"><fmt:formatDate value="${written}" pattern="yyyy" /></c:set>
+		<c:set var="month"><fmt:formatDate value="${written}" pattern="MM" /></c:set>
+		<c:set var="date"><fmt:formatDate value="${written}" pattern="dd" /></c:set>
+		<c:set var="hour"><fmt:formatDate value="${written}" pattern="HH" /></c:set>
+		<c:set var="minute"><fmt:formatDate value="${written}" pattern="mm" /></c:set>
+		<c:choose>
+		  <c:when test="${n_year ne year}">
+<!-- 올해가 아닌 경우 연월일 노출 -->
+		    <td class="text-center">${year}/${month}/${date}</td> 
+		  </c:when>
+		  <c:otherwise>
+<!-- 오늘 쓴글이 아닐경우 월일 노출 -->
+			<c:if test="${n_date ne date}">
+			    <td class="text-center">${month}/${date}</td>
+			</c:if>
+<!-- 오늘 쓴글이면 시간 노출 -->
+			<c:if test="${n_date eq date}">
+			    <td class="text-center">${hour}:${minute}</td>
+			</c:if>			
+		  </c:otherwise>
+		</c:choose>
+	    
 	    <td class="text-center">${board.push}</td>
 	    <td class="text-center">${board.views}</td>
 	  </tr>
