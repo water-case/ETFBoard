@@ -5,7 +5,20 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
+<style>
+    input::-webkit-outer-spin-button,
+    input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+</style>
+
 <script type="text/javascript">
+	function numberMaxLength(e){
+	    if(e.value.length > e.maxLength){
+	        e.value = e.value.slice(0, e.maxLength);
+	    }
+	}
+
 	function addItem(){
 		var _itemcode = document.getElementById('input_itemcode').value;
 		if(_itemcode >= 100000){
@@ -135,13 +148,13 @@
         <strong>추가할 종목코드를 입력 : </strong>
       </div>
       <div class="col-md-2">
-        <input class="form-control" type="text" id="input_itemcode" style="text-align:center;" maxlength='6'>
+        <input class="form-control" type="number" id="input_itemcode" style="text-align:center;" maxlength='6'>
       </div>
       <div class="col-md-3 pl-0">
         <button type="button" class="btn btn-primary" onclick="addItem()">종목추가</button>
       </div>
       <div class="col-md-2 pr-0 pl-5">
-        <input class="form-control text-right " type="text" id="input_weightMoney" placeholder="계산할 금액" style="text-align:center;" maxlength='10'>
+        <input class="form-control text-right " type="number" id="input_weightMoney" placeholder="계산할 금액" style="text-align:center;" maxlength='10'>
       </div>
       <div class="col-md-2">
         <button type="button" class="btn btn-warning btn-block" onclick="calCount()">수량계산</button>
@@ -193,13 +206,13 @@
 	        <button type="button" class="btn btn-danger btn-sm" onclick="buyItem(${checkList.itemcode})" style="font-size: 12px">매수</button>
 	      </td>
 	      <td class="text-right align-middle">
-	        <input class="form-control" type="text" id="input_buyAndSellnum${checkList.itemcode}" maxlength='3' style="text-align:center;">
+	        <input class="form-control" type="number" id="input_buyAndSellnum${checkList.itemcode}" maxlength='3' oninput="numberMaxLength(this)" style="text-align:center;">
 	      </td>
 	      <td class="text-center align-middle">
 	        <button type="button" class="btn btn-primary btn-sm" onclick="sellItem(${checkList.itemcode})" style="font-size: 12px">매도</button>
 	      </td>
 	      <td class="text-right align-middle">
-	      	<input class="form-control" type="text" id="input_weightPer${checkList.itemcode}" maxlength='2' style="text-align:center;">
+	      	<input class="form-control" type="number" id="input_weightPer${checkList.itemcode}" maxlength='2' oninput="numberMaxLength(this)" style="text-align:center;">
 	      </td>
 	      <td class="text-center align-middle" id="result_weight${checkList.itemcode}">0</td>
 	    </tr>

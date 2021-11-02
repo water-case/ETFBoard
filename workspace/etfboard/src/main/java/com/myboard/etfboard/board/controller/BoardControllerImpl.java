@@ -6,6 +6,7 @@ import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -153,12 +154,23 @@ public class BoardControllerImpl implements BoardController{
 	// 추천수 증가
 	@RequestMapping(value = "/board/push", method = RequestMethod.POST) 
 	@ResponseBody 
-	public Map<String, String> ContentsPush(@RequestParam("boardIndex") int boardIndex, HttpServletRequest request, HttpServletResponse response) throws Exception {
+	public Map<String, String> ContentsPush(@RequestParam("boardIndex") int boardIndex, @RequestParam("ip") String ip, HttpServletRequest request, HttpServletResponse response) throws Exception {
 		Map<String, String> map = new HashMap<String, String>();
+		//ip 중복인지 확인하기
+		BoardVO boardVO = new BoardVO(boardIndex, ip);
+		int ipCheck = boardService.ipCheck(boardVO);
+		if(ipCheck == 1) {
+			map.put("first", "false");
+			return map;
+		}
 		// 추천수 증가시키기
 		int pushCount = boardService.AddAndGetPushCount(boardIndex);
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("push"+boardIndex, true);
+		session.setMaxInactiveInterval(-1); // 세션 유지시간 하루
+		
 		map.put("push", Integer.toString(pushCount));
-		// 세션id조회해봐서 
 		map.put("first", "true"); 
 		return map;
 	}

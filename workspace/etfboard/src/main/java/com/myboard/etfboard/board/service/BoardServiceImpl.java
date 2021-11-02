@@ -89,5 +89,10 @@ public class BoardServiceImpl implements BoardService{
 		}
 		return 0;
 	}
+
+	@Override
+	public int ipCheck(BoardVO boardVO) throws DataAccessException {
+		return boardDAO.ipCheck(boardVO);
+	}
 }
 

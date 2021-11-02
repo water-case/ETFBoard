@@ -41,5 +41,7 @@ public interface BoardDAO {
 	public int SubCommentsCount(int boardIndex) throws DataAccessException;
 
 	public void InsertReReply(ReplyVO replyVO) throws DataAccessException;
+
+	public int ipCheck(BoardVO boardVO) throws DataAccessException;
 	
 }

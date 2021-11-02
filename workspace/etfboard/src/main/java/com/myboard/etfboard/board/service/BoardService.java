@@ -31,4 +31,6 @@ public interface BoardService {
 	public int UpdateBoardReply(ReplyVO replyVO) throws DataAccessException;
 
 	public int DeleteBoardReply(int boardIndex, int replyIndex) throws DataAccessException;
+
+	public int ipCheck(BoardVO boardVO) throws DataAccessException;
 }

@@ -106,5 +106,17 @@ public class BoardDAOImpl implements BoardDAO{
 	public void InsertReReply(ReplyVO replyVO) throws DataAccessException {
 		sqlSession.insert("mapper.board.insertReReply", replyVO);
 	}
+
+	@Override
+	public int ipCheck(BoardVO boardVO) throws DataAccessException {
+		BoardVO result = sqlSession.selectOne("mapper.board.ipCheck", boardVO);
+		
+		if(result == null) {
+			sqlSession.insert("mapper.board.ipInsert", boardVO);
+			return 0;
+		} else {
+			return 1;
+		}
+	}
 	
 }

@@ -12,6 +12,7 @@
         <result property="push" column="push" />
         <result property="views" column="views" />
         <result property="comments" column="comments" />
+        <result property="ip" column="ip" />
 	</resultMap>
 	
 	<resultMap id="replyResult" type="replyVO">
@@ -94,6 +95,21 @@
 		delete from etf_board where boardIndex=#{boardIndex}
 		]]>      
 	</delete>
+	
+	<!-- 아이피 조회 -->
+	<select id="ipCheck"  parameterType="int" resultType="boardVO">
+		<![CDATA[
+		select boardIndex, ip from (select * from push where boardIndex = #{boardIndex}) where ip = #{ip}
+		]]>
+	</select>
+	
+	<!-- 아이피 추가 -->
+	<insert id="ipInsert"  parameterType="boardVO">
+		<![CDATA[
+		insert into push (boardIndex, ip)
+		values(#{boardIndex}, #{ip})
+		]]>
+	</insert>
 	
 	<!-- 추천수 증가 -->
 	<update id="increasePush"  parameterType="int">

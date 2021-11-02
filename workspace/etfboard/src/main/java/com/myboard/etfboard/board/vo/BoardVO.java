@@ -14,6 +14,21 @@ public class BoardVO {
 	private int push;
 	private int views;
 	private int comments;
+	private String ip;
+	
+	public BoardVO() {
+	}
+	public BoardVO(int boardIndex, String ip) {
+		this.boardIndex = boardIndex;
+		this.ip = ip;
+	}
+	
+	public String getIp() {
+		return ip;
+	}
+	public void setIp(String ip) {
+		this.ip = ip;
+	}
 
 	public int getBoardIndex() {
 		return boardIndex;

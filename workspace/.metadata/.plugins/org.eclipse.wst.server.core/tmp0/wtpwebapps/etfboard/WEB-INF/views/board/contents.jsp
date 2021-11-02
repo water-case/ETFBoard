@@ -4,26 +4,37 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
+
+
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script type="text/javascript">
     document.title = "${boardContents.title}" ; <!-- 글 제목으로 title 변경 -->
-	
+    var cip = "";
+    // 아이피 조회 함수
+    function getIP(json) {
+		cip = json.ip;
+	}
     // 추천수 증가 함수
     function push() {
     	$.ajax({
     		type: "post",
     		url: "./push",
-    		data: {'boardIndex':'${boardContents.boardIndex}'},
+    		data: {
+    			'boardIndex':'${boardContents.boardIndex}',
+    			'ip':cip
+    			},
     		success: function(data) {
     			if(data.first=="true"){
     				document.getElementById('push_btn').innerText = '추천 '+data.push; 
     			} else{
-			    	alert("추천은 1회만 가능합니다");    				
+			    	alert("추천은 1회만 가능합니다");
     			}
     		}
     	});
 	}
 </script>
+<script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+
 <c:choose>
   <c:when test="${isLogOn == true && memberName != null}">
 	<script type="text/javascript">
@@ -181,6 +192,7 @@
   	</script>
   </c:otherwise>
 </c:choose>
+
 
 <div class="container">
 	<!-- 목록, 수정, 삭제버튼 -->
