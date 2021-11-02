@@ -15,7 +15,10 @@
 		+ mybatis
 		+ jsoup ( HTML 파싱 라이브러리 )
 
-## 추가할것
+## 추가할 것
 	+ RESTful API
 	+ Oauth2.0
 	+ spring security
+
+## 해야할 것
+	+ 리팩토링

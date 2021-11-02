@@ -2,12 +2,19 @@
     pageEncoding="UTF-8" isELIgnored="false"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
 <script type="text/javascript">
 	function addItem(){
 		var _itemcode = document.getElementById('input_itemcode').value;
-		location.href='${contextPath}/etfsimulator/add?name=${memberName}&itemcode='+_itemcode;
+		if(_itemcode >= 100000){
+			location.href='${contextPath}/etfsimulator/add?name=${memberName}&itemcode='+_itemcode;			
+		} else if(_itemcode > 0) {
+			alert("종목코드를 제대로 입력했는지 확인해주세요");
+		} else {
+			alert("종목코드를 입력해주세요");			
+		}
 	}
 	
 	function subItem(itemcode, havenum){
@@ -34,23 +41,66 @@
 			alert('수량을 입력해주세요');
 		}
 	}
+	function calCount(){
+		var weightMoney = document.getElementById('input_weightMoney').value; // 금액
+		var itemCodeList = []; // 비중
+		var nowPriceList = []; // 현재가
+		var weightList = [];
+		
+		/***************데이터 파싱*****************/
+		<c:forEach var="List" items="${checkList}">
+			nowPriceList.push("${List.nowPrice}");
+			itemCodeList.push("${List.itemcode}")
+		</c:forEach>
+		
+		for(var i=0; i<${fn:length(checkList)}; i++){
+			weightList[i] = document.getElementById('input_weightPer'+itemCodeList[i]).value;
+			if(weightList[i] == 0)
+				return 0;
+		}
+		/***************데이터 파싱 끝*****************/
+		
+		if(weightMoney != 0){
+			for(var i=0; i<${fn:length(checkList)}; i++){
+				document.getElementById('result_weight'+itemCodeList[i]).innerText = Math.floor(weightMoney*(weightList[i]/100)/nowPriceList[i]);
+				//alert(document.getElementById('result_weight'+itemCodeList[i]).value);
+			}
+			
+		} else {
+			alert('금액을 입력해주세요');
+		}
+	}
 </script>
+<!-- 현재 자산 가치 계산 -->
+<c:set var="totalValue" value="0"/>
+<c:forEach var="List" items="${checkList}">
+  <c:set var="totalValue" value="${totalValue+(List.nowPrice*List.havenum)}"/>
+</c:forEach>
+<!-- 현재 자산 가치 계산 끝 -->
 <div class="container">
   <table class="table mb-0">
     <tr>
       <td class="text-left" style="width:50%">
-        <strong>잔고 : <fmt:formatNumber value="${money}" /> 원 (보유 비중 <fmt:formatNumber type="percent" value="${money/(totalBuyMoney + money)}"/>)</strong>
+        <strong>현재 잔액 : <fmt:formatNumber value="${money}" /> 원 (보유 비중 <fmt:formatNumber type="percent" pattern="0.00%" value="${money/(totalBuyMoney + money)}"/>)</strong>
       </td>
       <td class="text-left" style="width:50%">
-        <strong>자산 총계 : <fmt:formatNumber value="${totalBuyMoney + money}" /> 원</strong>
-        </td>
+        <strong>자산 총계 : <fmt:formatNumber value="${totalValue + money}" /> 원</strong>
+      </td>
+    </tr>
+    <tr>
+      <td class="text-left" style="width:50%">
+        <strong>총 매수액 : <fmt:formatNumber value="${totalBuyMoney}" /> 원 (보유 비중 <fmt:formatNumber type="percent" pattern="0.00%" value="${totalBuyMoney/(totalBuyMoney + money)}"/>)</strong>
+      </td>
+      <td class="text-left" style="width:50%">
+        <strong>총 평가액 : <fmt:formatNumber value="${totalValue}" /> 원 (수익률 <fmt:formatNumber type="percent" pattern="0.00%" value="${totalValue/totalBuyMoney-1}"/>)</strong>
+      </td>
     </tr>
   </table>
   <hr class="mt-0 mb-2">
   
   <div class="row mb-2">
-      <div class="col-md-5 text-right align-self-center">
-        <strong>추가할 종목의 코드를 입력하세요 : </strong>
+      <div class="col-md-3 text-right align-self-center">
+        <strong>추가할 종목코드를 입력 : </strong>
       </div>
       <div class="col-md-2">
         <input class="form-control" type="text" id="input_itemcode" style="text-align:center;" maxlength='6'>
@@ -58,8 +108,11 @@
       <div class="col-md-3 pl-0">
         <button type="button" class="btn btn-primary" onclick="addItem()">종목추가</button>
       </div>
+      <div class="col-md-2 pr-0 pl-5">
+        <input class="form-control text-right " type="text" id="input_weightMoney" placeholder="계산할 금액" style="text-align:center;" maxlength='10'>
+      </div>
       <div class="col-md-2">
-        <button type="button" class="btn btn-warning btn-block">수량계산</button>
+        <button type="button" class="btn btn-warning btn-block" onclick="calCount()">수량계산</button>
       </div>
   </div>
   
@@ -67,16 +120,16 @@
 	<thead>
 	  <tr class="table-sm table-active" style="font-size: 14px">
 	    <th class="text-center align-middle" scope="col" style="width:3%"></th>
-	    <th class="text-center align-middle" scope="col" style="width:42%">종목명</th>
+	    <th class="text-center align-middle" scope="col" style="width:40%">종목명</th>
 	    <th class="text-right  align-middle" scope="col" style="width:6%">현재가</th>
-	    <th class="text-right  align-middle" scope="col" style="width:6%">보유량</th>
-	    <th class="text-right  align-middle" scope="col" style="width:6%">보유<br>비중</th>
-	    <th class="text-right  align-middle" scope="col" style="width:7%">평균<br>매수가</th>
+	    <th class="text-center  align-middle" scope="col" style="width:6%">보유량</th>
+	    <th class="text-center  align-middle" scope="col" style="width:8%">보유<br>비중</th>
+	    <th class="text-right  align-middle" scope="col" style="width:7%">평균&nbsp;&nbsp;<br>매수가</th>
 	    <th class="text-right  align-middle" scope="col" style="width:6%">수익률</th>
 	    <th class="text-center align-middle" scope="col" style="width:3%">매수</th>
 	    <th class="text-center align-middle" scope="col" style="width:7%">수량</th>
 	    <th class="text-center align-middle" scope="col" style="width:3%">매도</th>
-	    <th class="text-center align-middle" scope="col" style="width:6%">비중</th>
+	    <th class="text-center align-middle" scope="col" style="width:6%">비중(%)</th>
 	    <th class="text-center  align-middle" scope="col" style="width:5%">추천수량</th>
 	  </tr>
 	</thead>
@@ -92,7 +145,7 @@
 		      <td class="text-right align-middle text-danger"><fmt:formatNumber value="${checkList.nowPrice}" /></td>
 	  		</c:when>
 	  		<c:when test="${checkList.nowPrice eq checkList.savePrice}">
-		      <td class="text-left align-middle"><a id="ltemlink" href="https://finance.naver.com/item/main.naver?code=${checkList.itemcode}" target="_blank">${checkList.itemName}</a></td>
+		      <td class="text-left align-middle"><a class="text-dark" id="ltemlink" href="https://finance.naver.com/item/main.naver?code=${checkList.itemcode}" target="_blank">${checkList.itemName}</a></td>
 		      <td class="text-right align-middle"><fmt:formatNumber value="${checkList.nowPrice}" /></td>
 	  		</c:when>
 	  		<c:when test="${checkList.nowPrice lt checkList.savePrice}">
@@ -101,9 +154,9 @@
 	  		</c:when>
 	  	  </c:choose>
 	      <td class="text-right align-middle">${checkList.havenum}</td>
-	      <td class="text-right align-middle"><fmt:formatNumber type="percent" value="${checkList.buymoney/totalBuyMoney}"/></td>
+	      <td class="text-right align-middle "><fmt:formatNumber type="percent" pattern="0.00%" value="${checkList.buymoney/totalBuyMoney}"/></td>
 	      <td class="text-right align-middle"><fmt:formatNumber value="${checkList.buymoney/checkList.havenum}" /></td>
-	      <td class="text-right align-middle"><fmt:formatNumber type="percent" value="${(checkList.buymoney/checkList.havenum)/checkList.nowPrice-1}"/></td>
+	      <td class="text-right align-middle"><fmt:formatNumber type="percent" pattern="0.00%" value="${((checkList.nowPrice*checkList.havenum)/checkList.buymoney)-1}"/></td>
 	      <td class="text-center align-middle">
 	        <button type="button" class="btn btn-danger btn-sm" onclick="buyItem(${checkList.itemcode})" style="font-size: 12px">매수</button>
 	      </td>
@@ -114,9 +167,9 @@
 	        <button type="button" class="btn btn-primary btn-sm" onclick="sellItem(${checkList.itemcode})" style="font-size: 12px">매도</button>
 	      </td>
 	      <td class="text-right align-middle">
-	      	<input class="form-control" type="text"  maxlength='2' style="text-align:center;">
+	      	<input class="form-control" type="text" id="input_weightPer${checkList.itemcode}" maxlength='2' style="text-align:center;">
 	      </td>
-	      <td class="text-center align-middle">0</td>
+	      <td class="text-center align-middle" id="result_weight${checkList.itemcode}">0</td>
 	    </tr>
 	  </c:forEach>
 	</tbody>

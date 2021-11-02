@@ -33,4 +33,5 @@
     <fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
     <fullyQualifiedTypeName name="com.myboard.etfboard.etfkorea.dao.EtfDAO"/>
     <fullyQualifiedTypeName name="com.myboard.etfboard.member.dao.MemberDAO"/>
+    <fullyQualifiedTypeName name="java.lang.Override"/>
 </qualifiedTypeNameHistroy>
