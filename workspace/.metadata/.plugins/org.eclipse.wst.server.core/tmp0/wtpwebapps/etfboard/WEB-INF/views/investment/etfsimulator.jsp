@@ -25,16 +25,47 @@
 		}
 	}
 	var tradeConFirm = false;
+	
+	// 리팩토링때 매수매도 함수 합치기
 	function buyItem(itemcode){
 		var buyNum = document.getElementById('input_buyAndSellnum'+itemcode).value;
+		
+		/************** 평일 09:05 ~ 15:15 이외 거래 금지 *************/
+		var nowTime = new Date();
+		var day = nowTime.getDay();
+		var hour = nowTime.getHours();
+		var min = nowTime.getMinutes();
+		var time_result = hour*100+min;
+		if(time_result >= 905 && time_result <= 1515 && day != 0 && day != 6){
+		} else {
+			alert("거래시간이 아닙니다 09:05 ~ 15:15");
+			return 0;
+		}
+		/************** 평일 09:05 ~ 15:15 이외 거래 금지 끝*************/
+		
 		if(buyNum > 0) {
 			location.href='${contextPath}/etfsimulator/buy?name=${memberName}&itemcode='+itemcode+'&buyNum='+buyNum;
 		} else {
 			alert('수량을 입력해주세요');
 		}
 	}
+	
 	function sellItem(itemcode){
 		var sellNum = document.getElementById('input_buyAndSellnum'+itemcode).value;
+		
+		/************** 09:05 ~ 15:15 이외 거래 금지 *************/
+		var nowTime = new Date();
+		var day = nowTime.getDay();
+		var hour = nowTime.getHours();
+		var min = nowTime.getMinutes();
+		var time_result = hour*100+min;
+		if(time_result >= 905 && time_result <= 1515 && day != 0 && day != 6){
+		} else {
+			alert("거래시간이 아닙니다 09:05 ~ 15:15");
+			return 0;
+		}
+		/************** 09:05 ~ 15:15 이외 거래 금지 끝*************/
+
 		if(sellNum > 0){
 			location.href='${contextPath}/etfsimulator/sell?name=${memberName}&itemcode='+itemcode+'&sellNum='+sellNum;
 		} else {
@@ -47,6 +78,7 @@
 		var nowPriceList = []; // 현재가
 		var weightList = [];
 		
+		
 		/***************데이터 파싱*****************/
 		<c:forEach var="List" items="${checkList}">
 			nowPriceList.push("${List.nowPrice}");
@@ -55,8 +87,8 @@
 		
 		for(var i=0; i<${fn:length(checkList)}; i++){
 			weightList[i] = document.getElementById('input_weightPer'+itemCodeList[i]).value;
-			if(weightList[i] == 0)
-				return 0;
+			/* if(weightList[i] == 0)
+				return 0; */
 		}
 		/***************데이터 파싱 끝*****************/
 		
