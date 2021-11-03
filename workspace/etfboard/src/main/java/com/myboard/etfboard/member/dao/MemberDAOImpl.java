@@ -29,4 +29,19 @@ public class MemberDAOImpl implements MemberDAO {
 		return sqlSession.selectOne("mapper.member.getEtfMoney", name);
 	}
 
+	@Override
+	public int IdCheck(String id) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.idCheck", id);
+	}
+
+	@Override
+	public int NameCheck(String name) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.nameCheck", name);
+	}
+
+	@Override
+	public int EmailCheck(String email) throws DataAccessException {
+		return sqlSession.selectOne("mapper.member.emailCheck", email);
+	}
+
 }

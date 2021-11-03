@@ -1,6 +1,8 @@
 package com.myboard.etfboard.member.controller;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -14,9 +16,11 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.myboard.etfboard.board.vo.ReplyVO;
 import com.myboard.etfboard.member.service.MemberService;
 import com.myboard.etfboard.member.vo.MemberVO;
 
@@ -91,6 +95,44 @@ public class MemberControllerImpl implements MemberController {
 		// 로그아웃하면 메인이 아니라 현재페이지로 가도록 만들기
 		mav.setViewName("redirect:/");
 		return mav;
-	}	
-	
+	}
+	// id 중복체크
+	@RequestMapping(value = "/member/idCheck", method = RequestMethod.POST) 
+	@ResponseBody 
+	public Map<String, String> IdCheck(@RequestParam("id") String id, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		int result = memberService.IdCheck(id);
+		if(result == 0) {
+			map.put("check", "true"); 
+		} else {
+			map.put("check", "false"); 
+		}
+		return map;
+	}
+	// name 중복체크
+	@RequestMapping(value = "/member/nameCheck", method = RequestMethod.POST) 
+	@ResponseBody 
+	public Map<String, String> NameCheck(@RequestParam("name") String name, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		int result = memberService.NameCheck(name);
+		if(result == 0) {
+			map.put("check", "true"); 
+		} else {
+			map.put("check", "false"); 
+		}
+		return map;
+	}
+	// email 중복체크
+	@RequestMapping(value = "/member/emailCheck", method = RequestMethod.POST) 
+	@ResponseBody 
+	public Map<String, String> EmailCheck(@RequestParam("email") String email, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		Map<String, String> map = new HashMap<String, String>();
+		int result = memberService.EmailCheck(email);
+		if(result == 0) {
+			map.put("check", "true"); 
+		} else {
+			map.put("check", "false"); 
+		}
+		return map;
+	}
 }

@@ -24,8 +24,23 @@ public class MemberServiceImpl implements MemberService {
 	}
 	
 	@Override
-	public MemberVO login(MemberVO memberVO) throws Exception{
+	public MemberVO login(MemberVO memberVO) throws DataAccessException {
 		return memberDAO.loginById(memberVO);
+	}
+
+	@Override
+	public int IdCheck(String id) throws DataAccessException {
+		return memberDAO.IdCheck(id);
+	}
+
+	@Override
+	public int NameCheck(String name) throws DataAccessException {
+		return memberDAO.NameCheck(name);
+	}
+
+	@Override
+	public int EmailCheck(String email) throws DataAccessException {
+		return memberDAO.EmailCheck(email);
 	}
 
 }
