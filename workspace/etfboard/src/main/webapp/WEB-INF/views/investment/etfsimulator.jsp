@@ -5,28 +5,17 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
 
-<style>
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button {
-        -webkit-appearance: none;
-    }
-</style>
 
 <script type="text/javascript">
-	function numberMaxLength(e){
-	    if(e.value.length > e.maxLength){
-	        e.value = e.value.slice(0, e.maxLength);
-	    }
-	}
 
 	function addItem(){
 		var _itemcode = document.getElementById('input_itemcode').value;
-		if(_itemcode >= 100000){
+		if(_itemcode.length >= 6){
 			location.href='${contextPath}/etfsimulator/add?name=${memberName}&itemcode='+_itemcode;			
-		} else if(_itemcode > 0) {
+		} else if(_itemcode.length < 6) {
 			alert("종목코드를 제대로 입력했는지 확인해주세요");
 		} else {
-			alert("종목코드를 입력해주세요");			
+			alert("종목코드를 입력해주세요");
 		}
 	}
 	
@@ -37,7 +26,6 @@
 			alert("보유하신 수량을 모두 매도 후 시도해주세요");
 		}
 	}
-	var tradeConFirm = false;
 	
 	// 리팩토링때 매수매도 함수 합치기
 	function buyItem(itemcode){
@@ -49,7 +37,7 @@
 		var hour = nowTime.getHours();
 		var min = nowTime.getMinutes();
 		var time_result = hour*100+min;
-		if(time_result >= 905 && time_result <= 1515 && day != 0 && day != 6){
+		if(time_result >= 905 && time_result <= 1515 || (day == 0 || day == 6)){
 		} else {
 			alert("거래시간이 아닙니다 09:05 ~ 15:15");
 			return 0;
@@ -72,7 +60,7 @@
 		var hour = nowTime.getHours();
 		var min = nowTime.getMinutes();
 		var time_result = hour*100+min;
-		if(time_result >= 905 && time_result <= 1515 && day != 0 && day != 6){
+		if(time_result >= 905 && time_result <= 1515 || (day == 0 || day == 6)){
 		} else {
 			alert("거래시간이 아닙니다 09:05 ~ 15:15");
 			return 0;
@@ -148,13 +136,13 @@
         <strong>추가할 종목코드를 입력 : </strong>
       </div>
       <div class="col-md-2">
-        <input class="form-control" type="number" id="input_itemcode" style="text-align:center;" maxlength='6'>
+        <input class="form-control" type="text" id="input_itemcode" style="text-align:center;" maxlength='6'>
       </div>
       <div class="col-md-3 pl-0">
         <button type="button" class="btn btn-primary" onclick="addItem()">종목추가</button>
       </div>
       <div class="col-md-2 pr-0 pl-5">
-        <input class="form-control text-right " type="number" id="input_weightMoney" placeholder="계산할 금액" style="text-align:center;" maxlength='10'>
+        <input class="form-control text-right " type="text" id="input_weightMoney" placeholder="계산할 금액" style="text-align:center;" maxlength='10'>
       </div>
       <div class="col-md-2">
         <button type="button" class="btn btn-warning btn-block" onclick="calCount()">수량계산</button>
@@ -203,16 +191,16 @@
 	      <td class="text-right align-middle"><fmt:formatNumber value="${checkList.buymoney/checkList.havenum}" /></td>
 	      <td class="text-right align-middle"><fmt:formatNumber type="percent" pattern="0.00%" value="${((checkList.nowPrice*checkList.havenum)/checkList.buymoney)-1}"/></td>
 	      <td class="text-center align-middle">
-	        <button type="button" class="btn btn-danger btn-sm" onclick="buyItem(${checkList.itemcode})" style="font-size: 12px">매수</button>
+	        <button type="button" class="btn btn-danger btn-sm" onclick="buyItem('${checkList.itemcode}')" style="font-size: 12px">매수</button>
 	      </td>
 	      <td class="text-right align-middle">
-	        <input class="form-control" type="number" id="input_buyAndSellnum${checkList.itemcode}" maxlength='3' oninput="numberMaxLength(this)" style="text-align:center;">
+	        <input class="form-control" type="text" id="input_buyAndSellnum${checkList.itemcode}" maxlength='3' style="text-align:center;">
 	      </td>
 	      <td class="text-center align-middle">
-	        <button type="button" class="btn btn-primary btn-sm" onclick="sellItem(${checkList.itemcode})" style="font-size: 12px">매도</button>
+	        <button type="button" class="btn btn-primary btn-sm" onclick="sellItem('${checkList.itemcode}')" style="font-size: 12px">매도</button>
 	      </td>
 	      <td class="text-right align-middle">
-	      	<input class="form-control" type="number" id="input_weightPer${checkList.itemcode}" maxlength='2' oninput="numberMaxLength(this)" style="text-align:center;">
+	      	<input class="form-control" type="text" id="input_weightPer${checkList.itemcode}" maxlength='2' style="text-align:center;">
 	      </td>
 	      <td class="text-center align-middle" id="result_weight${checkList.itemcode}">0</td>
 	    </tr>

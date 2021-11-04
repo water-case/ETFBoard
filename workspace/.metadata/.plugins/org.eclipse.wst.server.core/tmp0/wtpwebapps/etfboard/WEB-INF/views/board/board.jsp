@@ -130,7 +130,7 @@
 		  </c:if>
 		  <c:if test="${startPage+5 < totalIndexCount}">
 		    <li class="page-item"> <!-- 5페이지씩 오른쪽으로 -->
-		      <a class="page-link" href="${contextPath}/board/page?page=${startPageIndex+6}">&raquo;</a>
+		      <a class="page-link" href="${contextPath}/board/page?page=${(startPageIndex+1)*5+1}">&raquo;</a>
 		    </li>
 		  </c:if>
 		</ul>

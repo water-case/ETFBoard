@@ -32,7 +32,22 @@
 					<hr class="featurette-divider">
 				
 					<div class="row featurette">
-						<div class="col-md-7 order-md-2">
+						<div class="col-md-7 mt-3">
+							<img src="https://newsimg.sedaily.com/2018/01/23/1RUJHFVA06_3.jpg" width="450" height="240">
+						</div>
+						<div class="col-md-5">
+							<br>
+							<h2 class="featurette-heading">장기 투자와 단기 투자</h2>
+							<br>
+							<p class="lead">
+								투자는 결국 돈을 벌기 위한 목적으로 하는것이다<br><br>
+								불나방식 단기 투자는 장기적으로 손실 확률이 클 수 밖에 없다
+						</div>
+					</div>
+					<hr class="featurette-divider">
+				
+					<div class="row featurette">
+						<div class="col-md-7">
 							<br>
 							<h2 class="featurette-heading">투자와 자산 배분</h2>
 							<br>
@@ -41,7 +56,7 @@
 								자산을 여러 투자 수단에 특정 비율대로 배분하고 주기적 &middot; 상황 맞춤형 리밸런싱을 하는 것이 자산 배분 투자전략이다
 							</p>
 						</div>
-						<div class="col-md-5 order-md-1">
+						<div class="col-md-5">
 							<br>
 							<img src="http://photo.sentv.co.kr/uploads/editor/news/2021/05/739489797ceba627adf976504464b221.png" width="300" height="250">
 						</div>
@@ -50,6 +65,9 @@
 					<hr class="featurette-divider">
 				
 					<div class="row featurette">
+						<div class="col-md-5 mt-5">
+							<img src="https://jaetechlab.com/wp-content/uploads/2020/07/image-4.png" width="370" height="210">
+						</div>
 						<div class="col-md-7">
 							<br>
 							<h2 class="featurette-heading">자산 배분과 ETF</h2>
@@ -59,9 +77,6 @@
 								또한 소규모의 자본을 비율에 맞춰 여러가지 회사와 채권에 배분하는 일은 상당히 곤혹스럽다<br><br>
 								ETF는 자산을 배분하는 것을 아주 쉽게 만들어주는 수단이다
 							</p>
-						</div>
-						<div class="col-md-5 mt-5">
-							<img src="https://jaetechlab.com/wp-content/uploads/2020/07/image-4.png" width="370" height="210">
 						</div>
 					</div>
 				</div>

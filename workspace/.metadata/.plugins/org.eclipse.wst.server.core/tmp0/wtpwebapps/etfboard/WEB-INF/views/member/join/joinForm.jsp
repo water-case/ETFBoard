@@ -14,7 +14,7 @@
   </c:choose>
   
   function idCheck(){
-	  var id = document.getElementById("id").value;
+	  var id = document.getElementById("_id").value;
 	  if(id=="" || id.length < 4){
 		  alert("4자이상 입력해주세요");
 		  return 0;
@@ -39,7 +39,7 @@
     	});
   }
   function nameCheck(){
-	  var name = document.getElementById("name").value;
+	  var name = document.getElementById("_name").value;
 	  if(name=="" || name.length < 4){
 		  alert("4자이상 입력해주세요");
 		  return 0;
@@ -64,7 +64,7 @@
     	});
   }
   function emailCheck(){
-	  var email = document.getElementById("email").value;
+	  var email = document.getElementById("_email").value;
 	  if(email=="" || email.length < 4){
 		  alert("4자이상 입력해주세요");
 		  return 0;
@@ -77,7 +77,7 @@
     		success: function(data) {
     			if(data.check=="true"){
 				    /* 중복되지 않으면 라벨OK세팅*/
-    				document.getElementById('email').innerText = 'OK'; 
+    				document.getElementById('email_alert').innerText = 'OK'; 
     			} else{
     				/* 중복되면 알림 */
 			    	alert("email이 중복됩니다");
@@ -104,7 +104,7 @@
           <label for="id">아이디</label>
         </div>
         <div class="col-md-3 mb-3">
-          <input type="text" class="form-control" id="id" placeholder="" value="" required maxlength='10' minlength='4'>
+          <input type="text" class="form-control" name="id" id="_id" placeholder="" value="" required maxlength='10' minlength='4'>
         </div>
           <button type="button" class="btn btn-secondary mb-3" id="id_btn" onClick="idCheck()">중복확인</button>
           <p class="text-primary ml-3 align-self-center" id="id_alert"></p>
@@ -116,7 +116,7 @@
           <label for="pwd">비밀번호</label>
         </div>
         <div class="col-md-3 mb-3">
-          <input type="password" class="form-control" id="pwd" placeholder="" value="" required maxlength='12' minlength='4'>
+          <input type="password" class="form-control" name="pwd"  id="_pwd" placeholder="" value="" required maxlength='12' minlength='4'>
         </div>
       </div>
 
@@ -126,7 +126,7 @@
           <label for="name">닉네임</label>
         </div>
         <div class="col-md-3 mb-3">
-          <input type="text" class="form-control" id="name" placeholder="" value="" required maxlength='6' minlength='1'>
+          <input type="text" class="form-control" name="name" id="_name" placeholder="" value="" required maxlength='6' minlength='1'>
         </div>
         <button type="button" class="btn btn-secondary mb-3" id="name_btn" onClick="nameCheck()">중복확인</button>
         <p class="text-primary ml-3 align-self-center" id="name_alert"></p>
@@ -138,7 +138,8 @@
           <label for="email">이메일</label>
         </div>
         <div class="col-md-4 mb-3">
-          <input type="email" class="form-control" id="email" placeholder="you@example.com" value="" required maxlength='30'>
+          <input type="email" class="form-control" name="email" id="_email" placeholder="you@example.com" value="" required maxlength='30'>
+          
         </div>
         <button type="button" class="btn btn-secondary mb-3" id="email_btn" onClick="emailCheck()">중복확인</button>
         <p class="text-primary ml-3 align-self-center" id="email_alert"></p>

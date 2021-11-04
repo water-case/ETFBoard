@@ -9,29 +9,27 @@
 <html>
 	<head>
 		<meta charset="UTF-8">
-	    <!-- bootstrap css -->
+	<!-- bootstrap css -->
 	    <link rel="stylesheet" href="${contextPath}/resources/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="${contextPath}/resources/my/my.css">
+	    
+	<!-- tap image -->
 	    <link rel="icon" type="image/jpg" href="${contextPath}/resources/icon/money_icon.jpg">
-		<title>
-			<tiles:insertAttribute name="title" />
-		</title>
-		
-		
+	
+	<!-- title -->
+		<title><tiles:insertAttribute name="title" /></title>
 	</head>
 	<body>
-		<div id="container">
-			<div id="header">
-				<tiles:insertAttribute name="header" />
-			</div>
-			<hr class="featurette-divider">
-			<div id="content">
-				<tiles:insertAttribute name="body" />
-			</div>
-			<hr class="featurette-divider">
-			<div id="footer">
-				<tiles:insertAttribute name="footer" />
-			</div>
-		</div>
+		<header>
+			<tiles:insertAttribute name="header" />
+		</header>
+		<hr class="featurette-divider">
+		<main>
+			<tiles:insertAttribute name="body" />
+		</main>
+		<hr class="featurette-divider">
+		<footer>
+			<tiles:insertAttribute name="footer" />
+		</footer>
 	</body>
 </html>
