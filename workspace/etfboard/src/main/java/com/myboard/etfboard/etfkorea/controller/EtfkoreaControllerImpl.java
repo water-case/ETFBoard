@@ -191,4 +191,5 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 		mav.setViewName("redirect:/etfsimulator");
 		return mav;
 	}
+	
 }

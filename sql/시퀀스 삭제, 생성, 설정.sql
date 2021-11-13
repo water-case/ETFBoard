@@ -1,6 +1,6 @@
 --시퀀스 조회
-select boardreply_index.currval from dual;
-SELECT boardreply_index.NEXTVAL FROM DUAL;
+select board_index.currval from dual;
+SELECT board_index.NEXTVAL FROM DUAL;
 
 -- 게시글 인덱스 시퀀스
 create sequence board_index
@@ -33,11 +33,15 @@ alter sequence board_index nocache;
 alter sequence boardreply_index nocache;
 alter sequence boardreplygroup_index nocache;
 
-insert into etf_mock (name, itemcode)
-		values('꼭꼭씹어먹어', '278530');
-select * from etf_mock
-		where name='꼭꼭씹어먹어';
+-- 더미데이터 추가하기
+insert into etf_board (boardindex, title, text, name)
+		values(board_index.nextval, '더미', '더미', 'watercase');
 
-delete from (select name, itemcode from etf_mock where name='꼭꼭씹어먹어') where itemcode=157490;
-
+begin    
+    for i in 1..1000
+    loop
+    insert into etf_board (boardindex, title, text, name)
+            values(board_index.nextval, '더미', '더미', 'watercase');
+    end loop;
+end;
 

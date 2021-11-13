@@ -25,6 +25,7 @@
 				<li><a href="${contextPath}/board/page?page=1" class="nav-link px-2 text-white">소통게시판</a></li>
 				<li><a href="${contextPath}/etfkorea" class="nav-link px-2 text-white">국내ETF</a></li>
 				<li><a onclick="etfSimulator()" href="#" class="nav-link px-2 text-white">모의투자</a></li>
+				<li><a href="${contextPath}/rank" class="nav-link px-2 text-white">투자랭킹</a></li>
 			</ul>
 		</nav>
 		<c:choose>

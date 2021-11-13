@@ -62,4 +62,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/investment/etfsimulator.jsp" />
 	</definition>
 	
+	<!-- 랭킹 페이지 -->
+	<definition name="/rank" extends="baseLayout">
+		<put-attribute name="title" value="투자랭킹" />
+		<put-attribute name="body" value="/WEB-INF/views/investment/rank.jsp" />
+	</definition>
+	
 </tiles-definitions>
