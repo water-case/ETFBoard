@@ -10,6 +10,7 @@
         <result property="name" column="name" />
         <result property="email" column="email" />
         <result property="joinDate" column="joinDate" />
+        <result property="money" column="money" />
 	</resultMap> 
 	<!-- 
 	<resultMap id="memResult" type="java.util.HashMap">
@@ -79,6 +80,13 @@
 		<![CDATA[
 		select count(*) from etf_member 
 		where email=#{email}
+		]]>
+	</select>
+	
+	<!-- 멤버리스트 조회 -->
+	<select id="getMemberList" resultMap="memResult">
+		<![CDATA[
+		select name, joinDate, money from etf_member
 		]]>
 	</select>
 	

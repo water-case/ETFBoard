@@ -11,6 +11,7 @@ public class MemberVO {
 	private String name;
 	private String email;
 	private Date joinDate;
+	private String money;
 
 	public MemberVO() {
 		
@@ -61,6 +62,14 @@ public class MemberVO {
 	
 	public void setJoinDate(Date joinDate) {
 		this.joinDate = joinDate;
+	}
+
+	public String getMoney() {
+		return money;
+	}
+
+	public void setMoney(String money) {
+		this.money = money;
 	}
 
 }

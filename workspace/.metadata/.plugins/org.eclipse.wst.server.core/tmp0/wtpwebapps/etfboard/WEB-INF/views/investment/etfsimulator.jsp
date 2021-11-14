@@ -31,47 +31,67 @@
 	function buyItem(itemcode){
 		var buyNum = document.getElementById('input_buyAndSellnum'+itemcode).value;
 		
-		/************** 평일 09:05 ~ 15:15 이외 거래 금지 *************/
+		if(buyNum > 0) {
+			location.href='${contextPath}/etfsimulator/buy?name=${memberName}&itemcode='+itemcode+'&buyNum='+buyNum;
+		} else {
+			alert('수량을 입력해주세요');
+			return 0;
+		}
+		
+		/************** 평일 09:05 ~ 15:15 이외 거래 금지 *************
 		var nowTime = new Date();
 		var day = nowTime.getDay();
 		var hour = nowTime.getHours();
 		var min = nowTime.getMinutes();
 		var time_result = hour*100+min;
-		if(time_result >= 905 && time_result <= 1515 || (day == 0 || day == 6)){
-		} else {
+		if((day == 0 || day == 6)) {
+			alert("거래요일이 아닙니다");
+			return 0;
+		} else if(time_result >= 905 && time_result <= 1515){
 			alert("거래시간이 아닙니다 09:05 ~ 15:15");
 			return 0;
-		}
-		/************** 평일 09:05 ~ 15:15 이외 거래 금지 끝*************/
-		
-		if(buyNum > 0) {
-			location.href='${contextPath}/etfsimulator/buy?name=${memberName}&itemcode='+itemcode+'&buyNum='+buyNum;
 		} else {
-			alert('수량을 입력해주세요');
+			if(buyNum > 0) {
+				location.href='${contextPath}/etfsimulator/buy?name=${memberName}&itemcode='+itemcode+'&buyNum='+buyNum;
+			} else {
+				alert('수량을 입력해주세요');
+				return 0;
+			}
 		}
+		************** 평일 09:05 ~ 15:15 이외 거래 금지 끝*************/
 	}
 	
 	function sellItem(itemcode){
 		var sellNum = document.getElementById('input_buyAndSellnum'+itemcode).value;
 		
-		/************** 09:05 ~ 15:15 이외 거래 금지 *************/
+		if(sellNum > 0){
+			location.href='${contextPath}/etfsimulator/sell?name=${memberName}&itemcode='+itemcode+'&sellNum='+sellNum;
+		} else {
+			alert('수량을 입력해주세요');
+			return 0;
+		}
+		
+		/************** 09:05 ~ 15:15 이외 거래 금지 *************
 		var nowTime = new Date();
 		var day = nowTime.getDay();
 		var hour = nowTime.getHours();
 		var min = nowTime.getMinutes();
 		var time_result = hour*100+min;
-		if(time_result >= 905 && time_result <= 1515 || (day == 0 || day == 6)){
-		} else {
+		if((day == 0 || day == 6)) {
+			alert("거래요일이 아닙니다");
+			return 0;
+		} else if(time_result >= 905 && time_result <= 1515){
 			alert("거래시간이 아닙니다 09:05 ~ 15:15");
 			return 0;
-		}
-		/************** 09:05 ~ 15:15 이외 거래 금지 끝*************/
-
-		if(sellNum > 0){
-			location.href='${contextPath}/etfsimulator/sell?name=${memberName}&itemcode='+itemcode+'&sellNum='+sellNum;
 		} else {
-			alert('수량을 입력해주세요');
+			if(sellNum > 0){
+				location.href='${contextPath}/etfsimulator/sell?name=${memberName}&itemcode='+itemcode+'&sellNum='+sellNum;
+			} else {
+				alert('수량을 입력해주세요');
+				return 0;
+			}
 		}
+		************** 09:05 ~ 15:15 이외 거래 금지 끝*************/
 	}
 	function calCount(){
 		var weightMoney = document.getElementById('input_weightMoney').value; // 금액
@@ -153,16 +173,16 @@
 	<thead>
 	  <tr class="table-sm table-active" style="font-size: 14px">
 	    <th class="text-center align-middle" scope="col" style="width:3%"></th>
-	    <th class="text-center align-middle" scope="col" style="width:40%">종목명</th>
+	    <th class="text-center align-middle" scope="col" style="width:33%">종목명</th>
 	    <th class="text-right  align-middle" scope="col" style="width:6%">현재가</th>
 	    <th class="text-center  align-middle" scope="col" style="width:6%">보유량</th>
 	    <th class="text-center  align-middle" scope="col" style="width:8%">보유<br>비중</th>
 	    <th class="text-right  align-middle" scope="col" style="width:7%">평균&nbsp;&nbsp;<br>매수가</th>
 	    <th class="text-right  align-middle" scope="col" style="width:6%">수익률</th>
 	    <th class="text-center align-middle" scope="col" style="width:3%">매수</th>
-	    <th class="text-center align-middle" scope="col" style="width:7%">수량</th>
+	    <th class="text-center align-middle" scope="col" style="width:10%">수량</th>
 	    <th class="text-center align-middle" scope="col" style="width:3%">매도</th>
-	    <th class="text-center align-middle" scope="col" style="width:6%">비중(%)</th>
+	    <th class="text-center align-middle" scope="col" style="width:10%">비중(%)</th>
 	    <th class="text-center  align-middle" scope="col" style="width:5%">추천수량</th>
 	  </tr>
 	</thead>
@@ -188,19 +208,19 @@
 	  	  </c:choose>
 	      <td class="text-right align-middle">${checkList.havenum}</td>
 	      <td class="text-right align-middle "><fmt:formatNumber type="percent" pattern="0.00%" value="${checkList.buymoney/totalBuyMoney}"/></td>
-	      <td class="text-right align-middle"><fmt:formatNumber value="${checkList.buymoney/checkList.havenum}" /></td>
+	      <td class="text-right align-middle"><fmt:formatNumber type="currency" value="${checkList.buymoney/checkList.havenum}" /></td>
 	      <td class="text-right align-middle"><fmt:formatNumber type="percent" pattern="0.00%" value="${((checkList.nowPrice*checkList.havenum)/checkList.buymoney)-1}"/></td>
 	      <td class="text-center align-middle">
 	        <button type="button" class="btn btn-danger btn-sm" onclick="buyItem('${checkList.itemcode}')" style="font-size: 12px">매수</button>
 	      </td>
 	      <td class="text-right align-middle">
-	        <input class="form-control" type="text" id="input_buyAndSellnum${checkList.itemcode}" maxlength='3' style="text-align:center;">
+	        <input class="form-control" type="number" id="input_buyAndSellnum${checkList.itemcode}" min='0' maxlength='3' value='0' style="text-align:center;">
 	      </td>
 	      <td class="text-center align-middle">
 	        <button type="button" class="btn btn-primary btn-sm" onclick="sellItem('${checkList.itemcode}')" style="font-size: 12px">매도</button>
 	      </td>
 	      <td class="text-right align-middle">
-	      	<input class="form-control" type="text" id="input_weightPer${checkList.itemcode}" maxlength='2' style="text-align:center;">
+	      	<input class="form-control" type="number" id="input_weightPer${checkList.itemcode}" min='0' max='100' value='0' style="text-align:center;">
 	      </td>
 	      <td class="text-center align-middle" id="result_weight${checkList.itemcode}">0</td>
 	    </tr>

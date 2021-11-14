@@ -12,20 +12,21 @@
 	    <th class="text-right" scope="col" style="width:15%">닉네임</th>
 	    <th class="text-right" scope="col" style="width:15%">현재자산</th>
 	    <th class="text-right" scope="col" style="width:15%">투자시작일</th>
-	    <th class="text-center" colspan="4" scope="col" style="width:50%">주력종목 TOP4</th>
+	    <th class="text-center" colspan="4" scope="col" style="width:50%">주력종목 TOP3</th>
 	  </tr>
 	</thead>
 	<tbody>
+	  <c:forEach var="mList" items="${memberList}" varStatus="status">
 	    <tr>
-	      <td class="text-right">1</td>
-	      <td class="text-right">고난</td>
-	      <td class="text-right">10,400,000</td>
-	      <td class="text-right">21-11-13</td>
+	      <td class="text-right">${status.count}</td>
+	      <td class="text-right">${mList.name}</td>
+	      <td class="text-right"><fmt:formatNumber value="${mList.money}" /></td>
+	      <td class="text-right">${mList.joinDate}</td>
 	      <td class="text-right">삼성전자</td>
 	      <td class="text-right">LG이노텍</td>
 	      <td class="text-right">삼성전기</td>
-	      <td class="text-right">카카오</td>
 	    </tr>
+	  </c:forEach>
 	</tbody>
    </table>
 </div>
