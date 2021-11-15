@@ -68,4 +68,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/investment/rank.jsp" />
 	</definition>
 	
+	<!-- 채굴 페이지 -->
+	<definition name="/mining" extends="baseLayout">
+		<put-attribute name="title" value="채굴현장" />
+		<put-attribute name="body" value="/WEB-INF/views/mining/mining.jsp" />
+	</definition>
+	
 </tiles-definitions>

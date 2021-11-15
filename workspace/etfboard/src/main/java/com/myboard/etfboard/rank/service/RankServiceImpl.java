@@ -37,6 +37,7 @@ public class RankServiceImpl implements RankService{
 			RankVO member = memberList.get(i);
 			int result = member.getMoney();
 			String[] top3 = new String[3];
+			String[] top3code = new String[3];
 			int[] top3val = new int[3];
 			
 			// 종목갯수만큼 for문
@@ -63,29 +64,36 @@ public class RankServiceImpl implements RankService{
 				if(result_ > top3val[0]) {
 					// if top1 보다 크면 top1에 종목명 주입, top1->top2, top2->top3
 					top3[2] = top3[1];
+					top3code[2] = top3code[1];
 					top3val[2] = top3val[1];
 					top3[1] = top3[0];
+					top3code[1] = top3code[0];
 					top3val[1] = top3val[0];
 					
 					top3[0] = name;
+					top3code[0] = itemList.get(j).getItemcode();
 					top3val[0] = result_;
 				} else if(result_ > top3val[1]) {
 					// else if top2 보다 크면 top2에 종목명 주입, top2->top3
 					top3[2] = top3[1];
+					top3code[2] = top3code[1];
 					top3val[2] = top3val[1];
 					
 					top3[1] = name;
+					top3code[1] = itemList.get(j).getItemcode();
 					top3val[1] = result_;
 					
 				} else if(result_ > top3val[2]) {
 					// else if top3 보다 크면 top3에 종목명 주입
 					top3[2] = name;
+					top3code[2] = itemList.get(j).getItemcode();
 					top3val[2] = result_;
 				}
 			}
 			// 로직 효율을 위해 임시변수에 저장한 값들 전송
 			member.setMoney(result);
 			member.setTop3(top3);
+			member.setTop3code(top3code);
 			member.setTop3val(top3val);
 		}
 		// 자산순으로 리스트 내림차순 정렬

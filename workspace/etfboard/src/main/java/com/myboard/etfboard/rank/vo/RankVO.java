@@ -10,12 +10,17 @@ public class RankVO implements Comparable<RankVO>{
 	private int money;
 	private Date joinDate;
 	private String top3[];
+	private String top3code[];
 	private int top3val[];
 	
 	public RankVO() {
 		top3 = new String[3];
 		for(int i=0; i<top3.length; i++) {
 			top3[i] = "";
+		}
+		top3code = new String[3];
+		for(int i=0; i<top3code.length; i++) {
+			top3code[i] = "";
 		}
 		top3val = new int[3];
 		for(int i=0; i<top3val.length ;i++) {
@@ -63,6 +68,14 @@ public class RankVO implements Comparable<RankVO>{
 		this.top3val = top3val;
 	}
 	
+	public String[] getTop3code() {
+		return top3code;
+	}
+
+	public void setTop3code(String[] top3code) {
+		this.top3code = top3code;
+	}
+
 	@Override
 	public int compareTo(RankVO rankVO) {
 		if(rankVO.getMoney() > money) {

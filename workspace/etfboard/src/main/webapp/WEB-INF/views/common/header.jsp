@@ -26,6 +26,7 @@
 				<li><a href="${contextPath}/etfkorea" class="nav-link px-3 text-white">국내ETF</a></li>
 				<li><a onclick="etfSimulator()" href="#" class="nav-link px-3 text-white">모의투자</a></li>
 				<li><a href="${contextPath}/rank" class="nav-link px-3 text-white">투자랭킹</a></li>
+				<li><a href="${contextPath}/mining" class="nav-link px-3 text-white">채굴현장</a></li>
 			</ul>
 		</nav>
 		<c:choose>
