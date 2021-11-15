@@ -5,6 +5,7 @@ import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -76,6 +77,11 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 	@Override
 	@RequestMapping(value="/etfsimulator", method=RequestMethod.GET)
 	public ModelAndView viewMock(@RequestParam("name") String name, HttpServletRequest request, HttpServletResponse response) throws Exception {
+		HttpSession session = request.getSession();
+		session.removeAttribute("mockName");
+		session.setAttribute("mockName", name);
+		session.setMaxInactiveInterval(24*60*60); // 세션 유지시간 하루
+		
 		ModelAndView mav = new ModelAndView();
 
 		// 잔고조회

@@ -4,7 +4,12 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"  %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"  %>
 <c:set var="contextPath"  value="${pageContext.request.contextPath}"  />
-
+<script>
+    if (${memberName ne mockName}) {
+    	alert("잘못된 접근입니다");
+    	location.href='${contextPath}/etfsimulator?name=${memberName}'
+    }
+</script>
 
 <script type="text/javascript">
 
