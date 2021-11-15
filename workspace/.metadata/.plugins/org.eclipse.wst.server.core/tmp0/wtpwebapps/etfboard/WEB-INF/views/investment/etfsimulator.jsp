@@ -30,8 +30,14 @@
 	// 리팩토링때 매수매도 함수 합치기
 	function buyItem(itemcode){
 		var buyNum = document.getElementById('input_buyAndSellnum'+itemcode).value;
+		var nowVal = document.getElementById('nowval'+itemcode).value;
+		var nowMoney = document.getElementById('nowMoney').value;
 		
 		if(buyNum > 0) {
+			if(nowVal*buyNum > nowMoney){
+				alert('잔고가 부족합니다');
+				return 0;
+			}
 			location.href='${contextPath}/etfsimulator/buy?name=${memberName}&itemcode='+itemcode+'&buyNum='+buyNum;
 		} else {
 			alert('수량을 입력해주세요');
@@ -63,8 +69,13 @@
 	
 	function sellItem(itemcode){
 		var sellNum = document.getElementById('input_buyAndSellnum'+itemcode).value;
+		var nowHave = Number(document.getElementById('nowHave'+itemcode).innerText);
 		
 		if(sellNum > 0){
+			if(sellNum > nowHave){
+				alert('보유하신 수량을 확인해주세요');
+				return 0;
+			}
 			location.href='${contextPath}/etfsimulator/sell?name=${memberName}&itemcode='+itemcode+'&sellNum='+sellNum;
 		} else {
 			alert('수량을 입력해주세요');
@@ -135,6 +146,7 @@
     <tr>
       <td class="text-left" style="width:50%">
         <strong>현재 잔액 : <fmt:formatNumber value="${money}" /> 원 (보유 비중 <fmt:formatNumber type="percent" pattern="0.00%" value="${money/(totalBuyMoney + money)}"/>)</strong>
+        <input id="nowMoney" type="hidden" value="${money}">
       </td>
       <td class="text-left" style="width:50%">
         <strong>자산 총계 : <fmt:formatNumber value="${totalValue + money}" /> 원</strong>
@@ -178,7 +190,7 @@
 	    <th class="text-center  align-middle" scope="col" style="width:6%">보유량</th>
 	    <th class="text-center  align-middle" scope="col" style="width:8%">보유<br>비중</th>
 	    <th class="text-right  align-middle" scope="col" style="width:7%">평균&nbsp;&nbsp;<br>매수가</th>
-	    <th class="text-right  align-middle" scope="col" style="width:6%">수익률</th>
+	    <th class="text-right  align-middle" scope="col" style="width:6%">누적&nbsp;<br>수익률</th>
 	    <th class="text-center align-middle" scope="col" style="width:3%">매수</th>
 	    <th class="text-center align-middle" scope="col" style="width:10%">수량</th>
 	    <th class="text-center align-middle" scope="col" style="width:3%">매도</th>
@@ -191,6 +203,7 @@
 		<tr>
 	      <td class="text-center align-middle">
 	        <button type="button" class="btn btn-warning btn-sm" id="subItem_btn${checkList.itemcode}" onclick="subItem(${checkList.itemcode}, ${checkList.havenum})">-</button>
+	        <input id="nowval${checkList.itemcode}" type="hidden" value="${checkList.nowPrice}">
 	      </td>
 	      <c:choose>
 	  		<c:when test="${checkList.nowPrice gt checkList.savePrice}">
@@ -206,8 +219,8 @@
 		      <td class="text-right align-middle text-primary"><fmt:formatNumber value="${checkList.nowPrice}" /></td>
 	  		</c:when>
 	  	  </c:choose>
-	      <td class="text-right align-middle">${checkList.havenum}</td>
-	      <td class="text-right align-middle "><fmt:formatNumber type="percent" pattern="0.00%" value="${checkList.buymoney/totalBuyMoney}"/></td>
+	      <td id="nowHave${checkList.itemcode}" class="text-right align-middle">${checkList.havenum}</td>
+	      <td class="text-right align-middle "><fmt:formatNumber type="percent" pattern="0.00%" value="${checkList.nowPrice*checkList.havenum/totalValue}"/></td>
 	      <td class="text-right align-middle"><fmt:formatNumber type="currency" value="${checkList.buymoney/checkList.havenum}" /></td>
 	      <td class="text-right align-middle"><fmt:formatNumber type="percent" pattern="0.00%" value="${((checkList.nowPrice*checkList.havenum)/checkList.buymoney)-1}"/></td>
 	      <td class="text-center align-middle">

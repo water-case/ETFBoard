@@ -49,7 +49,7 @@
 	<update id="sellItem"  parameterType="mockVO">
 		<![CDATA[
 		update etf_mock
-		set havenum=havenum-#{buyNum}, buymoney=buymoney-#{buyTotalPrice}
+		set havenum=havenum-#{buyNum}, buymoney=buymoney*((havenum-#{buyNum})/havenum)
 		where itemcode = #{itemcode} and name=#{name}
 		]]>      
 	</update>
