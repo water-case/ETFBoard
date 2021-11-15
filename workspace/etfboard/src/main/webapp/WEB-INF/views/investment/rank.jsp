@@ -22,9 +22,9 @@
 	      <td class="text-right">${mList.name}</td>
 	      <td class="text-right"><fmt:formatNumber value="${mList.money}" /></td>
 	      <td class="text-right">${mList.joinDate}</td>
-	      <td class="text-right">삼성전자</td>
-	      <td class="text-right">LG이노텍</td>
-	      <td class="text-right">삼성전기</td>
+	      <td class="text-right">${mList.top3[0]}</td>
+	      <td class="text-right">${mList.top3[1]}</td>
+	      <td class="text-right">${mList.top3[2]}</td>
 	    </tr>
 	  </c:forEach>
 	</tbody>

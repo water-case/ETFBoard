@@ -10,5 +10,19 @@ from
     select name, itemcode, buymoney
     from etf_mock
 ) 
-group by name
-order by name desc;
+group by name;
+
+-- 랭킹 폼 조회
+select name, money, joindate, itemcodeList
+from etf_member t1
+left outer join 
+(
+    select name, listagg(itemcode, ',') within group(order by buymoney desc) as itemcodeList
+    from
+    (
+        select name, itemcode, buymoney
+        from etf_mock
+    ) 
+    group by name
+)
+using(name);

@@ -11,8 +11,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.myboard.etfboard.member.vo.MemberVO;
 import com.myboard.etfboard.rank.service.RankService;
+import com.myboard.etfboard.rank.vo.RankVO;
 
 @Controller("rankController")
 public class RankControllerImpl implements RankController{
@@ -25,13 +25,9 @@ public class RankControllerImpl implements RankController{
 		ModelAndView mav = new ModelAndView();
 		
 		// 회원정보 리스트 받아오기
-		List memberList = rankService.GetMemberList();
-		
-		// 회원 정보 리스트 기반 현재자산 계산하기
-		
-		
-		
-		// 회원별 자산 계산 ( 보유잔고 + 종목별현재가격계산 ), 주력종목 top3 뽑기
+		List<RankVO> memberList = rankService.GetMemberList();
+		// 회원 정보 리스트 기반 현재자산 계산, 주력종목 top3 추출, 자산별 정렬
+		rankService.CalNowAsset(memberList);
 		
 		mav.addObject("memberList", memberList);
 		mav.setViewName("/rank");
