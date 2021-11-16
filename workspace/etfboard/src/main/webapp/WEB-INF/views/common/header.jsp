@@ -9,8 +9,10 @@
         }
     }
     function etfSimulator() {
+    	var _uri = '${contextPath}/etfsimulator?name=${memberName}';
+    	var uri=encodeURI(_uri);
 	    if (${isLogOn == true}) {
-	    	location.href='${contextPath}/etfsimulator?name=${memberName}'
+	    	location.href=uri;
 	    } else {
 	    	alert("로그인 후 이용가능합니다");
 	    }
@@ -27,6 +29,7 @@
 				<li><a onclick="etfSimulator()" href="#" class="nav-link px-3 text-white">모의투자</a></li>
 				<li><a href="${contextPath}/rank" class="nav-link px-3 text-white">투자랭킹</a></li>
 				<li><a href="${contextPath}/mining" class="nav-link px-3 text-white">채굴현장</a></li>
+				<li><a href="${contextPath}/exchange" class="nav-link px-3 text-white">환전소</a></li>
 			</ul>
 		</nav>
 		<c:choose>

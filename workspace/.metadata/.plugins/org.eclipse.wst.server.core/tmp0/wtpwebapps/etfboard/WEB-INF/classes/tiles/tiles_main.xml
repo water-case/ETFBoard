@@ -74,4 +74,10 @@
 		<put-attribute name="body" value="/WEB-INF/views/mining/mining.jsp" />
 	</definition>
 	
+	<!-- 환전 페이지 -->
+	<definition name="/exchange" extends="baseLayout">
+		<put-attribute name="title" value="환전소" />
+		<put-attribute name="body" value="/WEB-INF/views/investment/exchange.jsp" />
+	</definition>
+	
 </tiles-definitions>

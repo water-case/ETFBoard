@@ -198,4 +198,11 @@ public class EtfkoreaControllerImpl implements EtfkoreaController{
 		return mav;
 	}
 	
+	// 환전 폼
+	@RequestMapping(value="/exchange", method = RequestMethod.GET)
+	public ModelAndView ExchangeForm(HttpServletRequest request, HttpServletResponse response) throws Exception {
+		ModelAndView mav = new ModelAndView();
+		mav.setViewName("/exchange");
+		return mav;
+	}
 }
