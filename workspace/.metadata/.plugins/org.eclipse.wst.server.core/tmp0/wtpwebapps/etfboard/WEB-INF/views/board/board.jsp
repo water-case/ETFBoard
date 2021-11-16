@@ -27,7 +27,7 @@
       <th class="text-center" scope="col" style="width:7%">번호</th>
       <th class="text-center" scope="col" style="width:40%">글제목</th>
       <th class="text-center" scope="col" style="width:18%">닉네임</th>
-      <th class="text-center" scope="col" style="width:10%">자산규모</th>
+      <th class="text-center" scope="col" style="width:10%">자산뱃지</th>
       <th class="text-center" scope="col" style="width:13%">작성일</th>
       <th class="text-center" scope="col" style="width:6%">추천</th>
       <th class="text-center" scope="col" style="width:6%">조회</th>
@@ -46,7 +46,7 @@
 		  </c:choose>
 	    </a></td>
 	    <td class="text-center">${board.name}</td>
-	    <td class="text-center">10,040,000</td>
+	    <td class="text-center">&lt;뉴비&gt;</td>
 	    <!-- 오늘 쓴글이면 시간 노출, 아니면 월일 노출, 올해가 아니면 연월일 노출 -->
 	    <c:set var="now" value="<%=new java.util.Date()%>" />
 		<c:set var="n_year"><fmt:formatDate value="${now}" pattern="yyyy" /></c:set>

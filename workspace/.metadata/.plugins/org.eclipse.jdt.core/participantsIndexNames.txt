@@ -3,6 +3,8 @@ E:\GitStorage\InvestmentBoard\workspace\.metadata\.plugins\org.eclipse.jst.jsp.c
 \investingBoard\src\main\java
 E:\GitStorage\ETFBoard\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\3771687339.index
 \etfboard\src\main\java
+E:\GitStorage\ETFBoard\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\20231011.index
+\etfboard\src\main\java
 E:\GitStorage\ETFBoard\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2446746492.index
 \etfboard\src\main\java
 E:\GitStorage\ETFBoard\workspace\.metadata\.plugins\org.eclipse.jst.jsp.core\jspsearch\2981373717.index

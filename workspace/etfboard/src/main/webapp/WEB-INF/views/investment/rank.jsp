@@ -18,7 +18,7 @@
 	    <th class="text-right" scope="col" style="width:13%">닉네임</th>
 	    <th class="text-right" scope="col" style="width:12%">현재자산</th>
 	    <th class="text-right" scope="col" style="width:10%">투자시작일</th>
-	    <th class="text-center" colspan="4" scope="col" style="width:60%">주력종목 TOP3</th>
+	    <th class="text-center" colspan="4" scope="col" style="width:60%">보유종목 TOP3</th>
 	  </tr>
 	</thead>
 	<tbody>
