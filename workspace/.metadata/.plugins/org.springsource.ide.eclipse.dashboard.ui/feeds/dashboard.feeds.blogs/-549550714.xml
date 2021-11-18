@@ -5,7 +5,38 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2021-11-17T08:00:00Z</updated>
+  <updated>2021-11-18T09:12:00Z</updated>
+  <entry>
+    <title>Spring Boot 2.4.13 available now</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/11/18/spring-boot-2-4-13-available-now" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>St?phane Nicoll</name>
+    </author>
+    <id>tag:spring.io,2021-11-18:4611</id>
+    <updated>2021-11-18T09:12:00Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the team and everyone who has contributed, I&amp;rsquo;m happy to announce that Spring Boot &lt;code&gt;2.4.13&lt;/code&gt; has been released and is now available from Maven Central.&lt;/p&gt;
+&lt;p&gt;This release includes &lt;a href="https://github.com/spring-projects/spring-boot/releases/tag/v2.4.13"&gt;26 bug fixes, documentation improvements, and dependency upgrades&lt;/a&gt;. Thanks to all those who have contributed with issue reports and pull requests.&lt;/p&gt;&lt;h3&gt;&lt;a href="#end-of-oss-support" class="anchor" name="end-of-oss-support"&gt;&lt;/a&gt;End of OSS Support&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;2.4.x&lt;/code&gt; has now reached the end of its OSS support period and regular releases will no longer be made. If you are still on this version, please consider upgrading at your earliest convenience. If you cannot upgrade at this time, &lt;a href="https://tanzu.vmware.com/spring-runtime"&gt;commercial support is available&lt;/a&gt;.&lt;/p&gt;&lt;h3&gt;&lt;a href="#how-can-you-help" class="anchor" name="how-can-you-help"&gt;&lt;/a&gt;How can you help?&lt;/h3&gt;
+&lt;p&gt;If you&amp;rsquo;re interested in helping out, check out the &lt;a href="https://github.com/spring-projects/spring-boot/labels/status%3A%20ideal-for-contribution"&gt;&amp;ldquo;ideal for contribution&amp;rdquo; tag&lt;/a&gt; in the issue repository. If you have general questions, please ask on &lt;a href="https://stackoverflow.com"&gt;stackoverflow.com&lt;/a&gt; using the &lt;a href="https://stackoverflow.com/tags/spring-boot"&gt;&lt;code&gt;spring-boot&lt;/code&gt; tag&lt;/a&gt; or chat with the community on &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a href="https://spring.io/projects/spring-boot/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-boot/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://docs.spring.io/spring-boot/docs/2.4.13/reference/html"&gt;Documentation&lt;/a&gt; | &lt;a href="https://stackoverflow.com/questions/tagged/spring-boot"&gt;Stack Overflow&lt;/a&gt; | &lt;a href="https://gitter.im/spring-projects/spring-boot"&gt;Gitter&lt;/a&gt;&lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
+  <entry>
+    <title>Spring Cloud Netflix version 2.2.10.RELEASE is now available</title>
+    <link rel="alternate" href="https://spring.io/blog/2021/11/17/spring-cloud-netflix-version-2-2-10-release-is-now-available" />
+    <category term="releases" label="Releases" />
+    <author>
+      <name>Olga Maciaszek-Sharma</name>
+    </author>
+    <id>tag:spring.io,2021-11-17:4607</id>
+    <updated>2021-11-17T16:00:00Z</updated>
+    <content type="html">&lt;p&gt;On behalf of the community, I am pleased to announce that Spring Cloud Netflix version 2.2.10.RELEASE has been released.&lt;/p&gt;
+&lt;p&gt;This is primarily a security release that fixes the &lt;a href="https://tanzu.vmware.com/security/cve-2021-22053"&gt;CVE-2021-22053&lt;/a&gt;. &lt;/p&gt;
+&lt;p&gt;Applications using both &lt;code&gt;spring-cloud-netflix-hystrix-dashboard&lt;/code&gt; and &lt;code&gt;spring-boot-starter-thymeleaf&lt;/code&gt; exposed a way to execute code submitted within the request URI path during the resolution of view templates. When a request was made at &lt;code&gt;/hystrix/monitor;[user-provided-data]&lt;/code&gt;, the path elements following &lt;code&gt;hystrix/monitor&lt;/code&gt; were being evaluated as SpringEL expressions, which could lead to code execution.&lt;/p&gt;
+&lt;p&gt;This release fixes the issue.&lt;/p&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>Spring Tips: @Controllers: WebSockets</title>
     <link rel="alternate" href="https://spring.io/blog/2021/11/17/spring-tips-controllers-websockets" />
@@ -645,58 +676,6 @@ public class BookControllerTests {&#xD;
 &lt;p&gt;Detailed changes can be found here: &lt;a href="https://github.com/spring-projects/sts4/wiki/Changelog#2021-10-27-4121-release-no-language-server-updates"&gt;https://github.com/spring-projects/sts4/wiki/Changelog#2021-10-27-4121-release-no-language-server-updates&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;Spring Tools 4.13.0 is scheduled to be released in late December 2021.&lt;/p&gt;
 &lt;p&gt;Enjoy!&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Tips: @Controllers (pt. 1): the "C" in Model 2 MVC</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/10/27/spring-tips-controllers-pt-1-the-c-in-model-2-mvc" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2021-10-27:4586</id>
-    <updated>2021-10-27T07:00:00Z</updated>
-    <content type="html">&lt;p&gt;Hi, Spring fans! In this installment, the first of a series, Josh Long looks at the venerable &lt;code&gt;@Controller&lt;/code&gt; annotation and its use supporting Model 2 MVC-style web applications.&lt;/p&gt;
-&lt;iframe width="560" height="315" src="https://www.youtube.com/embed/hUBrFekxn0Y" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen&gt;&lt;/iframe&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>This Week in Spring - October 26th, 2021</title>
-    <link rel="alternate" href="https://spring.io/blog/2021/10/26/this-week-in-spring-october-26th-2021" />
-    <category term="engineering" label="Engineering" />
-    <author>
-      <name>Josh Long</name>
-    </author>
-    <id>tag:spring.io,2021-10-26:4585</id>
-    <updated>2021-10-26T18:00:00Z</updated>
-    <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;! How are you? &lt;/p&gt;
-&lt;p&gt;I&amp;rsquo;m doing well, as always. I literally just wrapped up presenting a fun session at the Russian Joker conference all about Spring and GraphQL. I got a ton of great questions from an enthusiastic audience. Thanks so much for joining me, everyone. I&amp;rsquo;ve got to get to other meetings, though, so let&amp;rsquo;s get this wonderful week in Spring out of the way! &lt;/p&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/20/spring-tips-refreshable-configuration-with-spring-cloud-bus-and-the-spring-cloud-config-monitor"&gt;Spring Tips: refreshable configuration with Spring Cloud Bus, and the Spring Cloud Config Monitor&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;In last week&amp;rsquo;s &lt;a href="https://spring.io/blog/2021/10/21/a-bootiful-podcast-rabbitmq-and-weaveworks-founder-alexis-richardson-on-rabbitmq-pivotal-spring-kubernetes-and-fluxcd"&gt;&lt;em&gt;A Bootiful Podcast&lt;/em&gt;, I talked to RabbitMQ and Weaveworks founder Alexis Richardson about RabbitMQ, Pivotal, Spring, Kubernetes, and FluxCD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://www.java67.com/2021/10/what-is-property-source-in-spring.html"&gt;A great article that @Javinpaul linked me to: What is &lt;code&gt;@PropertySource&lt;/code&gt; in Spring Framework? &lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;fellow Java Champion &lt;a href="https://twitter.com/aalmiray/status/1452530369157292034?s=12"&gt;Andres Almiray has just released a very cool sample Spring Boot application &lt;/a&gt; demonstrating some features of the JReleaser project, which aims to make deploying artifacts as easy as possible.&lt;/li&gt;
-  &lt;li&gt;Want to learn Spring Boot? Check out &lt;a href="https://github.com/BNYMellon/spring-kata"&gt;BNYMellon/spring-kata, which are code katas for learning Spring and Spring Boot.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://blog.codecentric.de/en/2021/10/gitlab-ci-paketo-buildpacks/"&gt;Cloud Native Buildpacks / Paketo.io in GitLab CI without Docker &amp;amp; pack CLI&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Did you know that the official client for writing Discord clients in Java is built on project Reactor? Me either! How cool! &lt;a href="https://github.com/Discord4J/Discord4J"&gt;Discord4J/Discord4J: Discord4J is a fast, powerful, unopinionated, reactive library to enable quick and easy development of Discord bots for Java, Kotlin, and other JVM languages using the official Discord Bot API.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://blog.frankel.ch/multiple-ways-configure-spring/"&gt;Multiple ways to configure Spring&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/26/new-features-for-spring-cloud-kubernetes-in-spring-cloud-2021-0-0-m3"&gt;New Features For Spring Cloud Kubernetes In Spring Cloud 2021.0.0-M3&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://alpaqastudio.com/sign-up/ide-for-cosmos-db?twclid=11451301638879133696"&gt;Professional GUI and IDE for Azure Cosmos DB: Sign up for the free plan or 30 days trial - Alpaqa Studio for Cosmos DB&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/25/spot-every-spring-boot-application-issue-on-the-spot-using-appdynamics"&gt;Spot every Spring Boot application issue on the spot using AppDynamics!&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/21/spring-boot-2-4-12-is-now-available"&gt;Spring Boot 2.4.12 is now available&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/21/spring-boot-2-5-6-is-now-available"&gt;Spring Boot 2.5.6 is now available&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/21/spring-boot-2-6-0-rc1-is-available-now"&gt;Spring Boot 2.6.0-RC1 is available now&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/26/spring-cloud-openfeign-versions-2-2-10-release-3-0-5-and-3-1-0-m4-are-now-available"&gt;Spring Cloud OpenFeign versions 2.2.10.RELEASE, 3.0.5 and 3.1.0-M4 are now available&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring-cloud-incubator.github.io/spring-cloud-sleuth-otel/docs/1.1.0-M3/reference/html/"&gt;Spring Cloud Sleuth OTel Reference Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/20/spring-cloud-square-0-4-0-m2-is-available"&gt;Spring Cloud Square 0.4.0-M2 is available.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/25/spring-cloud-square-0-4-0-m3-is-available"&gt;Spring Cloud Square 0.4.0-M3 is available.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://spring.io/blog/2021/10/21/spring-framework-5-3-12-available-now"&gt;Spring Framework 5.3.12 available now&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://apiexpert.medium.com/spring-graphql-graphql-done-right-d7c3a591d0bd"&gt;Spring GraphQL?: GraphQL Done Right&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://www.confluent.io/blog/using-spring-with-apache-kafka-full-introduction/"&gt;Using Spring with Apache Kafka - Full Introduction&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/bkaminnski/links-spring"&gt;bkaminnski/links-spring: Links project implemented in Spring Boot. Demonstrates a composite UI pattern implemented in react.&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;VSCode Java is 1.0! Hurray! &lt;a href="https://github.com/redhat-developer/vscode-java/blob/master/CHANGELOG.md#100-october-19th-2021"&gt;vscode-java/CHANGELOG.md at master ¡¤ redhat-developer/vscode-java&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href="https://github.com/kuberhealthy/kuberhealthy"&gt;kuberhealthy/kuberhealthy: A Kubernetes operator for running synthetic checks as pods. Works great with Prometheus!&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
