@@ -189,7 +189,7 @@
 	    <th class="text-center  align-middle" scope="col" style="width:6%">보유량</th>
 	    <th class="text-center  align-middle" scope="col" style="width:8%">보유<br>비중</th>
 	    <th class="text-right  align-middle" scope="col" style="width:7%">평균&nbsp;&nbsp;<br>매수가</th>
-	    <th class="text-right  align-middle" scope="col" style="width:6%">누적&nbsp;<br>수익률</th>
+	    <th class="text-right  align-middle" scope="col" style="width:6%">수익률</th>
 	    <th class="text-center align-middle" scope="col" style="width:3%">매수</th>
 	    <th class="text-center align-middle" scope="col" style="width:10%">수량</th>
 	    <th class="text-center align-middle" scope="col" style="width:3%">매도</th>

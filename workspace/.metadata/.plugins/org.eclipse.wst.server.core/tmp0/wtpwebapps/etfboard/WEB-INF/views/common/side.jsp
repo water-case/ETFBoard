@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" isELIgnored="false" %>
-				<h1>메뉴</h1>
-				<h1>
-					<a href="" class="no-underline">나의 자산배분</a> <br>
-					<a href="" class="no-underline">소통 게시판</a> <br>
-					<a href="" class="no-underline">국내 ETF</a> <br>
-					<a href="" class="no-underline">해외 ETF</a>			
-				</h1>
-				<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
+<h1>메뉴</h1>
+<h1>
+	<a href="" class="no-underline">나의 자산배분</a> <br>
+	<a href="" class="no-underline">소통 게시판</a> <br>
+	<a href="" class="no-underline">국내 ETF</a> <br>
+	<a href="" class="no-underline">해외 ETF</a>			
+</h1>
+<div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark" style="width: 280px;">
     <a href="/" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
       <svg class="bi me-2" width="40" height="32"><use xlink:href="#bootstrap"/></svg>
       <span class="fs-4">Sidebar</span>

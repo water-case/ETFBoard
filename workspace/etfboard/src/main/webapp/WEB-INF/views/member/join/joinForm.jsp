@@ -1,9 +1,7 @@
-<c:set var="result" value="${param.result}" />
-
 <script src="https://code.jquery.com/jquery-3.2.1.js"></script>
 <script>
   <c:choose>
-	<c:when test="${result=='joinFail'}">
+	<c:when test="${param.result=='joinFail'}">
 	  alert("회원가입에 실패했습니다! 다시 시도해 주세요");
 	</c:when>
   </c:choose>
@@ -72,7 +70,7 @@
   }
   function emailCheck(){
 	  var email = document.getElementById("_email").value;
-	  var chk = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+	  var chk = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/g;
 	  if(email.search(chk) == -1){
 		  document.getElementById('email_alert').innerText = '이메일 형식이 아닙니다';
 		  return 0;
@@ -152,7 +150,7 @@
           <label for="email">이메일</label>
         </div>
         <div class="col-md-4 mb-3">
-          <input type="email" class="form-control" name="email" id="_email" pattern="/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/" placeholder="you@example.com" value="" required maxlength='30'>
+          <input type="email" class="form-control" name="email" id="_email" pattern="/^[a-z0-9._+-]+@[a-z0-9-]+/.)+[a-z0-9]{2,4}$/" placeholder="you@example.com" value="" required maxlength='30'>
           
         </div>
         <button type="button" class="btn btn-secondary mb-3" id="email_btn" onClick="emailCheck()">중복확인</button>

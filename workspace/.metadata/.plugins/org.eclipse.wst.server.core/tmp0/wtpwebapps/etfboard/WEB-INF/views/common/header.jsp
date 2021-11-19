@@ -1,4 +1,3 @@
-
 <script>
     function logout() {
         if (confirm("로그아웃 하시겠습니까?")) {
@@ -16,7 +15,7 @@
 	}
 </script>
 
-<header class="p-3 bg-dark text-white shadow">
+<div class="p-3 bg-dark text-white shadow">
 	<div class="container-fluid d-flex justify-content-between">
 		<a href="${contextPath}" class="nav-link text-white align-self-center">자산배분</a>
 		<nav>
@@ -44,4 +43,4 @@
 			</c:otherwise>
 		</c:choose>
 	</div>
-</header>
+</div>
