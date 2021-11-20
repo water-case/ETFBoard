@@ -1,11 +1,5 @@
 <c:set var="startPage" value="${startPageIndex*5}" />
 
-<style>
-#boardTitle:link { color: black; text-decoration: none;}
-#boardTitle:visited { color: orange; text-decoration: none;}
-#boardTitle:hover { color: blue; text-decoration: none;}
-</style>
-
 <c:choose>
 	<c:when test="${result == false}">
 		<script>
@@ -80,18 +74,9 @@
 <!-- 페이징 -->
 <!-- 조건에 따라 페이징을 적합하게 변경 -->
 <!-- << 1 2 3 4 5 >> 현재페이지는 색이 다르게 표시 -->
-<script>
-	function writeButton() {
-	    if (${isLogOn == true}) {
-	    	location.href='${contextPath}/board/write'
-	    } else {
-	    	alert("로그인 후 이용가능합니다");
-	    }
-	}
-</script>
 	<div class="text-center row">	
       <div class="col-md-2">
-		<button type="button" onclick="writeButton()" class="btn btn-secondary disabled">글쓰기</button>
+		<button type="button" onclick="writeButton(${isLogOn})" class="btn btn-secondary disabled">글쓰기</button>
       </div>
       <div class="col-md-8">
         <ul class="pagination justify-content-center">

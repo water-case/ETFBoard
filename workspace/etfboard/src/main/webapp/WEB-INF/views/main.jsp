@@ -1,10 +1,3 @@
-<!-- 스크롤 없애기 -->
-<style>
-	::-webkit-scrollbar { 
-	display: none !important; // 윈도우 크롬 등
-	}
-</style>
-
 <div class="container">
 	<div class="row featurette">
 		<div class="col-md-7">

@@ -1,20 +1,3 @@
-<script>
-    function logout() {
-        if (confirm("로그아웃 하시겠습니까?")) {
-        	location.href='${contextPath}/member/logout.do'
-        }
-    }
-    function etfSimulator() {
-    	var _uri = '${contextPath}/etfsimulator?name=${memberName}';
-    	var uri=encodeURI(_uri);
-	    if (${isLogOn == true}) {
-	    	location.href=uri;
-	    } else {
-	    	alert("로그인 후 이용가능합니다");
-	    }
-	}
-</script>
-
 <div class="p-3 bg-dark text-white shadow">
 	<div class="container-fluid d-flex justify-content-between">
 		<a href="${contextPath}" class="nav-link text-white align-self-center">자산배분</a>
@@ -22,7 +5,7 @@
 			<ul class="nav justify-content-center">
 				<li><a href="${contextPath}/board/page?page=1" class="nav-link px-3 text-white">소통게시판</a></li>
 				<li><a href="${contextPath}/etfkorea" class="nav-link px-3 text-white">국내ETF</a></li>
-				<li><a onclick="etfSimulator()" href="#" class="nav-link px-3 text-white">모의투자</a></li>
+				<li><a onclick="etfSimulator(${isLogOn}, '${memberName}')" href="#" class="nav-link px-3 text-white">모의투자</a></li>
 				<li><a href="${contextPath}/rank" class="nav-link px-3 text-white">투자랭킹</a></li>
 				<li><a href="${contextPath}/mining" class="nav-link px-3 text-white">채굴현장</a></li>
 				<li><a href="${contextPath}/exchange" class="nav-link px-3 text-white">환전소</a></li>

@@ -1,9 +1,3 @@
-<style>
-	#ltemlink:link { color: black; text-decoration: none;}
-	#ltemlink:visited { color: black; text-decoration: none;}
-	#ltemlink:hover { color: red; text-decoration: none;}
-</style>
-
 <div class="container">
   <div class="row">
   	<div class="col-md-8"></div>

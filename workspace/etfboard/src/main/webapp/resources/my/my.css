@@ -1,5 +1,16 @@
 @charset "UTF-8";
 
+::-webkit-scrollbar { 
+	display: none; /*윈도우 크롬 등*/
+}
+
+#ltemlink:link { color: black; text-decoration: none;}
+#ltemlink:visited { color: black; text-decoration: none;}
+#ltemlink:hover { color: red; text-decoration: none;}
+
+#boardTitle:link { color: black; text-decoration: none;}
+#boardTitle:visited { color: orange; text-decoration: none;}
+#boardTitle:hover { color: blue; text-decoration: none;}
 
 /* loginForm */
 .form-signin {
