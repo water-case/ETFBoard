@@ -1,5 +1,0 @@
-package com.myboard.etfboard.etfkorea.controller;
-
-public interface EtfService {
-
-}
