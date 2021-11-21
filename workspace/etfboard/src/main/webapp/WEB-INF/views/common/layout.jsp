@@ -5,7 +5,7 @@
 	<head>
 	<!-- bootstrap css -->
 	    <link rel="stylesheet" href="${contextPath}/resources/css/bootstrap.min.css">
-	    <link rel="stylesheet" href="${contextPath}/resources/my/my.css?after">
+	    <link rel="stylesheet" href="${contextPath}/resources/my/my.css">
 	
 	<!-- javascript -->
 		<script src="https://code.jquery.com/jquery-3.2.1.js"></script>

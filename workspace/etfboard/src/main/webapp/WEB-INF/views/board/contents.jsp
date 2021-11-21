@@ -1,31 +1,8 @@
-<script src="https://code.jquery.com/jquery-3.2.1.js"></script>
-<script type="text/javascript">
-    document.title = "${boardContents.title}" ; <!-- 글 제목으로 title 변경 -->
-    var cip = "";
-    // 아이피 조회 함수
-    function getIP(json) {
-		cip = json.ip;
-	}
-    // 추천수 증가 함수
-    function push() {
-    	$.ajax({
-    		type: "post",
-    		url: "./push",
-    		data: {
-    			'boardIndex':'${boardContents.boardIndex}',
-    			'ip':cip
-    			},
-    		success: function(data) {
-    			if(data.first=="true"){
-    				document.getElementById('push_btn').innerText = '추천 '+data.push; 
-    			} else{
-			    	alert("추천은 1회만 가능합니다");
-    			}
-    		}
-    	});
-	}
-</script>
 <script type="text/javascript" src="https://api.ipify.org?format=jsonp&callback=getIP"></script>
+<script type="text/javascript">
+	// 글 제목으로 title 변경
+    document.title = "${boardContents.title}" ; 
+</script>
 
 <c:choose>
   <c:when test="${isLogOn == true && memberName != null}">
@@ -172,23 +149,13 @@
 	    }
 	</script>
   </c:when>
-  <c:otherwise>
-  	<script>
-	    // 대댓글함수
-	    function comment2_insert(){
-	    	alert("구현예정입니다");
-	    }
-	  	function comment_insert(){
-	    	alert("로그인 후 가능합니다");
-	    }
-  	</script>
-  </c:otherwise>
 </c:choose>
 
 
 <div class="container">
 	<!-- 목록, 수정, 삭제버튼 -->
 	<div class="row">
+		<input type="hidden" id="boardIndex" value="${boardContents.boardIndex}"/>
         <div class="col-md-3"></div>
         <div class="col-md-6"></div>
         <div class="col-md-3">

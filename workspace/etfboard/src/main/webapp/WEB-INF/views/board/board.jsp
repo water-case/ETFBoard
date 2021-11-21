@@ -8,6 +8,17 @@
 	</c:when>
 </c:choose>
 
+<script>
+	// 게시판 글쓰기 버튼
+	function writeButton() {
+	    if (${isLogOn == true}) {
+	    	location.href = getContextPath() + '/board/write';
+	    } else {
+	    	alert("로그인 후 이용가능합니다");
+	    }
+	}
+</script>
+
 <div class="container">
 <table class="table table-sm">
   <thead>
@@ -76,7 +87,7 @@
 <!-- << 1 2 3 4 5 >> 현재페이지는 색이 다르게 표시 -->
 	<div class="text-center row">	
       <div class="col-md-2">
-		<button type="button" onclick="writeButton(${isLogOn})" class="btn btn-secondary disabled">글쓰기</button>
+		<button type="button" onclick="writeButton()" class="btn btn-secondary disabled">글쓰기</button>
       </div>
       <div class="col-md-8">
         <ul class="pagination justify-content-center">
