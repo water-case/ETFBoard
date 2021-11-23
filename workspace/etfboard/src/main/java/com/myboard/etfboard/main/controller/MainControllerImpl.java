@@ -1,5 +1,6 @@
 package com.myboard.etfboard.main.controller;
 
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,7 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 @Controller("mainController")
 public class MainControllerImpl implements MainController{
-
+	
 	@Override
 	@RequestMapping(value="/", method=RequestMethod.GET)
 	public String viewMain(HttpServletRequest request, HttpServletResponse response) throws Exception {
