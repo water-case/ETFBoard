@@ -16,7 +16,6 @@ public class MyInterceptor implements HandlerInterceptor{
 	public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler)
 			throws Exception {
 		if(log.isDebugEnabled()) {
-			log.debug("=== start ===");
 			log.debug(" Request URI \t: " + request.getRequestURI());
 		}
 		return true;
@@ -25,16 +24,17 @@ public class MyInterceptor implements HandlerInterceptor{
 	@Override
 	public void postHandle(HttpServletRequest request, HttpServletResponse response, Object handler,
 			ModelAndView modelAndView) throws Exception {
-		if(log.isDebugEnabled()) {
-			log.debug("=== end ===");
-		}
+//		if(log.isDebugEnabled()) {
+//			log.debug("=== end ===");
+//		}
 	}
 
 	@Override
 	public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex)
 			throws Exception {
-		if(log.isDebugEnabled()) {
-			log.debug("=== complete ===");
-		}	}
+//		if(log.isDebugEnabled()) {
+//			log.debug("=== complete ===");
+//		}	
+	}
 
 }
